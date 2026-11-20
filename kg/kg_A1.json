@@ -1,0 +1,1645 @@
+{
+ "version": "1.0",
+ "page": "A1_rag_lab",
+ "registry": "KG_00_registry 0.2 + A1 추가분",
+ "nodes": [
+  {
+   "id": "lab:method/closed-book-llm",
+   "type": "Method",
+   "label": {
+    "ko": "LLM 혼자 답하기",
+    "en": "Closed-book LLM answering"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv1",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "질문만 건네고 LLM이 학습 때 배운 것만으로 답하게 하는 방법."
+   },
+   "level": 1,
+   "evidence": [
+    "F05"
+   ]
+  },
+  {
+   "id": "lab:method/keyword-search",
+   "type": "Method",
+   "label": {
+    "ko": "키워드 검색",
+    "en": "Keyword search"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv2",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "질문과 같은 글자의 단어가 많은 문장을 고르는 검색."
+   },
+   "level": 2,
+   "evidence": [
+    "F06"
+   ]
+  },
+  {
+   "id": "lab:method/embedding-search",
+   "type": "Method",
+   "label": {
+    "ko": "뜻으로 찾기 (임베딩 검색)",
+    "en": "Dense embedding retrieval"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "문장을 뜻 벡터로 바꾸고 코사인 유사도가 높은 문장을 고르는 검색."
+   },
+   "level": 3,
+   "evidence": [
+    "F07"
+   ]
+  },
+  {
+   "id": "lab:method/chunk-topk-retrieval",
+   "type": "Method",
+   "label": {
+    "ko": "조각 + 상위 k개 검색",
+    "en": "Chunked top-k retrieval"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "문서를 조각으로 자르고 점수 상위 k개 조각을 가져오는 검색."
+   },
+   "level": 4,
+   "evidence": [
+    "F08"
+   ]
+  },
+  {
+   "id": "lab:topic/rag",
+   "type": "Method",
+   "label": {
+    "ko": "검색 증강 생성 (RAG)",
+    "en": "Retrieval-augmented generation"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv5",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "답하기 전에 관련 문장을 찾아 질문과 함께 LLM에 건네는 방법."
+   },
+   "level": 5,
+   "altLabel": {
+    "ko": [
+     "RAG"
+    ]
+   },
+   "evidence": [
+    "F01",
+    "F09"
+   ],
+   "match": [
+    {
+     "scheme": "wikidata",
+     "id": "",
+     "rel": "closeMatch",
+     "verified": false
+    }
+   ]
+  },
+  {
+   "id": "lab:topic/word-embedding",
+   "type": "Concept",
+   "label": {
+    "ko": "임베딩",
+    "en": "Embedding"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "문장의 뜻을 숫자 줄(벡터)로 바꾸는 일. 뜻이 비슷하면 방향이 비슷하다."
+   },
+   "level": 3
+  },
+  {
+   "id": "lab:concept/cosine-similarity",
+   "type": "Metric",
+   "label": {
+    "ko": "코사인 유사도",
+    "en": "Cosine similarity"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "두 벡터 사이 각도의 cos. 1이면 같은 방향, 0이면 무관, −1이면 반대."
+   },
+   "level": 3,
+   "evidence": [
+    "F02",
+    "F03"
+   ]
+  },
+  {
+   "id": "lab:concept/dot-product",
+   "type": "Term",
+   "label": {
+    "ko": "내적",
+    "en": "Dot product"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "같은 자리 숫자끼리 곱해 모두 더한 값."
+   },
+   "level": 3
+  },
+  {
+   "id": "lab:concept/l2-norm",
+   "type": "Term",
+   "label": {
+    "ko": "벡터의 길이 (L2 노름)",
+    "en": "L2 norm"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "숫자를 제곱해 더한 뒤 제곱근을 씌운 값. 피타고라스 정리와 같다."
+   },
+   "level": 3
+  },
+  {
+   "id": "lab:concept/vector-database",
+   "type": "Concept",
+   "label": {
+    "ko": "벡터 DB",
+    "en": "Vector database"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#big",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "조각과 그 숫자 줄을 모아 두고 비슷한 것을 빨리 찾는 저장소."
+   },
+   "level": 4,
+   "evidence": [
+    "F04"
+   ]
+  },
+  {
+   "id": "lab:concept/chunk",
+   "type": "Concept",
+   "label": {
+    "ko": "청크 (조각)",
+    "en": "Chunk"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "긴 문서를 검색하기 좋게 자른 한 조각."
+   },
+   "level": 4
+  },
+  {
+   "id": "lab:concept/chunk-overlap",
+   "type": "Term",
+   "label": {
+    "ko": "조각 겹침",
+    "en": "Chunk overlap"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "앞 조각과 겹치게 자르는 문장(글자) 수."
+   },
+   "level": 4
+  },
+  {
+   "id": "lab:concept/top-k",
+   "type": "Term",
+   "label": {
+    "ko": "상위 k개 (top-k)",
+    "en": "Top-k"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "점수가 높은 순서로 k개만 가져오기."
+   },
+   "level": 4
+  },
+  {
+   "id": "lab:topic/prompting",
+   "type": "Concept",
+   "label": {
+    "ko": "프롬프트",
+    "en": "Prompt"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv5",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "LLM에 건네는 지시문. 여기서는 지시 + 조각 + 질문."
+   },
+   "level": 5
+  },
+  {
+   "id": "lab:concept/hallucination",
+   "type": "Concept",
+   "label": {
+    "ko": "환각",
+    "en": "Hallucination"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#why",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "근거 없이 그럴듯한 내용을 지어내는 일."
+   },
+   "level": 1
+  },
+  {
+   "id": "lab:concept/citation-check",
+   "type": "Concept",
+   "label": {
+    "ko": "출처 확인",
+    "en": "Citation check"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv5",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "답에 붙은 조각 번호가 프롬프트 안의 조각과 맞는지 대조하는 일."
+   },
+   "level": 5
+  },
+  {
+   "id": "lab:concept/indexing-phase",
+   "type": "Concept",
+   "label": {
+    "ko": "준비 단계 (색인)",
+    "en": "Indexing phase"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#big",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "문서 읽기·자르기·임베딩·서가에 꽂기를 미리 한 번 하는 단계."
+   },
+   "level": 2
+  },
+  {
+   "id": "lab:concept/query-phase",
+   "type": "Concept",
+   "label": {
+    "ko": "질문 단계",
+    "en": "Query phase"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#big",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "질문을 숫자로 바꾸고 찾은 조각과 함께 LLM에 건네는 단계."
+   },
+   "level": 2
+  },
+  {
+   "id": "lab:concept/next-token-probability",
+   "type": "Concept",
+   "label": {
+    "ko": "다음 말 확률",
+    "en": "Next-token probability"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv1",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "앞 문장이 주어졌을 때 다음에 올 말의 조건부 확률."
+   },
+   "level": 1
+  },
+  {
+   "id": "lab:task/document-qa",
+   "type": "Task",
+   "label": {
+    "ko": "문서 기반 질의응답",
+    "en": "Document question answering"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#first",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "정해진 문서 안에서 근거를 찾아 질문에 답하는 일."
+   },
+   "level": 1
+  },
+  {
+   "id": "lab:metric/top1-hit",
+   "type": "Metric",
+   "label": {
+    "ko": "1등 적중 수",
+    "en": "Top-1 hit count"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#duel",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "근거 문장을 점수 1등으로 찾은 질문 수."
+   },
+   "level": 3
+  },
+  {
+   "id": "lab:metric/context-size",
+   "type": "Metric",
+   "label": {
+    "ko": "보낸 문장 수",
+    "en": "Context size (sentences)"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "질문 하나에 LLM으로 보내는 문장 수."
+   },
+   "level": 4
+  },
+  {
+   "id": "lab:dataset/pebble-lamp-toy",
+   "type": "Dataset",
+   "label": {
+    "ko": "가상 회사 안내문 18문장",
+    "en": "Pebble Lamp toy corpus"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv2",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "설명용으로 만든 가상 회사의 영어 안내문 18문장과 질문 8개."
+   },
+   "level": 2
+  },
+  {
+   "id": "lab:tool/faiss",
+   "type": "Method",
+   "label": {
+    "ko": "FAISS",
+    "en": "FAISS"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv3",
+   "family": "systems",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "비슷한 벡터를 빠르게 찾는 공개 도구."
+   },
+   "level": 4,
+   "evidence": [
+    "F04"
+   ]
+  },
+  {
+   "id": "lab:tool/langchain-retrieval-chain",
+   "type": "Method",
+   "label": {
+    "ko": "LangChain 검색 묶음",
+    "en": "LangChain retrieval chain"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv5",
+   "family": "systems",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "검색기와 LLM을 한 흐름으로 잇는 LangChain의 묶음."
+   },
+   "level": 5,
+   "evidence": [
+    "F09"
+   ]
+  },
+  {
+   "id": "lab:limitation/no-grounding",
+   "type": "Limitation",
+   "label": {
+    "ko": "근거가 없다",
+    "en": "No grounding"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv1",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "맞는 답과 지어낸 답을 가려낼 수 없다."
+   },
+   "level": 1
+  },
+  {
+   "id": "lab:limitation/synonym-miss",
+   "type": "Limitation",
+   "label": {
+    "ko": "다른 말로 물으면 놓친다",
+    "en": "Misses synonyms"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv2",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "글자가 같아야만 찾는다."
+   },
+   "level": 2
+  },
+  {
+   "id": "lab:limitation/top1-fragile",
+   "type": "Limitation",
+   "label": {
+    "ko": "1등 하나는 근소한 차이에 틀린다",
+    "en": "Top-1 is fragile"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "가장 비슷한 하나만 믿으면 근소한 차이에 틀린다."
+   },
+   "level": 3
+  },
+  {
+   "id": "lab:limitation/no-answer-yet",
+   "type": "Limitation",
+   "label": {
+    "ko": "찾기만 하고 답은 없다",
+    "en": "Retrieval without an answer"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "조각을 찾아도 질문에 맞춘 답을 쓰지 못한다."
+   },
+   "level": 4
+  },
+  {
+   "id": "lab:limitation/retrieval-bound",
+   "type": "Limitation",
+   "label": {
+    "ko": "검색이 틀리면 답도 틀린다",
+    "en": "Bounded by retrieval quality"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv5",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "답의 품질은 검색 품질을 넘지 못한다."
+   },
+   "level": 5
+  },
+  {
+   "id": "lab:claim/rag-lewis-2020",
+   "type": "Claim",
+   "label": {
+    "ko": "RAG라는 이름은 2020년 Lewis 외 논문에서 나왔다",
+    "en": "RAG introduced by Lewis et al. 2020"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#top",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "evidence": [
+    "F01"
+   ]
+  },
+  {
+   "id": "lab:claim/cosine-example-0997",
+   "type": "Claim",
+   "label": {
+    "ko": "원자료 숫자 5개짜리 예시의 코사인 유사도는 0.997이다",
+    "en": "Infographic example cosine = 0.997"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "evidence": [
+    "F03"
+   ]
+  },
+  {
+   "id": "lab:claim/faiss-cosine",
+   "type": "Claim",
+   "label": {
+    "ko": "FAISS는 길이를 1로 맞춘 벡터의 내적으로 코사인 유사도를 계산할 수 있다",
+    "en": "FAISS supports cosine via normalized inner product"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "mid",
+   "evidence": [
+    "F04"
+   ]
+  },
+  {
+   "id": "lab:claim/retrievalqa-deprecated",
+   "type": "Claim",
+   "label": {
+    "ko": "RetrievalQA 묶음은 쓰지 말 것 표시가 붙었고 create_retrieval_chain이 안내된다",
+    "en": "RetrievalQA is deprecated"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv5",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "evidence": [
+    "F09"
+   ]
+  },
+  {
+   "id": "lab:claim/toy-kw-3-em-7",
+   "type": "Claim",
+   "label": {
+    "ko": "장난감 데이터에서 1등 적중은 단어 겹침 3/8, 뜻 검색 7/8이다",
+    "en": "Toy result: keyword 3/8, embedding 7/8"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#duel",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "evidence": [
+    "F06",
+    "F07"
+   ]
+  },
+  {
+   "id": "lab:question/core",
+   "type": "Question",
+   "label": {
+    "ko": "LLM이 읽지 못한 우리 회사 문서로 어떻게 근거 있는 답을 받을까?",
+    "en": "How to get grounded answers from unseen documents?"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#top",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:question/duel",
+   "type": "Question",
+   "label": {
+    "ko": "글자로 찾을까, 뜻으로 찾을까?",
+    "en": "Keyword or meaning?"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#duel",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:question/infographic-source",
+   "type": "Question",
+   "label": {
+    "ko": "원자료 인포그래픽의 발행일과 주소는? (확인 필요)",
+    "en": "Infographic publication date and URL (unverified)"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#footer-src",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "low"
+  },
+  {
+   "id": "lab:analogy/closed-book-exam",
+   "type": "Analogy",
+   "label": {
+    "ko": "책 없이 치르는 시험",
+    "en": "Closed-book exam"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv1",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:analogy/index-lookup",
+   "type": "Analogy",
+   "label": {
+    "ko": "책 뒤 찾아보기",
+    "en": "Book index lookup"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv2",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:analogy/librarian-coords",
+   "type": "Analogy",
+   "label": {
+    "ko": "주제 좌표가 붙은 서가와 사서",
+    "en": "Librarian with topic coordinates"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:analogy/photocopy-pages",
+   "type": "Analogy",
+   "label": {
+    "ko": "쪽만 복사해 오기",
+    "en": "Photocopying pages"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:analogy/open-book-exam",
+   "type": "Analogy",
+   "label": {
+    "ko": "오픈북 시험",
+    "en": "Open-book exam"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv5",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:work/lewis2020retrieval",
+   "type": "Work",
+   "label": {
+    "ko": "Lewis 외 (2020) RAG 논문",
+    "en": "Lewis et al. 2020"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#sum",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:work/johnson2019billion",
+   "type": "Work",
+   "label": {
+    "ko": "Johnson·Douze·Jégou FAISS 논문",
+    "en": "Johnson, Douze, Jegou (2019)"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#sum",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:work/langchain-retrievalqa-ref",
+   "type": "Work",
+   "label": {
+    "ko": "LangChain 레퍼런스 RetrievalQA",
+    "en": "LangChain reference: RetrievalQA"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#sum",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:work/mltut-rag-infographic",
+   "type": "Work",
+   "label": {
+    "ko": "ML Tut RAG 인포그래픽 (원자료)",
+    "en": "ML Tut RAG infographic"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#sum",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:sim/a1-closed-book",
+   "type": "Simulation",
+   "label": {
+    "ko": "실험 ① 책 없이 답하기",
+    "en": "Sim 1 closed-book"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv1",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:sim/a1-keyword",
+   "type": "Simulation",
+   "label": {
+    "ko": "실험 ② 단어 겹침",
+    "en": "Sim 2 keyword"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv2",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:sim/a1-cosine",
+   "type": "Simulation",
+   "label": {
+    "ko": "실험 ③ 각도와 뜻 검색",
+    "en": "Sim 3 cosine"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:sim/a1-chunk",
+   "type": "Simulation",
+   "label": {
+    "ko": "실험 ④ 조각·겹침·k",
+    "en": "Sim 4 chunk"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:sim/a1-prompt",
+   "type": "Simulation",
+   "label": {
+    "ko": "실험 ⑤ 프롬프트 조립",
+    "en": "Sim 5 prompt"
+   },
+   "page": "A1_rag_lab",
+   "anchor": "#lv5",
+   "family": "sequence",
+   "domain": [
+    "ai"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  }
+ ],
+ "edges": [
+  {
+   "s": "lab:method/closed-book-llm",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/no-grounding",
+   "anchor": "#lv1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/closed-book-llm",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:method/keyword-search",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/no-grounding",
+   "p": "lab:addressedBy",
+   "o": "lab:method/keyword-search",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/keyword-search",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/synonym-miss",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/keyword-search",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:method/embedding-search",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/synonym-miss",
+   "p": "lab:addressedBy",
+   "o": "lab:method/embedding-search",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/embedding-search",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/top1-fragile",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/embedding-search",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:method/chunk-topk-retrieval",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/top1-fragile",
+   "p": "lab:addressedBy",
+   "o": "lab:method/chunk-topk-retrieval",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/chunk-topk-retrieval",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/no-answer-yet",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/chunk-topk-retrieval",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:topic/rag",
+   "anchor": "#lv5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/no-answer-yet",
+   "p": "lab:addressedBy",
+   "o": "lab:topic/rag",
+   "anchor": "#lv5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:topic/rag",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/retrieval-bound",
+   "anchor": "#lv5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/retrieval-bound",
+   "p": "lab:raises",
+   "o": "lab:question/core",
+   "anchor": "#lv5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/no-grounding",
+   "p": "lab:raises",
+   "o": "lab:concept/hallucination",
+   "anchor": "#why",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/closed-book-llm",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/hallucination",
+   "anchor": "#why",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/embedding-search",
+   "p": "lab:partOf",
+   "o": "lab:topic/rag",
+   "anchor": "#big",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/chunk-topk-retrieval",
+   "p": "lab:partOf",
+   "o": "lab:topic/rag",
+   "anchor": "#big",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:topic/word-embedding",
+   "p": "lab:partOf",
+   "o": "lab:method/embedding-search",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/cosine-similarity",
+   "p": "lab:partOf",
+   "o": "lab:method/embedding-search",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/dot-product",
+   "p": "lab:partOf",
+   "o": "lab:concept/cosine-similarity",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/l2-norm",
+   "p": "lab:partOf",
+   "o": "lab:concept/cosine-similarity",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/vector-database",
+   "p": "lab:partOf",
+   "o": "lab:concept/indexing-phase",
+   "anchor": "#big",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/chunk",
+   "p": "lab:partOf",
+   "o": "lab:concept/indexing-phase",
+   "anchor": "#big",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:topic/word-embedding",
+   "p": "lab:partOf",
+   "o": "lab:concept/indexing-phase",
+   "anchor": "#big",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/indexing-phase",
+   "p": "lab:partOf",
+   "o": "lab:topic/rag",
+   "anchor": "#big",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/query-phase",
+   "p": "lab:partOf",
+   "o": "lab:topic/rag",
+   "anchor": "#big",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/top-k",
+   "p": "lab:partOf",
+   "o": "lab:concept/query-phase",
+   "anchor": "#big",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:topic/prompting",
+   "p": "lab:partOf",
+   "o": "lab:concept/query-phase",
+   "anchor": "#lv5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/chunk-overlap",
+   "p": "lab:partOf",
+   "o": "lab:concept/chunk",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/chunk",
+   "p": "lab:partOf",
+   "o": "lab:method/chunk-topk-retrieval",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/top-k",
+   "p": "lab:partOf",
+   "o": "lab:method/chunk-topk-retrieval",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/citation-check",
+   "p": "lab:partOf",
+   "o": "lab:topic/rag",
+   "anchor": "#lv5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/citation-check",
+   "p": "lab:addressedBy",
+   "o": "lab:limitation/no-grounding",
+   "anchor": "#lv5",
+   "confidence": "mid"
+  },
+  {
+   "s": "lab:concept/next-token-probability",
+   "p": "lab:partOf",
+   "o": "lab:method/closed-book-llm",
+   "anchor": "#lv1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:topic/rag",
+   "p": "lab:solves",
+   "o": "lab:task/document-qa",
+   "anchor": "#first",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/closed-book-llm",
+   "p": "lab:solves",
+   "o": "lab:task/document-qa",
+   "anchor": "#lv1",
+   "confidence": "mid"
+  },
+  {
+   "s": "lab:method/keyword-search",
+   "p": "lab:contrastsWith",
+   "o": "lab:method/embedding-search",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/keyword-search",
+   "p": "lab:evaluatedBy",
+   "o": "lab:metric/top1-hit",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/embedding-search",
+   "p": "lab:evaluatedBy",
+   "o": "lab:metric/top1-hit",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/chunk-topk-retrieval",
+   "p": "lab:evaluatedBy",
+   "o": "lab:metric/context-size",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/keyword-search",
+   "p": "lab:evaluatedOn",
+   "o": "lab:dataset/pebble-lamp-toy",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/embedding-search",
+   "p": "lab:evaluatedOn",
+   "o": "lab:dataset/pebble-lamp-toy",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:tool/faiss",
+   "p": "lab:partOf",
+   "o": "lab:concept/vector-database",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:tool/langchain-retrieval-chain",
+   "p": "lab:relatedTo",
+   "o": "lab:topic/rag",
+   "anchor": "#lv5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:question/duel",
+   "p": "lab:raises",
+   "o": "lab:method/embedding-search",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/synonym-miss",
+   "p": "lab:raises",
+   "o": "lab:question/duel",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:question/infographic-source",
+   "p": "lab:relatedTo",
+   "o": "lab:work/mltut-rag-infographic",
+   "anchor": "#sum",
+   "confidence": "low"
+  },
+  {
+   "s": "lab:claim/rag-lewis-2020",
+   "p": "lab:supports",
+   "o": "lab:topic/rag",
+   "anchor": "#sum",
+   "confidence": "high",
+   "evidence": [
+    "F01"
+   ]
+  },
+  {
+   "s": "lab:claim/rag-lewis-2020",
+   "p": "lab:assertedIn",
+   "o": "lab:work/lewis2020retrieval",
+   "anchor": "#sum",
+   "confidence": "high",
+   "evidence": [
+    "F01"
+   ]
+  },
+  {
+   "s": "lab:claim/cosine-example-0997",
+   "p": "lab:supports",
+   "o": "lab:concept/cosine-similarity",
+   "anchor": "#sum",
+   "confidence": "high",
+   "evidence": [
+    "F03"
+   ]
+  },
+  {
+   "s": "lab:claim/cosine-example-0997",
+   "p": "lab:assertedIn",
+   "o": "lab:work/mltut-rag-infographic",
+   "anchor": "#sum",
+   "confidence": "high",
+   "evidence": [
+    "F03"
+   ]
+  },
+  {
+   "s": "lab:claim/faiss-cosine",
+   "p": "lab:supports",
+   "o": "lab:tool/faiss",
+   "anchor": "#sum",
+   "confidence": "high",
+   "evidence": [
+    "F04"
+   ]
+  },
+  {
+   "s": "lab:claim/faiss-cosine",
+   "p": "lab:assertedIn",
+   "o": "lab:work/johnson2019billion",
+   "anchor": "#sum",
+   "confidence": "high",
+   "evidence": [
+    "F04"
+   ]
+  },
+  {
+   "s": "lab:claim/retrievalqa-deprecated",
+   "p": "lab:supports",
+   "o": "lab:tool/langchain-retrieval-chain",
+   "anchor": "#sum",
+   "confidence": "high",
+   "evidence": [
+    "F09"
+   ]
+  },
+  {
+   "s": "lab:claim/retrievalqa-deprecated",
+   "p": "lab:assertedIn",
+   "o": "lab:work/langchain-retrievalqa-ref",
+   "anchor": "#sum",
+   "confidence": "high",
+   "evidence": [
+    "F09"
+   ]
+  },
+  {
+   "s": "lab:claim/toy-kw-3-em-7",
+   "p": "lab:supports",
+   "o": "lab:method/embedding-search",
+   "anchor": "#duel",
+   "confidence": "high",
+   "evidence": [
+    "F06",
+    "F07"
+   ]
+  },
+  {
+   "s": "lab:claim/toy-kw-3-em-7",
+   "p": "lab:assertedIn",
+   "o": "lab:dataset/pebble-lamp-toy",
+   "anchor": "#duel",
+   "confidence": "high",
+   "evidence": [
+    "F06",
+    "F07"
+   ]
+  },
+  {
+   "s": "lab:topic/rag",
+   "p": "lab:assertedIn",
+   "o": "lab:work/lewis2020retrieval",
+   "anchor": "#footer",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:topic/rag",
+   "p": "lab:assertedIn",
+   "o": "lab:work/mltut-rag-infographic",
+   "anchor": "#footer",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/closed-book-exam",
+   "p": "lab:analogyOf",
+   "o": "lab:method/closed-book-llm",
+   "anchor": "#lv1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/index-lookup",
+   "p": "lab:analogyOf",
+   "o": "lab:method/keyword-search",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/librarian-coords",
+   "p": "lab:analogyOf",
+   "o": "lab:method/embedding-search",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/photocopy-pages",
+   "p": "lab:analogyOf",
+   "o": "lab:method/chunk-topk-retrieval",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/open-book-exam",
+   "p": "lab:analogyOf",
+   "o": "lab:topic/rag",
+   "anchor": "#lv5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/next-token-probability",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/a1-closed-book",
+   "anchor": "#lv1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/keyword-search",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/a1-keyword",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/cosine-similarity",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/a1-cosine",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/top-k",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/a1-chunk",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:topic/prompting",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/a1-prompt",
+   "anchor": "#lv5",
+   "confidence": "high"
+  }
+ ]
+}

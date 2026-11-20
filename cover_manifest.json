@@ -1,0 +1,111 @@
+{
+ "series_ko": "LLM 공식에서 GPT-6까지 · 응용편",
+ "title_ko": "RAG 연구실",
+ "site_title": "RAG 연구실 — 사서가 찾아온 문장으로 LLM이 답한다",
+ "site_url": "https://adminmrobo.github.io/llm_applied_lab/",
+ "ontology": {
+  "pages": [
+   {
+    "path": "A1_rag_lab.html",
+    "kg": true,
+    "export": true
+   }
+  ],
+  "files": [
+   "KG_00_registry.json"
+  ]
+ },
+ "i18n": {
+  "langs": [
+   "ko"
+  ],
+  "pages": {
+   "ko": 1
+  },
+  "readme_langs": [
+   "ko"
+  ]
+ },
+ "languages": [
+  "ko"
+ ],
+ "items": [
+  {
+   "id": "cover_A1",
+   "role": "cover",
+   "path": "assets/img/cover_A1.webp",
+   "size": [
+    1600,
+    900
+   ],
+   "characters": [
+    "doc",
+    "asst",
+    "fly",
+    "jupanbot"
+   ],
+   "robot": "jupanbot-v2",
+   "prompt_en": "Website top cover illustration, wide 16:9. Detailed 16-bit SNES-era RPG pixel art ... (전문은 COVER_A1_rag_lab.md)",
+   "source_of": null,
+   "status": "redraw"
+  },
+  {
+   "id": "thumb_A1",
+   "role": "thumb",
+   "path": "assets/img/thumb_A1.webp",
+   "size": [
+    600,
+    400
+   ],
+   "characters": [
+    "doc",
+    "asst",
+    "fly",
+    "jupanbot"
+   ],
+   "robot": "jupanbot-v2",
+   "prompt_en": null,
+   "source_of": "cover_A1",
+   "status": "redraw"
+  },
+  {
+   "id": "og_A1",
+   "role": "og",
+   "path": "assets/img/og_A1.png",
+   "size": [
+    1200,
+    630
+   ],
+   "characters": [
+    "doc",
+    "asst",
+    "fly",
+    "jupanbot"
+   ],
+   "robot": "jupanbot-v2",
+   "prompt_en": null,
+   "source_of": "cover_A1",
+   "status": "redraw"
+  },
+  {
+   "id": "sc_A1_outro",
+   "role": "outro",
+   "path": "assets/img/sc_A1_outro.webp",
+   "size": [
+    1200,
+    800
+   ],
+   "characters": [
+    "doc",
+    "asst",
+    "fly",
+    "jupanbot"
+   ],
+   "robot": "jupanbot-v2",
+   "prompt_en": "(IMG_A1_rag_lab.md 3-3)",
+   "source_of": null,
+   "status": "redraw"
+  }
+ ],
+ "updated": "2026-11-21"
+}

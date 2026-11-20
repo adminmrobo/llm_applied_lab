@@ -1,0 +1,257 @@
+{
+ "registry_base": "0.2",
+ "page": "A1",
+ "date": "2026-11-20",
+ "reuse_existing_ids": [
+  "lab:topic/rag",
+  "lab:topic/word-embedding",
+  "lab:topic/prompting"
+ ],
+ "add": [
+  {
+   "id": "lab:method/closed-book-llm",
+   "type": "Method",
+   "label_ko": "LLM 혼자 답하기",
+   "label_en": "Closed-book LLM answering",
+   "pages": [
+    "A1"
+   ]
+  },
+  {
+   "id": "lab:method/keyword-search",
+   "type": "Method",
+   "label_ko": "키워드 검색",
+   "label_en": "Keyword search",
+   "pages": [
+    "A1"
+   ]
+  },
+  {
+   "id": "lab:method/embedding-search",
+   "type": "Method",
+   "label_ko": "뜻으로 찾기 (임베딩 검색)",
+   "label_en": "Dense embedding retrieval",
+   "pages": [
+    "A1"
+   ]
+  },
+  {
+   "id": "lab:method/chunk-topk-retrieval",
+   "type": "Method",
+   "label_ko": "조각 + 상위 k개 검색",
+   "label_en": "Chunked top-k retrieval",
+   "pages": [
+    "A1"
+   ]
+  },
+  {
+   "id": "lab:concept/cosine-similarity",
+   "type": "Metric",
+   "label_ko": "코사인 유사도",
+   "label_en": "Cosine similarity",
+   "pages": [
+    "A1"
+   ]
+  },
+  {
+   "id": "lab:concept/dot-product",
+   "type": "Term",
+   "label_ko": "내적",
+   "label_en": "Dot product",
+   "pages": [
+    "A1"
+   ]
+  },
+  {
+   "id": "lab:concept/l2-norm",
+   "type": "Term",
+   "label_ko": "벡터의 길이 (L2 노름)",
+   "label_en": "L2 norm",
+   "pages": [
+    "A1"
+   ]
+  },
+  {
+   "id": "lab:concept/vector-database",
+   "type": "Concept",
+   "label_ko": "벡터 DB",
+   "label_en": "Vector database",
+   "pages": [
+    "A1"
+   ]
+  },
+  {
+   "id": "lab:concept/chunk",
+   "type": "Concept",
+   "label_ko": "청크 (조각)",
+   "label_en": "Chunk",
+   "pages": [
+    "A1"
+   ]
+  },
+  {
+   "id": "lab:concept/chunk-overlap",
+   "type": "Term",
+   "label_ko": "조각 겹침",
+   "label_en": "Chunk overlap",
+   "pages": [
+    "A1"
+   ]
+  },
+  {
+   "id": "lab:concept/top-k",
+   "type": "Term",
+   "label_ko": "상위 k개 (top-k)",
+   "label_en": "Top-k",
+   "pages": [
+    "A1"
+   ]
+  },
+  {
+   "id": "lab:concept/hallucination",
+   "type": "Concept",
+   "label_ko": "환각",
+   "label_en": "Hallucination",
+   "pages": [
+    "A1"
+   ]
+  },
+  {
+   "id": "lab:concept/citation-check",
+   "type": "Concept",
+   "label_ko": "출처 확인",
+   "label_en": "Citation check",
+   "pages": [
+    "A1"
+   ]
+  },
+  {
+   "id": "lab:concept/indexing-phase",
+   "type": "Concept",
+   "label_ko": "준비 단계 (색인)",
+   "label_en": "Indexing phase",
+   "pages": [
+    "A1"
+   ]
+  },
+  {
+   "id": "lab:concept/query-phase",
+   "type": "Concept",
+   "label_ko": "질문 단계",
+   "label_en": "Query phase",
+   "pages": [
+    "A1"
+   ]
+  },
+  {
+   "id": "lab:concept/next-token-probability",
+   "type": "Concept",
+   "label_ko": "다음 말 확률",
+   "label_en": "Next-token probability",
+   "pages": [
+    "A1"
+   ]
+  },
+  {
+   "id": "lab:task/document-qa",
+   "type": "Task",
+   "label_ko": "문서 기반 질의응답",
+   "label_en": "Document question answering",
+   "pages": [
+    "A1"
+   ]
+  },
+  {
+   "id": "lab:metric/top1-hit",
+   "type": "Metric",
+   "label_ko": "1등 적중 수",
+   "label_en": "Top-1 hit count",
+   "pages": [
+    "A1"
+   ]
+  },
+  {
+   "id": "lab:metric/context-size",
+   "type": "Metric",
+   "label_ko": "보낸 문장 수",
+   "label_en": "Context size (sentences)",
+   "pages": [
+    "A1"
+   ]
+  },
+  {
+   "id": "lab:dataset/pebble-lamp-toy",
+   "type": "Dataset",
+   "label_ko": "가상 회사 안내문 18문장",
+   "label_en": "Pebble Lamp toy corpus",
+   "pages": [
+    "A1"
+   ]
+  },
+  {
+   "id": "lab:tool/faiss",
+   "type": "Method",
+   "label_ko": "FAISS",
+   "label_en": "FAISS",
+   "pages": [
+    "A1"
+   ]
+  },
+  {
+   "id": "lab:tool/langchain-retrieval-chain",
+   "type": "Method",
+   "label_ko": "LangChain 검색 묶음",
+   "label_en": "LangChain retrieval chain",
+   "pages": [
+    "A1"
+   ]
+  },
+  {
+   "id": "lab:work/lewis2020retrieval",
+   "type": "Work",
+   "label_ko": "Lewis 외 (2020) RAG 논문",
+   "label_en": "Lewis et al. 2020",
+   "pages": [
+    "A1"
+   ]
+  },
+  {
+   "id": "lab:work/johnson2019billion",
+   "type": "Work",
+   "label_ko": "Johnson·Douze·Jégou FAISS 논문",
+   "label_en": "Johnson, Douze, Jegou (2019)",
+   "pages": [
+    "A1"
+   ]
+  },
+  {
+   "id": "lab:work/langchain-retrievalqa-ref",
+   "type": "Work",
+   "label_ko": "LangChain 레퍼런스 RetrievalQA",
+   "label_en": "LangChain reference: RetrievalQA",
+   "pages": [
+    "A1"
+   ]
+  },
+  {
+   "id": "lab:work/mltut-rag-infographic",
+   "type": "Work",
+   "label_ko": "ML Tut RAG 인포그래픽 (원자료)",
+   "label_en": "ML Tut RAG infographic",
+   "pages": [
+    "A1"
+   ]
+  }
+ ],
+ "update_pages": {
+  "lab:topic/rag": [
+   "A1"
+  ],
+  "lab:topic/word-embedding": [
+   "A1"
+  ],
+  "lab:topic/prompting": [
+   "A1"
+  ]
+ }
+}

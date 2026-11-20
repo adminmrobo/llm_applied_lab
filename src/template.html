@@ -1,0 +1,881 @@
+<!DOCTYPE html><html lang="ko"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RAG 연구실 — 사서가 찾아온 문장으로 LLM이 답한다 · LLM 공식에서 GPT-6까지 응용편 1</title>
+<meta name="description" content="검색 증강 생성(RAG)을 처음 보는 사람을 위한 연구실 해설. 키워드 검색, 임베딩과 코사인 유사도, 청크와 상위 k개, 프롬프트 조립까지 직접 눌러 보며 배운다.">
+<meta name="citation_title" content="RAG 연구실 — 사서가 찾아온 문장으로 LLM이 답한다">
+<meta name="citation_author" content="안상선">
+<meta name="citation_publication_date" content="2026/11/20">
+<meta name="dc.title" content="RAG 연구실 — 사서가 찾아온 문장으로 LLM이 답한다">
+<meta name="dc.creator" content="안상선">
+<meta name="dc.date" content="2026-11-20">
+<meta name="dc.language" content="ko">
+<meta property="og:title" content="RAG 연구실 — 사서가 찾아온 문장으로 LLM이 답한다">
+<meta property="og:description" content="LLM 공식에서 GPT-6까지 · 응용편 1. RAG를 직접 눌러 보며 배우는 연구실 해설.">
+<meta property="og:image" content="assets/img/og_A1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff; --panel:#f6f8fa; --panel2:#eef2f6; --rule:#d5dbe2;
+  --text:#16212b; --muted:#5b6874;
+  --stain:#9b3fb5; --gfp:#13733a; --eye:#c9302c; --amber:#a35c00; --info:#1e55c8;
+  --stain-soft:#f6ecfa; --gfp-soft:#e7f5ec; --eye-soft:#fcebea; --amber-soft:#fdf3e1; --info-soft:#e6eefb;
+  --c-doc:#7a3fd6; --c-asst:#c42a6e; --c-fly:#c93030; --c-robo:#0b7a86;
+  --accent:#3b63d6;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.8 "IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",system-ui,sans-serif;word-break:keep-all;overflow-x:hidden}
+h1,h2,h3,h4,p,li,td,th{word-break:keep-all}
+h1{font-size:clamp(32px,5vw,56px);line-height:1.2;margin:.2em 0}
+h2{font-size:clamp(24px,3vw,34px);line-height:1.3;margin:0 0 .4em}
+h3{font-size:19px;margin:1.2em 0 .4em}
+h4{font-size:16px;margin:0 0 .4em}
+a{color:var(--info)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+button,input{font:inherit}
+:focus-visible{outline:3px solid #e0a800;outline-offset:2px}
+/* nav */
+nav.top{position:sticky;top:0;z-index:50;height:54px;display:flex;align-items:center;gap:14px;padding:0 16px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+nav.top .logo{font-weight:700;white-space:nowrap;color:var(--c-doc)}
+nav.top .links{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;flex:1}
+nav.top .links::-webkit-scrollbar{display:none}
+nav.top .links a{white-space:nowrap;text-decoration:none;color:var(--muted);font-size:14px;padding:4px 10px;border-radius:999px}
+nav.top .links a:hover{background:var(--panel2);color:var(--text)}
+#prog{position:fixed;top:0;left:0;height:3px;background:var(--gfp);width:0;z-index:60}
+/* cover */
+.cover{position:relative;margin:0;background:linear-gradient(160deg,#eef2f8,#ffffff);aspect-ratio:16/9;max-height:48vh;width:100%;overflow:hidden;border-bottom:1px solid var(--rule)}
+.cover img.cv{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.cover .hex{position:absolute;inset:0;opacity:.5;background-image:radial-gradient(circle at 80% 20%,rgba(155,63,181,.10),transparent 55%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48'%3E%3Cpath d='M14 0l14 8v16l-14 8L0 24V8z' fill='none' stroke='%23c8d0da' stroke-width='1'/%3E%3C/svg%3E")}
+.cover .shelfart{position:absolute;right:4%;top:10%;bottom:22%;width:38%;display:grid;grid-template-rows:repeat(3,1fr);gap:8px}
+.cover .shelfart div{border-bottom:6px solid #b98a5a;display:flex;align-items:flex-end;gap:4px;padding:0 6px}
+.cover .shelfart i{display:block;width:10%;border-radius:2px 2px 0 0}
+.cover .line{position:absolute;left:4%;bottom:14%;display:flex;align-items:flex-end;gap:2%;width:56%}
+.cover .line img{image-rendering:auto;width:23%;max-width:150px;height:auto;filter:drop-shadow(0 2px 2px rgba(0,0,0,.12))}
+.cover .line img.fly{width:15%}
+.cover .line img.robo{width:18%}
+.cover-chip{position:absolute;left:16px;bottom:14px;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.9);border:1px solid var(--rule);color:var(--text);font-size:13px}
+/* hero */
+header.hero{position:relative;padding:44px 0 36px;overflow:hidden}
+header.hero::before{content:"";position:absolute;right:-60px;top:-60px;width:520px;height:520px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48'%3E%3Cpath d='M14 0l14 8v16l-14 8L0 24V8z' fill='none' stroke='%23d9dfe7' stroke-width='1'/%3E%3C/svg%3E");-webkit-mask-image:radial-gradient(circle,#000 30%,transparent 70%);mask-image:radial-gradient(circle,#000 30%,transparent 70%)}
+.hero .kicker{color:var(--c-doc);font-weight:700;font-size:14px;letter-spacing:.02em}
+.hero .q{font-size:clamp(18px,2.2vw,22px);color:var(--stain);font-weight:700;margin:.2em 0 .6em}
+.hero .lead{max-width:760px;color:var(--text)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:22px 0}
+.kpi{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:12px 14px}
+.kpi b{display:block;font-size:24px;line-height:1.2;font-variant-numeric:tabular-nums}
+.kpi span{font-size:13px;color:var(--muted)}
+.kpi.g b{color:var(--gfp)} .kpi.m b{color:var(--stain)} .kpi.r b{color:var(--eye)} .kpi.a b{color:var(--amber)}
+.kpi sup{font-size:11px;color:var(--muted)}
+.dialog{display:grid;gap:8px;max-width:820px}
+/* speech */
+.say{display:flex;gap:12px;align-items:flex-start;margin:14px 0}
+.say img.who{width:64px;height:64px;flex:0 0 64px;border-radius:12px;border:2px solid var(--rule);background:#fff;object-fit:contain}
+.say .name{font-size:13px}
+.say p{margin:.1em 0 0}
+.say>div{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:8px 14px;flex:1}
+.say[data-who=doc] img.who{border-color:var(--c-doc)} .say[data-who=doc] .name{color:var(--c-doc)}
+.say[data-who=asst] img.who{border-color:var(--c-asst)} .say[data-who=asst] .name{color:var(--c-asst)}
+.say[data-who=fly] img.who{border-color:var(--c-fly)} .say[data-who=fly] .name{color:var(--c-fly)}
+.say[data-who=robo] img.who{border-color:var(--c-robo)} .say[data-who=robo] .name{color:var(--c-robo)}
+.dialog .say{margin:0}
+/* sections */
+section.level{padding:88px 0 0}
+section.level:last-of-type{padding-bottom:40px}
+.lvhead{display:flex;gap:16px;align-items:flex-start;margin-bottom:14px}
+.hexno{flex:0 0 64px;height:72px;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:var(--stain);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:700;font-size:26px;line-height:1}
+.hexno small{font-size:11px;font-weight:500;margin-top:4px}
+.lvhead h2{margin:0}
+.sub{margin:6px 0 0;display:flex;flex-wrap:wrap;gap:6px}
+.lvtag{font-size:13px;padding:2px 10px;border-radius:999px;background:var(--panel2);border:1px solid var(--rule)}
+.lvtag.g{background:var(--gfp-soft);color:var(--gfp);border-color:#bfe3cc}
+.lvtag.d{background:var(--eye-soft);color:var(--eye);border-color:#f2c4c1}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}
+.steps>div{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:16px 18px}
+.steps b.n{display:inline-block;width:26px;height:26px;border-radius:50%;background:var(--stain);color:#fff;text-align:center;line-height:26px;font-size:14px;margin-right:6px}
+/* first-timer box */
+.first{background:var(--amber-soft);border:1px solid #f0d7a8;border-left:6px solid var(--amber);border-radius:12px;padding:20px 22px;margin-top:20px}
+.first h2{font-size:22px;color:var(--amber)}
+.first ol{margin:.3em 0 .6em;padding-left:1.4em}
+.first li{margin:6px 0}
+.first .free{display:inline-block;background:#fff;border:1px solid #f0d7a8;border-radius:999px;padding:2px 12px;font-size:14px}
+details{margin:12px 0}
+details>summary{cursor:pointer;font-weight:700;color:var(--muted)}
+.abbr{width:100%;border-collapse:collapse;margin-top:8px;font-size:15px}
+.abbr td,.abbr th{border-bottom:1px solid var(--rule);padding:6px 8px;text-align:left;vertical-align:top}
+/* example language toggle */
+.exbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--info-soft);border:1px solid #c6d6f3;border-radius:12px;padding:10px 14px;margin:16px 0}
+.exbar .glabel{font-size:14px;color:var(--info);font-weight:700}
+.ex{font-style:normal}
+/* cast */
+.cast{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.cast>div{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:14px;text-align:center}
+.cast img{width:84px;height:84px;object-fit:contain}
+.cast b{display:block}
+.cast span{font-size:14px;color:var(--muted)}
+/* why / ask-math */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+.why,.askm{border:1px solid var(--rule);border-radius:12px;padding:20px}
+.why{background:var(--stain-soft);border-color:#e2c9ec}
+.why h4{color:var(--stain)}
+.why ol{margin:0;padding-left:1.3em}
+.why li{margin:8px 0}
+.why .easy{margin:12px 0 0;padding:10px 12px;background:#fff;border-radius:10px;border:1px dashed #d7b4e6}
+.askm{background:#fff;border-color:#efc3d7}
+.askm h4{color:var(--c-asst)}
+.askm .row{display:flex;gap:10px;align-items:flex-start;margin:10px 0}
+.askm .row img{width:52px;height:52px;flex:0 0 52px;object-fit:contain;border:2px solid var(--c-asst);border-radius:10px;background:#fff}
+.askm .row p{margin:0;background:#fdf0f5;border-radius:10px;padding:8px 12px}
+.askm .school{font-size:14px;background:var(--info-soft);color:var(--info);border-radius:8px;padding:6px 10px;display:inline-block;margin:4px 0 8px}
+.askm table{width:100%;border-collapse:collapse;font-size:15px;margin:6px 0}
+.askm td{border-bottom:1px solid var(--rule);padding:6px 8px;vertical-align:top}
+.askm td:first-child{white-space:nowrap;font-weight:700;color:var(--stain)}
+.askm .try{background:var(--gfp-soft);border-radius:10px;padding:10px 12px;font-variant-numeric:tabular-nums}
+.askm .try b{color:var(--gfp)}
+/* pair */
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+.pair>div{border:1px solid var(--rule);border-radius:12px;padding:16px 18px;background:#fff}
+.pair .tag{display:inline-block;font-size:13px;font-weight:700;padding:2px 10px;border-radius:999px;margin-bottom:6px}
+.tag.fly{background:var(--eye-soft);color:var(--eye)}
+.tag.nn{background:var(--stain-soft);color:var(--stain)}
+.pair p{margin:.2em 0}
+/* talk */
+.talk{border-left:4px solid var(--rule);padding:4px 0 4px 14px;margin:18px 0}
+.talk .line{display:flex;gap:10px;align-items:center;margin:8px 0}
+.talk .line img{width:40px;height:40px;flex:0 0 40px;object-fit:contain;border-radius:8px;border:2px solid var(--rule);background:#fff}
+.talk .line b{font-size:13px;white-space:nowrap}
+.talk .line[data-who=doc] b{color:var(--c-doc)} .talk .line[data-who=doc] img{border-color:var(--c-doc)}
+.talk .line[data-who=asst] b{color:var(--c-asst)} .talk .line[data-who=asst] img{border-color:var(--c-asst)}
+.talk .line[data-who=fly] b{color:var(--c-fly)} .talk .line[data-who=fly] img{border-color:var(--c-fly)}
+.talk .line[data-who=robo] b{color:var(--c-robo)} .talk .line[data-who=robo] img{border-color:var(--c-robo)}
+.talk .line span{flex:1}
+/* panel */
+.panel{background:var(--panel);border:1px solid var(--rule);border-radius:14px;padding:18px;margin:16px 0;box-shadow:0 1px 2px rgba(22,33,43,.06)}
+.panel h3{margin:.2em 0 .5em;color:var(--info);font-size:17px}
+.cwrap{overflow-x:auto;background:#fff;border:1px solid var(--rule);border-radius:10px}
+.cwrap canvas{display:block;width:100%}
+.cwrap canvas.wide{min-width:680px}
+.ctrl{display:flex;flex-wrap:wrap;gap:12px 18px;margin:12px 0}
+.group{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.glabel{font-size:14px;color:var(--muted);margin-right:2px}
+.bt{background:#fff;border:1px solid var(--rule);border-radius:8px;padding:5px 12px;cursor:pointer;color:var(--text);font-size:14px;min-height:34px}
+.bt:hover{background:var(--panel2)}
+.bt.primary,.bt[aria-pressed=true]{background:var(--gfp);border-color:var(--gfp);color:#fff}
+.val{font-variant-numeric:tabular-nums;font-weight:700;min-width:2ch;display:inline-block}
+input[type=range]{accent-color:var(--gfp);width:140px}
+.qline{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:10px 14px;margin:10px 0;font-size:17px}
+.qline small{display:block;color:var(--muted);font-size:13px}
+.panel .kpis{grid-template-columns:repeat(4,1fr);margin:12px 0}
+.eq{background:#fff;border:1px dashed var(--rule);border-radius:10px;padding:10px 14px;font-variant-numeric:tabular-nums;margin:10px 0;overflow-x:auto;white-space:nowrap}
+.eq b{color:var(--gfp)} .eq em{color:var(--stain);font-style:normal;font-weight:700} .eq i{color:var(--amber);font-style:normal;font-weight:700}
+.insight p{margin:.4em 0;padding:8px 12px;border-radius:8px;background:#fff;border-left:4px solid var(--rule)}
+.insight p.g{border-color:var(--gfp)} .insight p.r{border-color:var(--eye)} .insight p.a{border-color:var(--amber)} .insight p.m{border-color:var(--stain)}
+.ans2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+.ans2>div{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:12px 14px}
+.ans2 h4{font-size:14px}
+.ans2 .bad h4{color:var(--eye)} .ans2 .good h4{color:var(--gfp)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.chip{font-size:13px;padding:2px 10px;border-radius:999px;background:var(--panel2);border:1px solid var(--rule)}
+.chip.hit{background:var(--gfp-soft);border-color:#bfe3cc;color:var(--gfp)}
+.chip.no{background:var(--eye-soft);border-color:#f2c4c1;color:var(--eye)}
+pre.prompt{white-space:pre-wrap;word-break:break-word;background:#fff;border:1px solid var(--rule);border-radius:10px;padding:12px 14px;font:14px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;margin:8px 0}
+.flow{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.flow span.s{font-size:14px;padding:4px 12px;border-radius:999px;border:1px solid var(--rule);background:#fff;color:var(--muted)}
+.flow span.s.on{background:var(--gfp);border-color:var(--gfp);color:#fff}
+.flow span.s.done{background:var(--gfp-soft);color:var(--gfp);border-color:#bfe3cc}
+/* explain */
+.explain{background:var(--amber-soft);border:1px solid #f0d7a8;border-left:6px solid var(--amber);border-radius:12px;padding:16px 20px;margin:16px 0}
+.explain h4{color:var(--amber)}
+.explain ol{margin:0;padding-left:1.3em}
+.explain li{margin:10px 0}
+.lim{background:#fff;border:1px solid var(--rule);border-left:6px solid var(--eye);border-radius:12px;padding:12px 18px;margin:12px 0}
+.lim b{color:var(--eye)}
+.bridge{border-radius:12px;padding:14px 18px;margin:12px 0}
+.bridge.gen{background:var(--info-soft);border:1px solid #c6d6f3}
+.bridge.gen h4{color:var(--info)}
+.bridge.field{background:var(--eye-soft);border:1px solid #f2c4c1}
+.bridge.field h4{color:var(--eye)}
+.bridge p{margin:.3em 0}
+.bridge .lm{font-size:14px;color:var(--muted)}
+details.code{background:#fff;border:1px solid var(--rule);border-radius:12px;padding:10px 16px}
+details.code table{width:100%;border-collapse:collapse;margin-top:8px}
+details.code td{border-bottom:1px solid var(--rule);padding:8px;vertical-align:top;font-size:15px}
+details.code td:first-child{width:54%}
+details.code code{font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;word-break:break-word;color:#3a2a55}
+.note{font-size:14px;color:var(--muted)}
+/* quiz */
+.quiz{margin:16px 0}
+.quiz .qi{background:#fff;border:1px solid #c6d6f3;border-left:6px solid var(--info);border-radius:12px;padding:14px 18px;margin:10px 0}
+.quiz .qi p{margin:0 0 8px;font-weight:700}
+.quiz .opts{display:flex;flex-wrap:wrap;gap:6px}
+.quiz .fb{margin:8px 0 0;font-size:15px}
+.quiz .fb.ok{color:var(--gfp)} .quiz .fb.no{color:var(--eye)}
+.quiz .qi .bt.right{background:var(--gfp);color:#fff;border-color:var(--gfp)}
+.quiz .qi .bt.wrong{background:var(--eye-soft);color:var(--eye);border-color:#f2c4c1}
+/* big picture */
+.bp svg{display:block;min-width:720px;width:100%;height:auto}
+.diff{background:#fff;border:1px solid var(--rule);border-left:6px solid var(--amber);border-radius:12px;padding:12px 18px;margin:12px 0}
+/* duel */
+.duel{background:var(--panel);border:1px solid var(--rule);border-radius:16px;padding:20px}
+.duel .head{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;text-align:center}
+.duel .head img{width:96px;height:96px;object-fit:contain}
+.duel .head img.flip{transform:scaleX(-1)}
+.duel .vs{font-weight:700;font-size:28px;color:var(--stain)}
+.choice{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+.choice>div{background:#fff;border:1px solid var(--rule);border-radius:12px;padding:12px 16px}
+.choice .fly{border-top:4px solid var(--c-fly)} .choice .robo{border-top:4px solid var(--c-robo)}
+.guess{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
+.bars{display:grid;gap:10px;margin:14px 0}
+.bars .b{display:grid;grid-template-columns:90px 1fr 70px;gap:10px;align-items:center}
+.bars .track{height:22px;background:#fff;border:1px solid var(--rule);border-radius:6px;overflow:hidden}
+.bars .fill{height:100%}
+.duel .after{display:none}
+.duel.open .after{display:block}
+.score{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
+.score span{padding:4px 12px;border-radius:999px;border:1px solid var(--rule);background:#fff;font-size:14px}
+/* summary table */
+.tb{width:100%;border-collapse:collapse;font-size:15px}
+.tb th,.tb td{border-bottom:1px solid var(--rule);padding:8px 10px;text-align:left;vertical-align:top}
+.tb th{background:var(--panel2)}
+.tw{overflow-x:auto}
+/* KG */
+#kg .kgtools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+#kg input[type=search]{flex:1;min-width:200px;border:1px solid var(--rule);border-radius:8px;padding:6px 10px}
+#kgList{display:grid;gap:8px;max-height:460px;overflow:auto;padding-right:4px}
+#kgList .it{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:10px 14px}
+#kgList .it.open{border-color:var(--stain)}
+#kgList .it b{margin-right:6px}
+#kgList .it p{margin:.2em 0;font-size:14px;color:var(--muted)}
+.kchip{font-size:12px;padding:1px 8px;border-radius:999px;background:var(--panel2);border:1px solid var(--rule);margin-right:4px}
+.kgcols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.legend{display:flex;flex-wrap:wrap;gap:8px;font-size:13px;color:var(--muted);margin:6px 0}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px;vertical-align:middle}
+/* export */
+#export .refs li{margin:8px 0}
+.badge{font-size:12px;padding:1px 8px;border-radius:999px;margin-left:4px}
+.badge.ok{background:var(--gfp-soft);color:var(--gfp)} .badge.no{background:var(--amber-soft);color:var(--amber)}
+textarea.cite{width:100%;min-height:90px;border:1px solid var(--rule);border-radius:8px;padding:8px;font:13px/1.5 ui-monospace,Menlo,Consolas,monospace}
+footer{border-top:1px solid var(--rule);margin-top:60px;padding:30px 0 80px;color:var(--muted);font-size:14px}
+footer a{overflow-wrap:anywhere}
+footer .by{color:var(--text);font-size:15px}
+/* tooltip, study */
+.jt{border-bottom:2px dotted var(--amber);cursor:help}
+#tip{position:fixed;z-index:80;max-width:300px;background:#fff;border:1px solid var(--rule);border-left:4px solid var(--amber);border-radius:10px;padding:10px 12px;font-size:14px;box-shadow:0 4px 14px rgba(0,0,0,.12);display:none}
+#tip b{display:block}
+#tip small{color:var(--muted)}
+#study{position:fixed;right:14px;bottom:14px;z-index:70;background:#fff;border:1px solid var(--rule);border-radius:999px;padding:6px 8px 6px 14px;font-size:13px;display:flex;gap:8px;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+#study button{border:1px solid var(--rule);background:var(--panel);border-radius:999px;padding:2px 10px;cursor:pointer;font-size:13px}
+@media (max-width:980px){.cover .shelfart{opacity:.5}}
+@media (max-width:860px){
+  .duo{grid-template-columns:1fr}
+  .kpis,.panel .kpis{grid-template-columns:repeat(2,1fr)}
+  .cast{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:1fr}
+  .kgcols{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  section.level{padding-top:64px}
+  .pair,.ans2,.choice{grid-template-columns:1fr}
+  .say img.who{width:52px;height:52px;flex-basis:52px}
+  .cover .line{width:80%}
+  .cover .shelfart{display:none}
+  details.code td{display:block;width:auto!important}
+}
+@media (max-width:520px){#study{left:10px;right:10px;justify-content:space-between}.bars .b{grid-template-columns:70px 1fr 56px}}
+@media (max-width:600px){.cover{max-height:none}.cover .line{bottom:26%}}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<nav class="top" aria-label="섹션 바로가기">
+  <span class="logo">RAG 연구실</span>
+  <div class="links">
+    <a href="#first">3줄 요약</a><a href="#why">왜</a><a href="#big">큰 그림</a>
+    <a href="#lv1">① 혼자</a><a href="#lv2">② 단어</a><a href="#lv3">③ 뜻</a><a href="#lv4">④ 조각</a><a href="#lv5">⑤ RAG</a>
+    <a href="#duel">대결</a><a href="#sum">정리</a><a href="#kg">지식 색인</a><a href="#export">꾸러미</a>
+  </div>
+</nav>
+
+<!-- lab-cover -->
+<header class="cover" id="cover" data-img="cover_A1" role="img" aria-label="도서관처럼 꾸민 낮의 연구실에서 네 캐릭터가 서가의 문장 카드를 바라보는 대체 표지">
+  <div class="hex"></div>
+  <div class="shelfart" aria-hidden="true">
+    <div><i style="height:70%;background:#e7c9f0"></i><i style="height:85%;background:#cfe6d7"></i><i style="height:60%;background:#f5d8b0"></i><i style="height:90%;background:#d6e2f7"></i><i style="height:75%;background:#f3cfd7"></i><i style="height:65%;background:#cfe6d7"></i></div>
+    <div><i style="height:80%;background:#d6e2f7"></i><i style="height:60%;background:#f3cfd7"></i><i style="height:95%;background:#fff3a8;box-shadow:0 0 14px #ffe066"></i><i style="height:70%;background:#e7c9f0"></i><i style="height:85%;background:#f5d8b0"></i><i style="height:60%;background:#d6e2f7"></i></div>
+    <div><i style="height:65%;background:#cfe6d7"></i><i style="height:80%;background:#f5d8b0"></i><i style="height:70%;background:#d6e2f7"></i><i style="height:90%;background:#e7c9f0"></i><i style="height:60%;background:#f3cfd7"></i><i style="height:75%;background:#cfe6d7"></i></div>
+  </div>
+  <div class="line" aria-hidden="true">
+    <img class="fly" data-who="fly" data-mood="point" data-face="right" alt="">
+    <img data-who="doc" data-mood="think" alt="">
+    <img data-who="asst" data-mood="smile" alt="">
+    <img class="robo" data-who="robo" data-mood="coin" alt="">
+  </div>
+  <span class="cover-chip">LLM 공식에서 GPT-6까지 · 응용편 1</span>
+</header>
+<!-- /lab-cover -->
+
+<header class="hero" id="top">
+<div class="wrap">
+  <div class="kicker">LLM 공식에서 GPT-6까지 · 응용편 1 · 검색 증강 생성(RAG)</div>
+  <h1>RAG 연구실 — 사서가 찾아온 문장으로 LLM이 답한다</h1>
+  <p class="q">핵심 질문: LLM이 한 번도 읽지 못한 우리 회사 문서로, 어떻게 근거 있는 답을 받을까?</p>
+  <p class="lead">LLM은 배운 적 없는 문서를 모릅니다. 그래도 그럴듯하게 답을 지어낼 수 있습니다. RAG는 답하기 전에 관련 문장부터 찾아 함께 건네는 방법입니다. 이 페이지는 가상 회사의 안내문 18문장과 질문 8개로 그 과정을 다섯 단계로 나눠 보여 줍니다.</p>
+  <section class="kpis" aria-label="숫자 요약">
+    <div class="kpi m"><b>18문장</b><span>가상 회사 안내문 (예시 데이터)</span></div>
+    <div class="kpi g"><b>8개</b><span>직접 던져 볼 질문</span></div>
+    <div class="kpi a"><b>8개</b><span>문장의 뜻을 적은 숫자 줄 (예시값)</span></div>
+    <div class="kpi r"><b>2020</b><span>RAG라는 이름이 논문에 나온 해 <sup>[1]</sup></span></div>
+  </section>
+  <div class="dialog">
+    <div class="say" data-who="doc"><img class="who" data-who="doc" data-mood="think" alt="" aria-hidden="true"><div><b class="name">박사</b><p>오늘은 도서관 사서를 하나 고용해요. 질문이 오면 서가에서 맞는 문장을 찾아오는 사서예요.</p></div></div>
+    <div class="say" data-who="asst"><img class="who" data-who="asst" data-mood="smile" alt="" aria-hidden="true"><div><b class="name">조수(하루)</b><p>문서는 18문장, 질문은 8개 준비했어요. 모두 영어 예문이에요.</p></div></div>
+    <div class="say" data-who="fly"><img class="who" data-who="fly" data-mood="point" alt="" aria-hidden="true"><div><b class="name">초파리 연구원</b><p>사서가 엉뚱한 책을 가져오면? 출처부터 보여 줘.</p></div></div>
+    <div class="say" data-who="robo"><img class="who" data-who="robo" data-mood="coin" alt="" aria-hidden="true"><div><b class="name">주판봇</b><p>뜻을 숫자 8개에 담으면 다 찾지. 숫자에 걸어 볼게.</p></div></div>
+  </div>
+
+  <div class="first" id="first">
+    <h2>처음 오신 분께 — 이 페이지를 3줄로</h2>
+    <ol>
+      <li><b>무엇을:</b> 질문과 뜻이 가까운 문장을 먼저 찾아, 질문과 함께 LLM에 건네는 방법(RAG)을 배웁니다.</li>
+      <li><b>왜 중요한가:</b> LLM은 모르는 내용도 자신 있게 지어냅니다. 찾아온 문장이 있으면 답의 근거를 확인할 수 있습니다.</li>
+      <li><b>업무에서는:</b> 사내 규정, 제품 설명서, 상담 기록처럼 LLM이 배운 적 없는 문서로 묻고 답할 때 씁니다.</li>
+    </ol>
+    <span class="free">코드·수식을 몰라도 됩니다. 버튼만 눌러 보세요.</span>
+    <details>
+      <summary>영어 약어 풀이 (눌러서 펼치기)</summary>
+      <table class="abbr">
+        <tr><th>약어</th><th>풀어 쓰면</th><th>이 페이지에서 뜻</th></tr>
+        <tr><td>RAG</td><td>Retrieval-Augmented Generation</td><td>검색으로 보강해 글을 만드는 방법</td></tr>
+        <tr><td>LLM</td><td>Large Language Model</td><td>다음 단어를 이어 쓰며 답하는 큰 언어 모델</td></tr>
+        <tr><td>DB</td><td>Database</td><td>자료를 모아 두고 찾아 쓰는 저장소</td></tr>
+        <tr><td>top-k</td><td>상위 k개</td><td>점수가 높은 순서로 k개만 고르기</td></tr>
+        <tr><td>FAISS</td><td>Facebook AI Similarity Search</td><td>비슷한 숫자 줄을 빨리 찾는 공개 도구 <sup>[2]</sup></td></tr>
+        <tr><td>L2 노름</td><td>L2 norm</td><td>숫자 줄의 길이 (피타고라스 정리로 잰다)</td></tr>
+      </table>
+    </details>
+  </div>
+
+  <div class="exbar" role="group" aria-label="예문 언어">
+    <span class="glabel">예문 언어</span>
+    <button class="bt" data-exlang="en" aria-pressed="true">English (원문)</button>
+    <button class="bt" data-exlang="ko" aria-pressed="false">내 언어 (한국어)</button>
+    <span class="note">예문은 영어가 원문입니다. 한국어는 뜻을 돕는 번역입니다. 검색 실험의 계산은 늘 영어 원문으로 합니다.</span>
+  </div>
+</div>
+</header>
+
+<section class="level" id="cast">
+<div class="wrap">
+  <h2>등장인물과 이 페이지 쓰는 법</h2>
+  <div class="cast">
+    <div><img data-who="doc" data-mood="front" alt="" aria-hidden="true"><b>박사</b><span>해설과 판정</span></div>
+    <div><img data-who="asst" data-mood="smile" alt="" aria-hidden="true"><b>조수(하루)</b><span>실험 진행, 숫자 발표, 수식 질문</span></div>
+    <div><img data-who="fly" data-mood="clip" alt="" aria-hidden="true"><b>초파리 연구원</b><span>의심하는 쪽: "출처는?"</span></div>
+    <div><img data-who="robo" data-mood="smile" alt="" aria-hidden="true"><b>주판봇</b><span>확신하는 쪽: "숫자에 건다"</span></div>
+  </div>
+  <p>노란 점선 밑줄 단어를 누르면 뜻이 나옵니다. 단계마다 실험 패널이 하나 있고, 끝에 확인 퀴즈 두 문제가 있습니다. 이 페이지는 「LLM 공식에서 GPT-6까지」 본편 뒤에 잇는 응용편 첫 편입니다.</p>
+</div>
+</section>
+
+<section class="level" id="why">
+<div class="wrap">
+  <h2>왜 RAG인가</h2>
+  <div class="steps">
+    <div><b class="n">1</b><b>모르는 문서</b><p>LLM은 학습이 끝난 뒤 생긴 문서나 회사 안 문서를 읽은 적이 없습니다.</p></div>
+    <div><b class="n">2</b><b>그럴듯한 지어냄</b><p>모르는 것도 흔한 말투로 자신 있게 답합니다. 이것을 환각이라고 부릅니다.</p></div>
+    <div><b class="n">3</b><b>근거를 붙이기</b><p>찾아온 문장을 함께 건네면, 답이 어느 문장에서 나왔는지 확인할 수 있습니다.</p></div>
+  </div>
+  <p>RAG를 다시 학습시키는 방법과 헷갈리기 쉽습니다. RAG는 모델을 고치지 않습니다. 질문할 때마다 읽을거리를 바꿔 끼울 뿐입니다. 모델 자체를 고치는 방법(미세조정)은 응용편 다음 편에서 다룹니다.</p>
+</div>
+</section>
+
+<section class="level" id="big">
+<div class="wrap">
+  <h2>큰 그림 — 미리 해 두는 일과 질문할 때 하는 일</h2>
+  <p>원자료의 흐름도는 질문이 들어온 뒤의 순서만 그렸습니다. 실제로는 서가를 먼저 채워 두는 준비 단계가 있습니다. 원자료의 코드 1~4번이 준비 단계, 5~7번이 질문 단계입니다.</p>
+  <div class="cwrap bp">
+  <svg viewBox="0 0 980 330" role="img" aria-label="준비 단계: 문서 읽기, 조각으로 자르기, 뜻을 숫자로, 서가에 꽂기. 질문 단계: 질문을 숫자로, 비슷한 조각 찾기, 상위 k개, 질문과 조각을 함께 LLM에, 근거가 붙은 답.">
+    <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#5b6874"/></marker>
+    <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#13733a"/></marker></defs>
+    <text x="16" y="28" font-size="15" font-weight="700" fill="#a35c00">미리 한 번 (준비 단계)</text>
+    <g font-size="14" text-anchor="middle">
+      <rect x="16" y="42" width="160" height="56" rx="10" fill="#fdf3e1" stroke="#e8c88f"/><text x="96" y="66">① 문서 읽기</text><text x="96" y="86" font-size="12" fill="#5b6874">안내문 18문장</text>
+      <rect x="226" y="42" width="160" height="56" rx="10" fill="#fdf3e1" stroke="#e8c88f"/><text x="306" y="66">② 조각으로 자르기</text><text x="306" y="86" font-size="12" fill="#5b6874">청크</text>
+      <rect x="436" y="42" width="160" height="56" rx="10" fill="#fdf3e1" stroke="#e8c88f"/><text x="516" y="66">③ 뜻을 숫자로</text><text x="516" y="86" font-size="12" fill="#5b6874">임베딩</text>
+      <rect x="646" y="42" width="160" height="56" rx="10" fill="#fdf3e1" stroke="#e8c88f"/><text x="726" y="66">④ 서가에 꽂기</text><text x="726" y="86" font-size="12" fill="#5b6874">벡터 DB</text>
+    </g>
+    <g stroke="#5b6874" stroke-width="2" marker-end="url(#ar)"><line x1="178" y1="70" x2="222" y2="70"/><line x1="388" y1="70" x2="432" y2="70"/><line x1="598" y1="70" x2="642" y2="70"/></g>
+    <line x1="726" y1="100" x2="726" y2="184" stroke="#a35c00" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ar)"/>
+    <text x="736" y="146" font-size="12" fill="#a35c00">찾을 때 쓰는 서가</text>
+    <text x="16" y="168" font-size="15" font-weight="700" fill="#13733a">질문마다 (질문 단계)</text>
+    <g font-size="14" text-anchor="middle">
+      <rect x="16" y="188" width="150" height="56" rx="10" fill="#e6eefb" stroke="#b9cdf1"/><text x="91" y="212">⑤ 질문</text><text x="91" y="232" font-size="12" fill="#5b6874">영어 문장 하나</text>
+      <rect x="200" y="188" width="150" height="56" rx="10" fill="#e6eefb" stroke="#b9cdf1"/><text x="275" y="212">⑥ 질문도 숫자로</text><text x="275" y="232" font-size="12" fill="#5b6874">같은 임베딩 모델</text>
+      <rect x="384" y="188" width="150" height="56" rx="10" fill="#e6eefb" stroke="#b9cdf1"/><text x="459" y="212">⑦ 비슷한 조각</text><text x="459" y="232" font-size="12" fill="#5b6874">코사인 유사도</text>
+      <rect x="568" y="188" width="150" height="56" rx="10" fill="#e6eefb" stroke="#b9cdf1"/><text x="643" y="212">⑧ 상위 k개</text><text x="643" y="232" font-size="12" fill="#5b6874">top-k</text>
+      <rect x="752" y="188" width="100" height="56" rx="10" fill="#f6ecfa" stroke="#d7b4e6"/><text x="802" y="221">⑨ LLM</text>
+      <rect x="878" y="188" width="90" height="56" rx="10" fill="#e7f5ec" stroke="#bfe3cc"/><text x="923" y="212">⑩ 답</text><text x="923" y="232" font-size="12" fill="#5b6874">+ 출처</text>
+    </g>
+    <g stroke="#5b6874" stroke-width="2" marker-end="url(#ar)"><line x1="168" y1="216" x2="196" y2="216"/><line x1="352" y1="216" x2="380" y2="216"/><line x1="536" y1="216" x2="564" y2="216"/><line x1="720" y1="216" x2="748" y2="216"/><line x1="854" y1="216" x2="874" y2="216"/></g>
+    <path d="M91 246 C 91 300, 802 300, 802 248" fill="none" stroke="#13733a" stroke-width="2.5" marker-end="url(#arg)"/>
+    <text x="446" y="314" font-size="13" fill="#13733a" text-anchor="middle">질문 원문도 LLM에 함께 들어간다 (원자료 흐름도에는 없는 화살표)</text>
+  </svg>
+  </div>
+  <div class="diff"><b>원자료와 다른 곳</b> — 원자료 흐름도의 「질문 → 검색기 → 벡터 DB → 관련 조각 → LLM」을 이 페이지에서는 두 가지로 바꿉니다. ① 질문을 숫자로 바꾸는 임베딩 상자를 따로 그립니다. ② 질문 원문이 LLM에도 함께 들어가는 화살표를 더합니다.</div>
+</div>
+</section>
+
+<!-- ① -->
+<section class="level" id="lv1">
+<div class="wrap">
+  <div class="lvhead"><div class="hexno">1<small>출발</small></div><div><h2>LLM 혼자 답하기 — 책 없이 시험 보기</h2>
+    <p class="sub"><span class="lvtag g">방법: 질문만 건네고 답 받기</span><span class="lvtag d">일상: 책 없이 치르는 시험</span></p></div></div>
+  <div class="duo">
+    <div class="why"><h4>왜 이 방법부터 보나</h4><ol>
+      <li><b>문제 상황:</b> 고객이 우리 회사 램프의 보증 기간을 묻습니다.</li>
+      <li><b>이 방법:</b> LLM에 질문만 건넵니다. 가장 간단해서 누구나 먼저 해 봅니다.</li>
+      <li><b>무엇이 드러나나:</b> 문서를 읽은 적 없는 모델은 흔한 답을 그럴듯하게 고릅니다.</li>
+    </ol><p class="easy"><b>쉽게 말하면</b> — 수업을 안 들은 학생이 「보통 이렇던데」로 답안을 채우는 모습입니다.</p></div>
+    <div class="askm"><h4>수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
+      <div class="row"><img data-who="asst" data-mood="shock" alt="" aria-hidden="true"><p>모델이 "1년"이라고 답한 건 거짓말을 하려던 건가요?</p></div>
+      <span class="school">학교 수학으로 보면: 조건부 확률 P(B | A)</span>
+      <table><tr><td>P(다음 말 | 앞 문장)</td><td>앞 문장이 주어졌을 때 다음에 올 말의 확률</td></tr>
+        <tr><td>가장 큰 값 고르기</td><td>확률이 가장 높은 말을 골라 이어 씁니다</td></tr></table>
+      <div class="try">숫자로 한 번 해 보기 (예시값): 「The warranty covers ___」 뒤에 <b>1 year 0.46</b>, accidents 0.22, 2 years 0.19, nothing 0.13. 넷을 더하면 1.00입니다. 가장 큰 0.46을 고르면 "1 year"가 됩니다.</div>
+      <div class="row"><img data-who="asst" data-mood="spark" alt="" aria-hidden="true"><p>거짓말이 아니라 흔한 말을 고른 거네요. 우리 문서의 "2 years"는 모델 머릿속에 없었고요.</p></div>
+    </div>
+  </div>
+  <div class="pair">
+    <div><div class="tag fly">일상으로 치면</div><p>책을 덮고 시험을 봅니다. 아는 문제는 맞히지만, 배우지 않은 문제도 비슷한 말로 빈자리를 채웁니다.</p></div>
+    <div><div class="tag nn">모델에서는</div><p>LLM은 학습 때 본 글의 흐름대로 다음 말을 고릅니다. 우리 회사 안내문은 그 학습 글에 없었습니다.</p></div>
+  </div>
+  <div class="talk">
+    <div class="line" data-who="doc"><img data-who="doc" data-mood="board" alt="" aria-hidden="true"><b>박사</b><span>질문만 던지면 얼마나 맞힐까요?</span></div>
+    <div class="line" data-who="robo"><img data-who="robo" data-mood="coin" alt="" aria-hidden="true"><b>주판봇</b><span>모델이 크니까 대부분 맞히겠지.</span></div>
+    <div class="line" data-who="fly"><img data-who="fly" data-mood="point" alt="" aria-hidden="true"><b>초파리 연구원</b><span>질문 버튼을 눌러 봐. 오른쪽 문서랑 비교해.</span></div>
+  </div>
+  <section class="panel" aria-label="실험 1">
+    <h3>실험 ① 책 없이 답하기 vs 문서에 적힌 것</h3>
+    <div class="ctrl"><div class="group" id="q1chips"><span class="glabel">질문</span></div></div>
+    <div class="qline" id="q1line"></div>
+    <div class="ans2">
+      <div class="bad"><h4>LLM 혼자 낸 답 (예시 답변)</h4><p id="q1bad"></p><div class="chips"><span class="chip no">근거 문장 없음</span></div></div>
+      <div class="good"><h4>회사 문서에 적힌 것</h4><p id="q1good"></p><div class="chips" id="q1gid"></div></div>
+    </div>
+    <h3>다음 말 확률 (예시값)</h3>
+    <div class="cwrap"><canvas id="c1" aria-label="The warranty covers 다음에 올 말 네 가지의 확률 막대. 1 year가 0.46으로 가장 높다."></canvas></div>
+    <section class="kpis" id="k1"></section>
+    <div class="insight" id="ins1" aria-live="polite"></div>
+  </section>
+  <div class="explain"><h4>풀이</h4><ol>
+    <li>왼쪽 답은 실제 모델 출력이 아닙니다. 문서를 모르는 모델이 흔히 내는 답을 흉내 낸 예시입니다.</li>
+    <li>8개 중 1개(Q6 비밀번호)는 맞습니다. 흔한 상식과 우리 문서가 우연히 같았기 때문입니다.</li>
+    <li>맞을 때도 틀릴 때도 말투는 똑같이 자신 있습니다. 독자는 어느 쪽인지 구별할 수 없습니다.</li>
+  </ol></div>
+  <div class="lim"><b>이 단계의 한계</b> — 근거가 없으니 맞는 답과 지어낸 답을 가려낼 수 없습니다. 그래서 다음 단계에서는 문서를 직접 뒤집니다.</div>
+  <div class="quiz" data-quiz="lv1"></div>
+</div>
+</section>
+
+<!-- ② -->
+<section class="level" id="lv2">
+<div class="wrap">
+  <div class="lvhead"><div class="hexno">2<small>단어</small></div><div><h2>단어가 겹치는 문장 찾기 — 키워드 검색</h2>
+    <p class="sub"><span class="lvtag g">방법: 같은 단어가 많은 문장 고르기</span><span class="lvtag d">일상: 책 뒤 찾아보기에서 낱말로 찾기</span></p></div></div>
+  <div class="duo">
+    <div class="why"><h4>왜 이 방법을 쓰나</h4><ol>
+      <li><b>문제 상황:</b> ①단계의 모델은 우리 문서를 모릅니다.</li>
+      <li><b>앞 방법의 한계:</b> 근거 없이 답하니 맞는지 알 수 없었습니다.</li>
+      <li><b>해법:</b> 질문의 단어가 들어 있는 문장을 문서에서 직접 찾습니다.</li>
+    </ol><p class="easy"><b>쉽게 말하면</b> — 책 맨 뒤 「찾아보기」에서 낱말을 찾아 그 쪽을 펴는 방식입니다.</p></div>
+    <div class="askm"><h4>수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
+      <div class="row"><img data-who="asst" data-mood="shock" alt="" aria-hidden="true"><p>점수는 어떻게 매기는 거예요? 단어를 세는 건가요?</p></div>
+      <span class="school">학교 수학으로 보면: 집합의 교집합과 원소의 개수 n(A∩B)</span>
+      <table><tr><td>A</td><td>질문의 단어 집합 (the, is 같은 흔한 말은 뺌)</td></tr>
+        <tr><td>B</td><td>문장 하나의 단어 집합</td></tr>
+        <tr><td>점수 = n(A∩B)</td><td>둘 다에 있는 단어의 개수</td></tr></table>
+      <div class="try">숫자로 한 번 해 보기: Q7 「How much does a new cell cost?」의 A = {much, cost, new, cell}. B6 문장의 B = {replacement, batteries, cost, 12, dollars}. 겹치는 것은 <b>cost 하나</b>라 점수는 1입니다.</div>
+      <div class="row"><img data-who="asst" data-mood="spark" alt="" aria-hidden="true"><p>cell과 battery는 뜻이 같은데, 글자가 다르니 점수에 안 들어가네요.</p></div>
+    </div>
+  </div>
+  <div class="pair">
+    <div><div class="tag fly">일상으로 치면</div><p>사서가 질문 쪽지의 낱말을 서가 꼬리표와 하나씩 맞춰 봅니다. 꼬리표에 같은 글자가 있어야 꺼내 옵니다.</p></div>
+    <div><div class="tag nn">모델에서는</div><p>질문과 문장을 단어 목록으로 바꾸고 겹치는 수를 셉니다. 가장 많이 겹치는 문장이 1등입니다.</p></div>
+  </div>
+  <div class="talk">
+    <div class="line" data-who="doc"><img data-who="doc" data-mood="board" alt="" aria-hidden="true"><b>박사</b><span>단어가 겹치는 문장을 찾으면 근거가 생기죠. 8개 중 몇 개를 찾을까요?</span></div>
+    <div class="line" data-who="fly"><img data-who="fly" data-mood="clip" alt="" aria-hidden="true"><b>초파리 연구원</b><span>글자가 같으면 확실하잖아. 나는 이쪽이 믿음직해.</span></div>
+    <div class="line" data-who="asst"><img data-who="asst" data-mood="report" alt="" aria-hidden="true"><b>조수(하루)</b><span>Q5 「How fast is delivery?」부터 눌러 볼게요.</span></div>
+  </div>
+  <section class="panel" aria-label="실험 2">
+    <h3>실험 ② 단어 겹침으로 찾기</h3>
+    <div class="ctrl"><div class="group" id="q2chips"><span class="glabel">질문</span></div></div>
+    <div class="qline" id="q2line"></div>
+    <div class="chips" id="q2words"></div>
+    <h3>행동으로 보기 — 사서가 점수 1등 카드를 꺼내 온다</h3>
+    <div class="cwrap"><canvas id="c2" class="wide" aria-label="서가 세 줄에 문장 카드 18장. 카드마다 단어 겹침 점수가 막대로 표시되고, 사서 로봇이 1등 카드로 걸어간다."></canvas></div>
+    <section class="kpis" id="k2"></section>
+    <div class="eq" id="eq2"></div>
+    <div class="insight" id="ins2" aria-live="polite"></div>
+  </section>
+  <div class="explain"><h4>풀이</h4><ol>
+    <li>8개 질문 중 3개만 정답 문장을 1등으로 찾습니다.</li>
+    <li>delivery와 shipping, money back과 refund처럼 뜻은 같고 글자가 다르면 놓칩니다.</li>
+    <li>점수가 같은 문장이 여럿이면 순서가 운에 맡겨집니다. 점수 1짜리 동점이 자주 생깁니다.</li>
+  </ol></div>
+  <div class="lim"><b>이 단계의 한계</b> — 글자만 봅니다. 같은 뜻을 다른 말로 물으면 찾지 못합니다. 그래서 다음 단계는 뜻을 숫자로 적습니다.</div>
+  <details class="code"><summary>교안의 파이썬 코드로 보면 (몰라도 됩니다)</summary>
+    <p class="note">원자료 코드에는 키워드 검색이 없습니다. 비교를 위해 이 페이지가 더한 단계입니다.</p>
+  </details>
+  <div class="quiz" data-quiz="lv2"></div>
+</div>
+</section>
+
+<!-- ③ -->
+<section class="level" id="lv3">
+<div class="wrap">
+  <div class="lvhead"><div class="hexno">3<small>뜻</small></div><div><h2>뜻을 숫자 줄로 — 임베딩과 코사인 유사도</h2>
+    <p class="sub"><span class="lvtag g">방법: 뜻의 방향이 가까운 문장 고르기</span><span class="lvtag d">일상: 주제별 서가 위치로 찾기</span></p></div></div>
+  <div class="duo">
+    <div class="why"><h4>왜 이 방법을 쓰나</h4><ol>
+      <li><b>문제 상황:</b> 고객은 문서와 다른 말로 묻습니다.</li>
+      <li><b>앞 방법의 한계:</b> 글자가 겹쳐야만 찾았습니다. 8개 중 3개뿐이었습니다.</li>
+      <li><b>해법:</b> 문장마다 뜻을 숫자 줄로 적고, 줄의 방향이 비슷한 문장을 찾습니다.</li>
+    </ol><p class="easy"><b>쉽게 말하면</b> — 책마다 「환불 쪽 0.9, 배송 쪽 0.3」처럼 주제 좌표를 붙여 두고, 질문 좌표와 가까운 책을 꺼냅니다.</p></div>
+    <div class="askm"><h4>수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
+      <div class="row"><img data-who="asst" data-mood="shock" alt="" aria-hidden="true"><p>원자료의 similarity(A, B) = A·B / (‖A‖ ‖B‖)는 무슨 뜻이에요?</p></div>
+      <span class="school">학교 수학으로 보면: 벡터의 내적과 삼각비 cos, 피타고라스 정리</span>
+      <table><tr><td>A, B</td><td>두 문장의 숫자 줄 (벡터라고 부름)</td></tr>
+        <tr><td>A·B (내적)</td><td>같은 자리 숫자끼리 곱해서 모두 더한 값</td></tr>
+        <tr><td>‖A‖ (길이)</td><td>숫자를 제곱해 더한 뒤 제곱근. 피타고라스 정리와 같음</td></tr>
+        <tr><td>나눈 값</td><td>두 화살표 사이 각도의 cos. 1이면 같은 방향, 0이면 직각, −1이면 반대</td></tr></table>
+      <div class="try">숫자로 한 번 해 보기 (원자료의 숫자 5개짜리 예시): 같은 자리끼리 곱해 더하면 A·B = <b>0.6506</b>. ‖A‖ = 0.8361, ‖B‖ = 0.7803. 0.6506 ÷ (0.8361 × 0.7803) = <b>0.997</b>.</div>
+      <div class="row"><img data-who="asst" data-mood="spark" alt="" aria-hidden="true"><p>길이로 나누니까 문장이 길든 짧든 방향만 비교하는 거네요. 원자료는 0.99라고 적었지만 계산하면 0.997이에요.</p></div>
+    </div>
+  </div>
+  <div class="pair">
+    <div><div class="tag fly">일상으로 치면</div><p>사서가 책마다 주제 좌표 스티커를 붙여 둡니다. 질문을 듣고 좌표를 정한 뒤, 같은 방향에 꽂힌 책을 꺼냅니다.</p></div>
+    <div><div class="tag nn">모델에서는</div><p>임베딩 모델이 문장을 숫자 수백~수천 개로 바꿉니다. 이 페이지는 이해를 돕기 위해 숫자 8개만 씁니다.</p></div>
+  </div>
+  <div class="talk">
+    <div class="line" data-who="doc"><img data-who="doc" data-mood="board" alt="" aria-hidden="true"><b>박사</b><span>뜻으로 찾으면 Q5 「delivery」도 shipping 문장을 찾을까요?</span></div>
+    <div class="line" data-who="robo"><img data-who="robo" data-mood="coin" alt="" aria-hidden="true"><b>주판봇</b><span>숫자 8개면 8개 다 찾지. 확실해.</span></div>
+    <div class="line" data-who="fly"><img data-who="fly" data-mood="point" alt="" aria-hidden="true"><b>초파리 연구원</b><span>8개 다? Q4도 눌러 봐.</span></div>
+  </div>
+  <section class="panel" aria-label="실험 3">
+    <h3>실험 ③-가 각도만 보면 된다 — 화살표 두 개</h3>
+    <div class="ctrl">
+      <div class="group"><span class="glabel">두 화살표 사이 각도</span><input type="range" id="ang" min="0" max="180" step="5" value="30" aria-label="각도"><span class="val" id="angv">30°</span></div>
+      <div class="group"><span class="glabel">B 화살표 길이</span><input type="range" id="blen" min="0.4" max="1.6" step="0.1" value="1" aria-label="길이"><span class="val" id="blenv">1.0</span></div>
+    </div>
+    <div class="cwrap"><canvas id="c3a" aria-label="원점에서 뻗은 두 화살표 A와 B. 각도와 길이를 바꾸면 코사인 유사도가 바뀐다."></canvas></div>
+    <div class="eq" id="eq3a"></div>
+    <h3>실험 ③-나 뜻 숫자 8개로 찾기</h3>
+    <div class="ctrl"><div class="group" id="q3chips"><span class="glabel">질문</span></div></div>
+    <div class="qline" id="q3line"></div>
+    <div class="cwrap"><canvas id="c3v" aria-label="질문의 뜻 숫자 8개 막대: 환불, 가격, 배송, 운영 시간, 배터리, 보증, 안전, 계정."></canvas></div>
+    <h3>행동으로 보기 — 사서가 방향이 가장 비슷한 카드를 꺼내 온다</h3>
+    <div class="cwrap"><canvas id="c3" class="wide" aria-label="서가 세 줄 문장 카드 18장. 카드마다 코사인 유사도 막대, 사서 로봇이 1등 카드로 간다."></canvas></div>
+    <section class="kpis" id="k3"></section>
+    <div class="insight" id="ins3" aria-live="polite"></div>
+  </section>
+  <div class="explain"><h4>풀이</h4><ol>
+    <li>각도 실험에서 길이를 바꿔도 값은 그대로입니다. 코사인 유사도는 방향만 봅니다.</li>
+    <li>뜻으로 찾으면 8개 중 7개를 1등으로 찾습니다. 단어 검색의 3개보다 많습니다.</li>
+    <li>Q4 「When can I call someone?」은 C2(답장 시간)가 C3(전화 시간)를 0.009 차이로 앞섭니다. 뜻 검색도 틀릴 수 있습니다.</li>
+  </ol></div>
+  <div class="lim"><b>이 단계의 한계</b> — 1등 하나만 믿으면 근소한 차이에 틀립니다. 또 실제 문서는 한 문장이 아니라 긴 글입니다. 어떻게 잘라 몇 개를 가져올지는 다음 단계에서 봅니다.</div>
+  <div class="bridge gen"><h4>생성 AI로 치면</h4><p>챗봇에 파일을 올리면 보이지 않는 곳에서 이 숫자 줄을 만들어 둡니다. 「파일에서 찾아 줘」의 첫 단계가 바로 이것입니다.</p><p class="lm">비유의 한계: 실제 숫자 하나하나에는 「환불」 같은 이름이 붙어 있지 않습니다. 숫자 8개의 이름은 이 페이지의 설명용입니다.</p></div>
+  <details class="code"><summary>교안의 파이썬 코드로 보면 (몰라도 됩니다)</summary>
+    <table>
+      <tr><td><code>from langchain_openai import OpenAIEmbeddings
+embeddings = OpenAIEmbeddings()</code></td><td>문장을 숫자 줄로 바꾸는 임베딩 모델을 준비합니다 (원자료 3번).</td></tr>
+      <tr><td><code>vectorstore = FAISS.from_documents(chunks, embeddings)</code></td><td>조각마다 숫자 줄을 만들어 서가(FAISS)에 꽂습니다 (원자료 4번).</td></tr>
+    </table>
+    <p class="note">FAISS는 길이를 1로 맞춘 벡터의 내적으로 코사인 유사도를 계산할 수 있습니다 <sup>[2]</sup>.</p>
+  </details>
+  <div class="quiz" data-quiz="lv3"></div>
+</div>
+</section>
+
+<!-- ④ -->
+<section class="level" id="lv4">
+<div class="wrap">
+  <div class="lvhead"><div class="hexno">4<small>조각</small></div><div><h2>잘라서 몇 개 가져올까 — 청크와 상위 k개</h2>
+    <p class="sub"><span class="lvtag g">방법: 조각 크기·겹침·k 정하기</span><span class="lvtag d">일상: 책 대신 쪽을 복사해 오기</span></p></div></div>
+  <div class="duo">
+    <div class="why"><h4>왜 이 방법을 쓰나</h4><ol>
+      <li><b>문제 상황:</b> 실제 문서는 수십 쪽입니다. 통째로 숫자 줄 하나에 담으면 뜻이 뭉개집니다.</li>
+      <li><b>앞 방법의 한계:</b> 1등 하나만 가져오면 근소한 차이에 틀렸습니다(Q4).</li>
+      <li><b>해법:</b> 문서를 조각(청크)으로 자르고, 점수 상위 k개 조각을 가져옵니다.</li>
+    </ol><p class="easy"><b>쉽게 말하면</b> — 책 한 권을 빌려 오는 대신, 관련 있는 쪽 몇 장만 복사해 옵니다.</p></div>
+    <div class="askm"><h4>수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
+      <div class="row"><img data-who="asst" data-mood="shock" alt="" aria-hidden="true"><p>조각을 겹치게 자르면 조각이 몇 개가 되는 거예요?</p></div>
+      <span class="school">학교 수학으로 보면: 등차수열 (첫째항과 공차)</span>
+      <table><tr><td>n</td><td>전체 문장 수 (여기서는 18)</td></tr>
+        <tr><td>s</td><td>조각 하나의 문장 수</td></tr>
+        <tr><td>o</td><td>앞 조각과 겹치는 문장 수</td></tr>
+        <tr><td>공차 = s − o</td><td>다음 조각이 시작하는 간격</td></tr></table>
+      <div class="try">숫자로 한 번 해 보기: s = 3, o = 1이면 조각은 1, 3, 5, … 번째 문장에서 시작합니다. 마지막 조각이 18번째 문장에 닿을 때까지 세면 <b>9조각</b>입니다. 겹침이 없으면 18 ÷ 3 = <b>6조각</b>입니다.</div>
+      <div class="row"><img data-who="asst" data-mood="spark" alt="" aria-hidden="true"><p>겹치게 자르면 조각 수가 늘고, 그만큼 서가가 커지는 거네요.</p></div>
+    </div>
+  </div>
+  <div class="pair">
+    <div><div class="tag fly">일상으로 치면</div><p>쪽을 너무 작게 복사하면 앞뒤 맥락이 잘립니다. 너무 크게 복사하면 가방이 무거워지고 읽을 것이 늘어납니다.</p></div>
+    <div><div class="tag nn">모델에서는</div><p>조각이 작으면 근거가 둘로 갈라지고, 크면 상관없는 문장이 섞입니다. LLM이 한 번에 읽는 양에도 한도가 있습니다.</p></div>
+  </div>
+  <div class="talk">
+    <div class="line" data-who="doc"><img data-who="doc" data-mood="board" alt="" aria-hidden="true"><b>박사</b><span>조각 크기와 k를 바꾸면 무엇이 달라질까요?</span></div>
+    <div class="line" data-who="robo"><img data-who="robo" data-mood="coin" alt="" aria-hidden="true"><b>주판봇</b><span>k를 크게! 많이 가져올수록 남는 장사야.</span></div>
+    <div class="line" data-who="fly"><img data-who="fly" data-mood="point" alt="" aria-hidden="true"><b>초파리 연구원</b><span>보낸 문장 수도 같이 봐. 겹침 1도 눌러 보고.</span></div>
+  </div>
+  <section class="panel" aria-label="실험 4">
+    <h3>실험 ④ 조각 크기 · 겹침 · k</h3>
+    <div class="ctrl">
+      <div class="group" id="g4s"><span class="glabel">조각 크기(문장)</span></div>
+      <div class="group" id="g4o"><span class="glabel">겹침</span></div>
+      <div class="group" id="g4k"><span class="glabel">k</span></div>
+    </div>
+    <div class="ctrl"><div class="group" id="q4chips"><span class="glabel">질문</span></div></div>
+    <div class="qline" id="q4line"></div>
+    <h3>행동으로 보기 — 사서가 상위 k개 조각을 복사해 온다</h3>
+    <div class="cwrap"><canvas id="c4" class="wide" aria-label="문장 카드 18장을 조각 단위로 묶은 서가. 선택된 상위 k개 조각이 초록으로 빛난다."></canvas></div>
+    <section class="kpis" id="k4"></section>
+    <div class="eq" id="eq4"></div>
+    <div class="insight" id="ins4" aria-live="polite"></div>
+  </section>
+  <div class="explain"><h4>풀이</h4><ol>
+    <li>조각 1문장, k 1이면 8개 중 7개를 찾습니다. k를 3으로 올리면 8개를 다 찾습니다.</li>
+    <li>대신 보내는 문장도 1개에서 3개로 늘어납니다. 찾는 양과 읽을 양은 함께 움직입니다.</li>
+    <li>조각 6문장, 겹침 1, k 1이면 6개로 떨어집니다. 주제 경계가 조각 가운데로 들어가 뜻이 섞이기 때문입니다.</li>
+  </ol></div>
+  <div class="lim"><b>이 단계의 한계</b> — 좋은 조각을 찾아도 아직 답은 없습니다. 찾아온 조각과 질문을 어떻게 LLM에 건넬지가 남았습니다.</div>
+  <div class="bridge field"><h4>현장에 옮기면</h4><p>조각 크기와 k는 정답이 정해져 있지 않습니다. 실제 질문 수십 개로 「근거를 찾은 비율」과 「보낸 글자 수」를 함께 재서 고릅니다.</p><p class="lm">비유의 한계: 실제 조각은 문장 수가 아니라 글자 수나 토큰 수로 자르는 경우가 많습니다.</p></div>
+  <details class="code"><summary>교안의 파이썬 코드로 보면 (몰라도 됩니다)</summary>
+    <table>
+      <tr><td><code>splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+chunks = splitter.split_documents(docs)</code></td><td>문서를 약 500글자 조각으로 자르고, 앞 조각과 50글자를 겹칩니다 (원자료 2번). 이 페이지의 조각 크기·겹침과 같은 역할입니다.</td></tr>
+      <tr><td><code>retriever = vectorstore.as_retriever(search_kwargs={"k": 4})</code></td><td>점수 상위 4개 조각을 가져오는 검색기를 만듭니다 (원자료 5번). 이 페이지의 k입니다.</td></tr>
+    </table>
+  </details>
+  <div class="quiz" data-quiz="lv4"></div>
+</div>
+</section>
+
+<!-- ⑤ -->
+<section class="level" id="lv5">
+<div class="wrap">
+  <div class="lvhead"><div class="hexno">5<small>완성</small></div><div><h2>찾은 조각과 질문을 함께 — RAG 완성</h2>
+    <p class="sub"><span class="lvtag g">방법: 질문 + 조각 → 프롬프트 → 답 + 출처</span><span class="lvtag d">일상: 오픈북 시험</span></p></div></div>
+  <div class="duo">
+    <div class="why"><h4>왜 이 방법을 쓰나</h4><ol>
+      <li><b>문제 상황:</b> 고객에게는 문장 목록이 아니라 한두 줄의 답이 필요합니다.</li>
+      <li><b>앞 방법의 한계:</b> 검색만으로는 조각을 찾아올 뿐, 질문에 맞춰 답을 쓰지 못합니다.</li>
+      <li><b>해법:</b> 찾은 조각과 질문을 한 장의 지시문(프롬프트)에 담아 LLM에 건넵니다. 「이 조각 안에서만 답하고, 근거 번호를 붙여라」라고 적습니다.</li>
+    </ol><p class="easy"><b>쉽게 말하면</b> — ①단계의 「책 없이 시험」을 「오픈북 시험」으로 바꾼 것입니다.</p></div>
+    <div class="askm"><h4>수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
+      <div class="row"><img data-who="asst" data-mood="shock" alt="" aria-hidden="true"><p>검색을 붙이면 이제 무조건 맞는 거죠?</p></div>
+      <span class="school">학교 수학으로 보면: 확률의 곱셈 (두 사건이 모두 일어날 확률)</span>
+      <table><tr><td>P(찾음)</td><td>근거 조각을 찾아올 확률</td></tr>
+        <tr><td>P(바르게 씀 | 찾음)</td><td>찾은 조각으로 답을 바르게 쓸 확률</td></tr>
+        <tr><td>곱</td><td>둘 다 일어나야 맞는 답이 됩니다</td></tr></table>
+      <div class="try">숫자로 한 번 해 보기 (예시값): 찾을 확률 0.90 × 바르게 쓸 확률 0.95 = <b>0.855</b>. 열 번에 한두 번은 여전히 틀립니다.</div>
+      <div class="row"><img data-who="asst" data-mood="spark" alt="" aria-hidden="true"><p>검색이 틀리면 뒤가 아무리 좋아도 틀리는 거네요. 그래서 출처 번호를 남기는 거고요.</p></div>
+    </div>
+  </div>
+  <div class="pair">
+    <div><div class="tag fly">일상으로 치면</div><p>시험지와 함께 관련 쪽 복사본을 받습니다. 답안 옆에 「몇 쪽 참고」를 적으면 채점자가 바로 확인합니다.</p></div>
+    <div><div class="tag nn">모델에서는</div><p>LLM은 프롬프트 안의 조각을 읽고 답을 씁니다. 조각 번호를 붙이게 하면 답과 근거를 대조할 수 있습니다.</p></div>
+  </div>
+  <div class="talk">
+    <div class="line" data-who="doc"><img data-who="doc" data-mood="board" alt="" aria-hidden="true"><b>박사</b><span>단계를 하나씩 넘기며 프롬프트가 어떻게 조립되는지 봅시다.</span></div>
+    <div class="line" data-who="fly"><img data-who="fly" data-mood="magnify" alt="" aria-hidden="true"><b>초파리 연구원</b><span>검색 끄기도 눌러 봐. 출처 자리가 어떻게 되는지.</span></div>
+    <div class="line" data-who="asst"><img data-who="asst" data-mood="report" alt="" aria-hidden="true"><b>조수(하루)</b><span>설정은 조각 1문장, k 3이에요. ④단계에서 8개를 다 찾은 설정이에요.</span></div>
+  </div>
+  <section class="panel" aria-label="실험 5">
+    <h3>실험 ⑤ 프롬프트 조립과 답</h3>
+    <div class="ctrl">
+      <div class="group" id="q5chips"><span class="glabel">질문</span></div>
+      <div class="group"><button class="bt" id="p5next">다음 단계 ▶</button><button class="bt" id="p5all">한 번에 보기</button><button class="bt" id="p5off" aria-pressed="false">검색 끄기</button></div>
+    </div>
+    <div class="flow" id="flow5"><span class="s">① 질문</span><span class="s">② 질문을 숫자로</span><span class="s">③ 비슷한 조각 3개</span><span class="s">④ 프롬프트 조립</span><span class="s">⑤ LLM 답</span><span class="s">⑥ 출처 확인</span></div>
+    <div class="qline" id="q5line"></div>
+    <h3>행동으로 보기 — 사서가 조각 3장을 가져와 프롬프트에 붙인다</h3>
+    <div class="cwrap"><canvas id="c5" class="wide" aria-label="서가에서 상위 3개 카드가 빛나고 사서 로봇이 가져간다."></canvas></div>
+    <h3>LLM에 건네는 프롬프트</h3>
+    <pre class="prompt" id="pr5"></pre>
+    <h3>답 (예시 답변)</h3>
+    <div class="qline" id="an5"></div>
+    <section class="kpis" id="k5"></section>
+    <div class="insight" id="ins5" aria-live="polite"></div>
+  </section>
+  <div class="explain"><h4>풀이</h4><ol>
+    <li>프롬프트는 지시, 조각, 질문 세 부분입니다. 조각마다 번호(A3, B4…)를 붙입니다.</li>
+    <li>답에 붙은 번호가 프롬프트 안의 조각 번호와 맞으면 「출처 확인됨」입니다.</li>
+    <li>검색을 끄면 ①단계의 답으로 돌아갑니다. 말투는 같지만 출처 자리가 비어 있습니다.</li>
+  </ol></div>
+  <div class="lim"><b>이 단계의 한계</b> — 답의 품질은 검색 품질을 넘지 못합니다. 실제로 잘 되는지는 질문 묶음으로 재야 합니다. 평가 방법은 응용편의 평가 편에서 다룹니다.</div>
+  <div class="bridge gen"><h4>생성 AI로 치면</h4><p>「업로드한 파일 기준으로 답해 줘」 기능, 사내 문서 챗봇, 출처 각주가 붙는 검색형 챗봇이 이 구조입니다.</p><p class="lm">비유의 한계: 실제 서비스는 검색을 여러 번 하거나, 찾은 조각을 다시 고르는 단계를 더하기도 합니다.</p></div>
+  <details class="code"><summary>교안의 파이썬 코드로 보면 (몰라도 됩니다)</summary>
+    <table>
+      <tr><td><code>llm = ChatOpenAI(model="gpt-4.1-mini", temperature=0)
+qa = RetrievalQA.from_chain_type(llm=llm, retriever=retriever)</code></td><td>LLM과 검색기를 한 묶음으로 잇습니다 (원자료 6번). temperature=0은 매번 가장 확률 높은 말을 고르라는 설정입니다.</td></tr>
+      <tr><td><code>result = qa.run(question)</code></td><td>질문을 넣으면 검색 → 조립 → 답이 한 번에 나옵니다 (원자료 7번).</td></tr>
+      <tr><td><code>from langchain_classic.chains import create_retrieval_chain
+from langchain_classic.chains.combine_documents import create_stuff_documents_chain
+qa_chain = create_stuff_documents_chain(llm, prompt)
+rag_chain = create_retrieval_chain(retriever, qa_chain)
+rag_chain.invoke({"input": question})</code></td><td>지금 권장하는 같은 일입니다. 위 묶음 방식은 「쓰지 말 것(deprecated)」 표시가 붙었고, LangChain 1.0부터 langchain_classic 꾸러미로 옮겨졌습니다 <sup>[3]</sup>. 새 방식은 프롬프트를 직접 정하고 찾은 조각도 함께 돌려줍니다.</td></tr>
+    </table>
+    <p class="note">원자료의 모델 이름(gpt-4.1-mini)은 예시입니다. 이 페이지는 특정 모델 버전에 기대지 않습니다.</p>
+  </details>
+  <div class="quiz" data-quiz="lv5"></div>
+</div>
+</section>
+
+<!-- DUEL -->
+<section class="level" id="duel">
+<div class="wrap">
+  <h2>대결 — 글자로 찾을까, 뜻으로 찾을까</h2>
+  <p>같은 질문 8개, 같은 문장 18개, 같은 규칙(점수 1등 하나만 가져오기)입니다. 근거 문장을 1등으로 찾은 질문 수로 가립니다.</p>
+  <div class="duel" id="duelBox">
+    <div class="head">
+      <div><img data-who="fly" data-mood="point" data-face="right" alt="" aria-hidden="true"><b style="color:var(--c-fly);display:block">초파리 연구원</b></div>
+      <div class="vs">VS</div>
+      <div><img data-who="robo" data-mood="coin" alt="" aria-hidden="true"><b style="color:var(--c-robo);display:block">주판봇</b></div>
+    </div>
+    <div class="choice">
+      <div class="fly"><b>초파리의 선택: 단어 겹침 검색</b><p>"뜻을 숫자로? 못 믿겠어. 글자가 똑같이 들어 있는 게 확실해."</p></div>
+      <div class="robo"><b>주판봇의 선택: 뜻 숫자 8개 + 코사인 유사도</b><p>"숫자 8개에 뜻을 담으면 다른 말로 물어도 찾지. 여기에 건다."</p></div>
+    </div>
+    <div class="guess" role="group" aria-label="먼저 맞혀 보기"><span class="glabel">먼저 맞혀 보기</span><button class="bt" data-guess="fly" aria-pressed="false">초파리가 이길 것 같다</button><button class="bt" data-guess="robo" aria-pressed="false">주판봇이 이길 것 같다</button><span class="note" id="guessNote"></span></div>
+    <button class="bt primary reveal">결과 보기</button>
+    <div class="after">
+      <div class="bars"></div>
+      <div class="say asst" data-who="asst"><img class="who" data-who="asst" data-mood="firm" alt="" aria-hidden="true"><div><b class="name">조수(하루)</b><p></p></div></div>
+      <div class="say verdict" data-who="doc"><img class="who" data-who="doc" data-mood="front" alt="" aria-hidden="true"><div><b class="name">박사</b><p></p></div></div>
+      <div class="score" id="duelScore"></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- SUMMARY -->
+<section class="level" id="sum">
+<div class="wrap">
+  <h2>정리 — 다섯 단계 한눈에</h2>
+  <div class="tw"><table class="tb">
+    <tr><th>단계</th><th>방법</th><th>새로 생긴 힘</th><th>남은 한계</th><th>이 페이지 결과</th></tr>
+    <tr><td>①</td><td>LLM 혼자</td><td>바로 답한다</td><td>근거가 없어 지어낸 답을 못 가린다</td><td>예시 답 1/8 일치</td></tr>
+    <tr><td>②</td><td>단어 겹침</td><td>문서에서 근거를 찾는다</td><td>다른 말로 물으면 놓친다</td><td>1등 적중 3/8</td></tr>
+    <tr><td>③</td><td>뜻 숫자 + 코사인</td><td>다른 말이어도 뜻으로 찾는다</td><td>1등 하나는 근소한 차이에 틀린다</td><td>1등 적중 7/8</td></tr>
+    <tr><td>④</td><td>조각 + 상위 k개</td><td>후보를 여러 개 가져온다</td><td>찾는 양과 읽을 양이 함께 는다</td><td>1문장·k3에서 8/8, 3문장 보냄</td></tr>
+    <tr><td>⑤</td><td>RAG</td><td>근거 번호가 붙은 답</td><td>검색이 틀리면 답도 틀린다</td><td>출처 확인 8/8 (예시 답변)</td></tr>
+  </table></div>
+  <h3>용어 대응 카드</h3>
+  <div class="tw"><table class="tb">
+    <tr><th>원자료 상자</th><th>이 페이지의 말</th><th>도서관 비유</th></tr>
+    <tr><td>Retriever</td><td>검색기</td><td>사서</td></tr>
+    <tr><td>Vector Database</td><td>벡터 DB (서가)</td><td>주제 좌표가 붙은 서가</td></tr>
+    <tr><td>Relevant Chunks</td><td>관련 조각 (상위 k개)</td><td>복사해 온 쪽 몇 장</td></tr>
+    <tr><td>LLM</td><td>답을 쓰는 언어 모델</td><td>복사본을 보고 답안을 쓰는 학생</td></tr>
+    <tr><td>Embedding</td><td>뜻을 적은 숫자 줄</td><td>주제 좌표 스티커</td></tr>
+  </table></div>
+  <h3>원자료와 다르게 쓴 곳</h3>
+  <div class="tw"><table class="tb">
+    <tr><th>원자료</th><th>이 페이지</th><th>이유</th></tr>
+    <tr><td>코사인 유사도 ≈ 0.99</td><td>0.997로 바꿉니다</td><td>숫자 5개짜리 예시를 그대로 계산하면 0.99726입니다.</td></tr>
+    <tr><td>흐름도: 질문 → 검색기 → … → LLM</td><td>임베딩 상자와 「질문도 LLM으로」 화살표를 더합니다</td><td>질문 원문이 없으면 LLM은 무엇을 답할지 모릅니다.</td></tr>
+    <tr><td>코드 6번의 묶음 방식</td><td>새 방식을 함께 적습니다 (접기 상자)</td><td>옛 방식은 쓰지 말라는 표시가 붙었습니다 <sup>[3]</sup>.</td></tr>
+  </table></div>
+  <div class="lim"><b>비유의 한계</b> — 실제 사서는 책 내용을 이해하지만, 검색기는 숫자 줄의 방향만 비교합니다. 「뜻」이라는 말도 임베딩 모델이 배운 범위 안의 뜻입니다.</div>
+</div>
+</section>
+
+<!-- OUTRO -->
+<section class="level" id="outro">
+<div class="wrap">
+  <h2>아웃트로</h2>
+  <div class="say" data-who="doc"><img class="who" data-who="doc" data-mood="magic" alt="" aria-hidden="true"><div><b class="name">박사</b><p>오늘의 세 줄이에요.<br>① LLM은 모르는 문서도 자신 있게 답한다.<br>② 뜻으로 찾고, 후보는 여러 개 가져온다.<br>③ 질문과 조각을 함께 건네고, 출처 번호를 남긴다.</p></div></div>
+  <div class="say" data-who="robo"><img class="who" data-who="robo" data-mood="happy" alt="" aria-hidden="true"><div><b class="name">주판봇</b><p>숫자 8개로 7개를 찾았지. 이번 판은 숫자가 말해 줬어.</p></div></div>
+  <div class="say" data-who="fly"><img class="who" data-who="fly" data-mood="coffee" alt="" aria-hidden="true"><div><b class="name">초파리 연구원</b><p>…뜻이 이겼네. 인정. 그래도 Q4는 틀렸어. 후보는 늘 여러 개 가져와.</p></div></div>
+  <div class="say" data-who="asst"><img class="who" data-who="asst" data-mood="spark" alt="" aria-hidden="true"><div><b class="name">조수(하루)</b><p>다음 편은 모델 자체를 고치는 미세조정이에요. 검색으로 안 되는 일이 무엇인지 볼게요.</p></div></div>
+</div>
+</section>
+
+<!-- KG -->
+<section class="level" id="kg">
+<div class="wrap">
+  <h2>지식 색인 — 이 페이지에서 찾아보기</h2>
+  <div class="kgtools"><input type="search" id="kgq" placeholder="이름·영어·정의로 찾기 (예: 코사인, chunk)" aria-label="지식 색인 검색"><span class="note" id="kgstat"></span></div>
+  <div class="chips" id="kgtypes" role="group" aria-label="종류 고르기"></div>
+  <div class="kgcols">
+    <div id="kgList" aria-live="polite"></div>
+    <div>
+      <div class="cwrap"><canvas id="kgc" aria-label="이 페이지 개념들의 관계 그래프. 점을 누르면 왼쪽 목록에서 펼친다."></canvas></div>
+      <div class="legend" id="kgleg"></div>
+      <h3>배움 순서</h3><div class="flow" id="kgpath"></div>
+      <h3>열린 질문</h3><ul id="kgqs"></ul>
+      <div class="group"><button class="bt" id="kgJson">JSON 내려받기</button><button class="bt" id="kgMer">Mermaid 내려받기</button><span class="note">전체 꾸러미는 다음 섹션에서.</span></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- EXPORT -->
+<section class="level" id="export">
+<div class="wrap">
+  <h2>온톨로지·서지 꾸러미 — 이 페이지의 지식을 가져가기</h2>
+  <section class="kpis" id="exk"></section>
+  <div class="say" data-who="asst"><img class="who" data-who="asst" data-mood="report" alt="" aria-hidden="true"><div><b class="name">조수(하루)</b><p id="exsay"></p></div></div>
+  <h3>이 페이지 인용하기</h3>
+  <div class="group" role="group" aria-label="인용 형식"><button class="bt" data-cf="plain" aria-pressed="true">일반 문장</button><button class="bt" data-cf="bib" aria-pressed="false">BibTeX</button><button class="bt" data-cf="ris" aria-pressed="false">RIS</button><button class="bt" id="cpy">복사</button></div>
+  <textarea class="cite" id="citeBox" readonly aria-label="인용문"></textarea>
+  <h3>참고문헌</h3>
+  <ol class="refs" id="refList"></ol>
+  <h3>범위와 형식 고르기</h3>
+  <div class="group" role="group" aria-label="범위"><span class="glabel">범위</span><button class="bt" data-sc="all" aria-pressed="true">전체</button><button class="bt" data-sc="concepts" aria-pressed="false">개념·방법만</button><button class="bt" data-sc="claims" aria-pressed="false">주장 + 출처</button><button class="bt" data-sc="prereq" aria-pressed="false">선수 관계만</button></div>
+  <div class="ctrl"><div class="group"><button class="bt primary" id="zipAll">꾸러미 ZIP 내려받기</button></div><div class="group" id="fileBtns"></div></div>
+  <h3>확인 필요 목록</h3>
+  <ul id="todo"></ul>
+  <p class="note" id="verinfo"></p>
+</div>
+</section>
+
+<footer id="footer">
+<div class="wrap">
+  <p class="by">글 · 안상선 (<a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">https://adminmrobo.github.io/who_am_i/who_am_i.html</a>) · (주)M-Robo 대표</p>
+  <p>「LLM 공식에서 GPT-6까지」 응용편 1 · 버전 1.0 · 2026-11-20</p>
+  <h4 id="footer-src">출처</h4>
+  <ol>
+    <li>Lewis, P. 외 (2020). Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks. NeurIPS 33. <a href="https://arxiv.org/abs/2005.11401">arXiv:2005.11401</a></li>
+    <li>Johnson, J., Douze, M., Jégou, H. Billion-scale similarity search with GPUs. IEEE Transactions on Big Data 7(3), 535–547 (온라인 공개 2019). <a href="https://arxiv.org/abs/1702.08734">arXiv:1702.08734</a></li>
+    <li>LangChain 레퍼런스, RetrievalQA (deprecated, create_retrieval_chain 안내). <a href="https://reference.langchain.com/python/langchain-classic/chains/retrieval_qa/base/RetrievalQA">reference.langchain.com</a> (2026-11-20 확인)</li>
+    <li>원자료: ML Tut 인포그래픽 「Retrieval-Augmented Generation (RAG)」 (흐름도, 코사인 공식, 숫자 5개짜리 임베딩 예시, LangChain 코드 7단계). 발행일·주소 확인 필요.</li>
+  </ol>
+  <h4>예시값·설명용 모형인 것</h4>
+  <ul>
+    <li>가상 회사 Pebble Lamp Co.의 안내문 18문장과 질문 8개 (실존 회사 아님)</li>
+    <li>문장마다 붙인 뜻 숫자 8개와 그 이름 (실제 임베딩 모델 출력 아님)</li>
+    <li>①단계과 ⑤단계의 답변, 다음 말 확률, ⑤단계 수식 상자의 확률 0.90·0.95</li>
+  </ul>
+  <p>캐릭터 그림 출처: adminmrobo/fruitfly-lab-expressions (캐릭터 설정·그림 저작권 안상선).</p>
+</div>
+</footer>
+
+<div id="tip" role="tooltip"></div>
+<div id="study"><span id="stRead">읽은 곳 0%</span><span id="stQuiz">퀴즈 0/10</span><button id="stGl">밑줄: 핵심</button></div>
+
+<script type="application/json" id="kg-raw">__KGRAW__</script>
+<script type="application/ld+json" id="kg-ld">__KGLD__</script>
+<script type="application/json" id="refs-csl">__REFS__</script>
+<script type="application/json" id="page-meta">__META__</script>
+<script>
+__SPRITE__
+var DATA=__DATA__;
+__APPJS__
+</script>
+</body></html>

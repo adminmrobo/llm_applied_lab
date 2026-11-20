@@ -1,0 +1,26 @@
+[사용법] 아래 참고 그림을 Genspark에 함께 올리고 영어 프롬프트를 그대로 붙여 넣으세요.
+참고 그림: ref_lab4_lineup.png, ref_k02_doctor.png, ref_k03_haru.png, ref_k04_fly.png, ref_jupanbot_E13.png
+받은 그림 저장 이름: cover_A1.png
+
+16:9 wide website cover illustration, at least 1920x1080.
+SCENE: a small library corner built inside the bright daytime lab: tall light-wood bookshelves holding rows of blank cards with simple striped lines instead of writing; a reading desk on the left with one small blank question card on it. A thin beam of soft green light runs from that question card to exactly three cards on the shelves, which glow gently; every other card stays plain.
+POSES:
+- Professor: center, slightly behind, presenting the shelves with an open palm, tiny purple sparks at the fingertips, calm smile.
+- Haru: right of center, front, hugging the three glowing cards and a clipboard to her chest, gentle smile.
+- Fruit fly researcher: left side, facing right, leaning in with a magnifying glass toward the small tag on one glowing card, skeptical look.
+- AbaBot: far right, facing left, holding the wooden abacus, screen face showing a tiny mint arrow pattern without digits, confident grin.
+COMPOSITION: the page frame crops the top and bottom, so keep every face and hand inside the middle 50% of the height and inside 12% side margins. Keep the bottom-left corner plain and bright for a small label. The light falls on the three glowing cards.
+Friendly rivalry, the moment before any result; nobody is winning or losing.
+
+STYLE: detailed 16-bit SNES-era RPG pixel art, crisp visible square pixels, bold dark outlines (#1d1a22), 2-3 tone shading with small highlights. Match the attached reference images exactly in proportions, colors and pixel density. Not a vector illustration, not anime cel painting, not watercolor, not 3D render.
+MOOD: bright daytime laboratory - white walls, large sunlit windows, soft natural light, small props in lavender, mint and pink.
+
+CHARACTERS (exactly as in the references):
+- Professor: chibi scientist, thin teal rectangular glasses, spiky black hair with one white streak, short tied-back ponytail, white lab coat over black vest and black tie, dark trousers.
+- Haru (assistant): long pink hair with two round buns and navy streaks, blue eyes, lavender hoodie under a white lab coat, blue jeans, white sneakers.
+- AbaBot: boxy beige retro CRT-monitor robot with rounded corners, dark green screen face drawn only with mint pixel blocks, short antenna on a small square base topped with one red-brown abacus bead, gray segmented arms, two small dark gray tank treads, wooden abacus with red-brown beads.
+- Fruit fly researcher: small anthropomorphic fruit fly, black body, big red compound eyes, blue helmet with a gold stripe and pink and blue cables, white lab coat over a black vest, black gloves, transparent wings.
+
+RULES: Height ratio Professor 1.00, Haru 0.90, AbaBot 0.72, fruit fly 0.41. Do not mirror the Professor or Haru; keep their faces and hair parting as in the references. Ignore the Korean labels printed on the reference sheet; do not draw them.
+
+Absolutely NO text, letters, numbers, speech bubbles, captions or logos anywhere (cards, screens and books stay blank or striped). No night scene, no neon, no dark background. AbaBot is NOT a white round-headed robot, has no black pill-shaped visor, no yellow or gold eyes, no ball antenna, no cyan chest light, no gold coins, and never floats. No microscope, no insects other than the fruit fly researcher, no real brands, no weapons, no cigarettes, no alcohol, no blood.

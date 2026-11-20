@@ -1,0 +1,19 @@
+[사용법] 아래 참고 그림을 Genspark에 함께 올리고 영어 프롬프트를 그대로 붙여 넣으세요.
+참고 그림: ref_k03_haru.png, ref_k04_fly.png, ref_jupanbot_E13.png, 그리고 받은 표지 cover_A1.png (그림체 기준)
+받은 그림 저장 이름: cut_A1_lv3.png, cut_A1_versus.png
+
+Make 2 separate images, both 16:9 (960x540 or larger), in the same pixel art style as the attached cover image.
+1) Haru on the left, facing front, sticking small colored arrow stickers on the spines of books on a light-wood shelf; each arrow points in a different direction. The fruit fly researcher on the right, facing left, holds a blank card with one arrow sticker and compares it, through a magnifying glass, with the one book whose arrow points the same way. Calm, curious mood.
+2) A wide banner for a friendly match. The fruit fly researcher on the left, facing right, holding two small blank puzzle tiles side by side, confident. AbaBot on the right, facing left, screen showing a mint arrow pattern, holding the wooden abacus, confident grin. Leave the middle third of the image empty and plain (a title goes there later). The moment before the result: no winner, no trophy, no tears.
+
+STYLE: detailed 16-bit SNES-era RPG pixel art, crisp visible square pixels, bold dark outlines (#1d1a22), 2-3 tone shading with small highlights. Match the attached reference images exactly in proportions, colors and pixel density. Not a vector illustration, not anime cel painting, not watercolor, not 3D render.
+MOOD: bright daytime laboratory - white walls, large sunlit windows, soft natural light, small props in lavender, mint and pink.
+
+CHARACTERS (exactly as in the references):
+- Haru (assistant): long pink hair with two round buns and navy streaks, blue eyes, lavender hoodie under a white lab coat, blue jeans, white sneakers.
+- Fruit fly researcher: small anthropomorphic fruit fly, black body, big red compound eyes, blue helmet with a gold stripe and pink and blue cables, white lab coat over a black vest, black gloves, transparent wings.
+- AbaBot: boxy beige retro CRT-monitor robot with rounded corners, dark green screen face drawn only with mint pixel blocks, short antenna on a small square base topped with one red-brown abacus bead, gray segmented arms, two small dark gray tank treads, wooden abacus with red-brown beads.
+
+RULES: Height ratio Professor 1.00, Haru 0.90, AbaBot 0.72, fruit fly 0.41. Do not mirror the Professor or Haru; keep their faces and hair parting as in the references. Ignore the Korean labels printed on the reference sheet; do not draw them.
+
+Absolutely NO text, letters, numbers, speech bubbles, captions or logos anywhere (cards, screens and books stay blank or striped). No night scene, no neon, no dark background. AbaBot is NOT a white round-headed robot, has no black pill-shaped visor, no yellow or gold eyes, no ball antenna, no cyan chest light, no gold coins, and never floats. No microscope, no insects other than the fruit fly researcher, no real brands, no weapons, no cigarettes, no alcohol, no blood.

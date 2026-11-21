@@ -12,7 +12,10 @@
 <meta name="dc.language" content="ko">
 <meta property="og:title" content="RAG 연구실 — 사서가 찾아온 문장으로 LLM이 답한다">
 <meta property="og:description" content="LLM 공식에서 GPT-6까지 · 응용편 1. RAG를 직접 눌러 보며 배우는 연구실 해설.">
-<meta property="og:image" content="assets/img/og_A1.png">
+<meta property="og:image" content="https://adminmrobo.github.io/llm_applied_lab/assets/img/og_A1.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -48,7 +51,10 @@ nav.top .links a:hover{background:var(--panel2);color:var(--text)}
 #prog{position:fixed;top:0;left:0;height:3px;background:var(--gfp);width:0;z-index:60}
 /* cover */
 .cover{position:relative;margin:0;background:linear-gradient(160deg,#eef2f8,#ffffff);aspect-ratio:16/9;max-height:48vh;width:100%;overflow:hidden;border-bottom:1px solid var(--rule)}
-.cover img.cv{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.cover img.cv{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 55%}
+.scene{margin:16px 0}
+.scene img{display:block;width:100%;height:auto;border-radius:12px;border:1px solid var(--rule);background:#f6f8fa}
+.scene figcaption{font-size:14px;color:var(--muted);margin-top:6px}
 .cover .hex{position:absolute;inset:0;opacity:.5;background-image:radial-gradient(circle at 80% 20%,rgba(155,63,181,.10),transparent 55%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48'%3E%3Cpath d='M14 0l14 8v16l-14 8L0 24V8z' fill='none' stroke='%23c8d0da' stroke-width='1'/%3E%3C/svg%3E")}
 .cover .shelfart{position:absolute;right:4%;top:10%;bottom:22%;width:38%;display:grid;grid-template-rows:repeat(3,1fr);gap:8px}
 .cover .shelfart div{border-bottom:6px solid #b98a5a;display:flex;align-items:flex-end;gap:4px;padding:0 6px}
@@ -300,19 +306,8 @@ footer .by{color:var(--text);font-size:15px}
 </nav>
 
 <!-- lab-cover -->
-<header class="cover" id="cover" data-img="cover_A1" role="img" aria-label="도서관처럼 꾸민 낮의 연구실에서 네 캐릭터가 서가의 문장 카드를 바라보는 대체 표지">
-  <div class="hex"></div>
-  <div class="shelfart" aria-hidden="true">
-    <div><i style="height:70%;background:#e7c9f0"></i><i style="height:85%;background:#cfe6d7"></i><i style="height:60%;background:#f5d8b0"></i><i style="height:90%;background:#d6e2f7"></i><i style="height:75%;background:#f3cfd7"></i><i style="height:65%;background:#cfe6d7"></i></div>
-    <div><i style="height:80%;background:#d6e2f7"></i><i style="height:60%;background:#f3cfd7"></i><i style="height:95%;background:#fff3a8;box-shadow:0 0 14px #ffe066"></i><i style="height:70%;background:#e7c9f0"></i><i style="height:85%;background:#f5d8b0"></i><i style="height:60%;background:#d6e2f7"></i></div>
-    <div><i style="height:65%;background:#cfe6d7"></i><i style="height:80%;background:#f5d8b0"></i><i style="height:70%;background:#d6e2f7"></i><i style="height:90%;background:#e7c9f0"></i><i style="height:60%;background:#f3cfd7"></i><i style="height:75%;background:#cfe6d7"></i></div>
-  </div>
-  <div class="line" aria-hidden="true">
-    <img class="fly" data-who="fly" data-mood="point" data-face="right" alt="">
-    <img data-who="doc" data-mood="think" alt="">
-    <img data-who="asst" data-mood="smile" alt="">
-    <img class="robo" data-who="robo" data-mood="coin" alt="">
-  </div>
+<header class="cover" id="cover" data-img="cover_A1">
+  <img class="cv" src="assets/img/cover_A1.webp" width="1600" height="900" alt="낮의 연구실 서고에서 박사·조수·초파리 연구원·주판봇이 빛줄기가 닿은 문장 카드 세 장을 바라보는 픽셀아트 표지" fetchpriority="high">
   <span class="cover-chip">LLM 공식에서 GPT-6까지 · 응용편 1</span>
 </header>
 <!-- /lab-cover -->
@@ -560,6 +555,7 @@ footer .by{color:var(--text);font-size:15px}
     <div><div class="tag fly">일상으로 치면</div><p>사서가 책마다 주제 좌표 스티커를 붙여 둡니다. 질문을 듣고 좌표를 정한 뒤, 같은 방향에 꽂힌 책을 꺼냅니다.</p></div>
     <div><div class="tag nn">모델에서는</div><p>임베딩 모델이 문장을 숫자 수백~수천 개로 바꿉니다. 이 페이지는 이해를 돕기 위해 숫자 8개만 씁니다.</p></div>
   </div>
+  <figure class="scene" data-img="cut_A1_lv3"><img src="assets/img/cut_A1_lv3.webp" width="960" height="540" loading="lazy" alt="조수가 책마다 방향 화살표 스티커를 붙이고, 박사와 초파리 연구원이 같은 방향의 화살표 카드를 돋보기로 비교하는 픽셀아트 컷"><figcaption>책마다 「주제 방향」 스티커를 붙여 두면, 질문 카드와 화살표 방향이 같은 책을 꺼낼 수 있습니다.</figcaption></figure>
   <div class="talk">
     <div class="line" data-who="doc"><img data-who="doc" data-mood="board" alt="" aria-hidden="true"><b>박사</b><span>뜻으로 찾으면 Q5 「delivery」도 shipping 문장을 찾을까요?</span></div>
     <div class="line" data-who="robo"><img data-who="robo" data-mood="coin" alt="" aria-hidden="true"><b>주판봇</b><span>숫자 8개면 8개 다 찾지. 확실해.</span></div>
@@ -741,6 +737,7 @@ rag_chain.invoke({"input": question})</code></td><td>지금 권장하는 같은 
 <div class="wrap">
   <h2>대결 — 글자로 찾을까, 뜻으로 찾을까</h2>
   <p>같은 질문 8개, 같은 문장 18개, 같은 규칙(점수 1등 하나만 가져오기)입니다. 근거 문장을 1등으로 찾은 질문 수로 가립니다.</p>
+  <figure class="scene" data-img="cut_A1_versus"><img src="assets/img/cut_A1_versus.webp" width="960" height="540" loading="lazy" alt="대결 전, 왼쪽의 초파리 연구원과 박사·조수, 오른쪽의 주판봇이 마주 보는 픽셀아트 띠"></figure>
   <div class="duel" id="duelBox">
     <div class="head">
       <div><img data-who="fly" data-mood="point" data-face="right" alt="" aria-hidden="true"><b style="color:var(--c-fly);display:block">초파리 연구원</b></div>
@@ -799,6 +796,7 @@ rag_chain.invoke({"input": question})</code></td><td>지금 권장하는 같은 
 <section class="level" id="outro">
 <div class="wrap">
   <h2>아웃트로</h2>
+  <figure class="scene" data-img="sc_A1_outro"><img src="assets/img/sc_A1_outro.webp" width="1200" height="800" loading="lazy" alt="대결 뒤 서고 앞에서 주판봇이 두 팔을 들고 기뻐하고, 초파리 연구원이 커피를 들고 고개를 끄덕이는 픽셀아트 장면"></figure>
   <div class="say" data-who="doc"><img class="who" data-who="doc" data-mood="magic" alt="" aria-hidden="true"><div><b class="name">박사</b><p>오늘의 세 줄이에요.<br>① LLM은 모르는 문서도 자신 있게 답한다.<br>② 뜻으로 찾고, 후보는 여러 개 가져온다.<br>③ 질문과 조각을 함께 건네고, 출처 번호를 남긴다.</p></div></div>
   <div class="say" data-who="robo"><img class="who" data-who="robo" data-mood="happy" alt="" aria-hidden="true"><div><b class="name">주판봇</b><p>숫자 8개로 7개를 찾았지. 이번 판은 숫자가 말해 줬어.</p></div></div>
   <div class="say" data-who="fly"><img class="who" data-who="fly" data-mood="coffee" alt="" aria-hidden="true"><div><b class="name">초파리 연구원</b><p>…뜻이 이겼네. 인정. 그래도 Q4는 틀렸어. 후보는 늘 여러 개 가져와.</p></div></div>

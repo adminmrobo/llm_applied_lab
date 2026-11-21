@@ -47,7 +47,7 @@
    "robot": "jupanbot-v2",
    "prompt_en": "Website top cover illustration, wide 16:9. Detailed 16-bit SNES-era RPG pixel art ... (전문은 COVER_A1_rag_lab.md)",
    "source_of": null,
-   "status": "redraw"
+   "status": "ok"
   },
   {
    "id": "thumb_A1",
@@ -66,12 +66,12 @@
    "robot": "jupanbot-v2",
    "prompt_en": null,
    "source_of": "cover_A1",
-   "status": "redraw"
+   "status": "ok"
   },
   {
    "id": "og_A1",
    "role": "og",
-   "path": "assets/img/og_A1.png",
+   "path": "assets/img/og_A1.jpg",
    "size": [
     1200,
     630
@@ -85,7 +85,7 @@
    "robot": "jupanbot-v2",
    "prompt_en": null,
    "source_of": "cover_A1",
-   "status": "redraw"
+   "status": "ok"
   },
   {
    "id": "sc_A1_outro",
@@ -104,7 +104,45 @@
    "robot": "jupanbot-v2",
    "prompt_en": "(IMG_A1_rag_lab.md 3-3)",
    "source_of": null,
-   "status": "redraw"
+   "status": "ok"
+  },
+  {
+   "id": "cut_A1_lv3",
+   "role": "scene",
+   "path": "assets/img/cut_A1_lv3.webp",
+   "size": [
+    960,
+    540
+   ],
+   "characters": [
+    "doc",
+    "asst",
+    "fly",
+    "jupanbot"
+   ],
+   "robot": "jupanbot-v2",
+   "prompt_en": "(genspark_A1/요청2_컷_2장.txt 1번)",
+   "source_of": null,
+   "status": "ok"
+  },
+  {
+   "id": "cut_A1_versus",
+   "role": "scene",
+   "path": "assets/img/cut_A1_versus.webp",
+   "size": [
+    960,
+    540
+   ],
+   "characters": [
+    "doc",
+    "asst",
+    "fly",
+    "jupanbot"
+   ],
+   "robot": "jupanbot-v2",
+   "prompt_en": "(genspark_A1/요청2_컷_2장.txt 2번)",
+   "source_of": null,
+   "status": "ok"
   }
  ],
  "updated": "2026-11-21"

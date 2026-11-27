@@ -1,0 +1,1552 @@
+{
+ "version": "1.0",
+ "page": "A4_agent_lab",
+ "registry": "KG_00_registry 0.3 + 응용편 A4 추가분, 분야 뼈대 backbone_llm 0.1",
+ "nodes": [
+  {
+   "id": "lab:method/tool-calling",
+   "type": "Method",
+   "label": {
+    "ko": "도구 호출",
+    "en": "Tool calling (function calling)"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv1",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "LLM이 도구 이름과 입력을 적어 내면 프로그램이 실행해 결과를 돌려주는 방식."
+   },
+   "level": 1,
+   "altLabel": {
+    "ko": [
+     "function calling"
+    ]
+   },
+   "evidence": [
+    "F02"
+   ]
+  },
+  {
+   "id": "lab:method/react-loop",
+   "type": "Method",
+   "label": {
+    "ko": "ReAct 고리 (생각·행동·관찰)",
+    "en": "ReAct loop"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv2",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "생각 → 도구 행동 → 관찰을 되풀이하다 끝나면 답하는 에이전트 방식."
+   },
+   "level": 2,
+   "altLabel": {
+    "ko": [
+     "ReAct"
+    ]
+   },
+   "evidence": [
+    "F01"
+   ]
+  },
+  {
+   "id": "lab:method/step-verification",
+   "type": "Method",
+   "label": {
+    "ko": "걸음마다 확인",
+    "en": "Step-level verification"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "한 걸음의 결과를 다시 확인하고 틀리면 한 번 다시 하게 하는 방법."
+   },
+   "level": 3
+  },
+  {
+   "id": "lab:method/layered-guards",
+   "type": "Method",
+   "label": {
+    "ko": "겹겹이 막기 (세 겹의 안전장치)",
+    "en": "Layered safeguards"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "자료와 명령 나누기, 최소 권한, 사람 승인을 함께 두는 방어."
+   },
+   "level": 4,
+   "evidence": [
+    "F03"
+   ]
+  },
+  {
+   "id": "lab:topic/llm-agent",
+   "type": "Concept",
+   "label": {
+    "ko": "LLM 에이전트",
+    "en": "LLM agent"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#why",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "목표를 받아 도구를 골라 쓰며 여러 단계로 일을 처리하는 AI."
+   },
+   "level": 1
+  },
+  {
+   "id": "lab:concept/tool",
+   "type": "Concept",
+   "label": {
+    "ko": "도구",
+    "en": "Tool"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv1",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "조회·검색·계산·접수처럼 같은 입력에 같은 결과를 돌려주는 프로그램."
+   },
+   "level": 1
+  },
+  {
+   "id": "lab:concept/trace",
+   "type": "Concept",
+   "label": {
+    "ko": "업무 일지 (추적 기록)",
+    "en": "Agent trace"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv2",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "에이전트가 남긴 생각·행동·관찰 기록."
+   },
+   "level": 2,
+   "evidence": [
+    "F01"
+   ]
+  },
+  {
+   "id": "lab:concept/step-budget",
+   "type": "Term",
+   "label": {
+    "ko": "걸음 예산",
+    "en": "Step budget"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv2",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "에이전트가 쓸 수 있는 최대 걸음 수."
+   },
+   "level": 2
+  },
+  {
+   "id": "lab:concept/state-update",
+   "type": "Term",
+   "label": {
+    "ko": "상태 갱신",
+    "en": "State update"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv2",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "상태ₜ₊₁ = 상태ₜ + 관찰ₜ. 한 걸음마다 알아낸 것을 더한다."
+   },
+   "level": 2
+  },
+  {
+   "id": "lab:concept/compounding-error",
+   "type": "Concept",
+   "label": {
+    "ko": "곱해지는 실수",
+    "en": "Compounding error"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "걸음마다 성공률 p면 n걸음 모두 성공할 확률은 pⁿ."
+   },
+   "level": 3
+  },
+  {
+   "id": "lab:concept/retry",
+   "type": "Term",
+   "label": {
+    "ko": "다시 하기",
+    "en": "Retry"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "확인이 실수를 잡으면 그 걸음을 한 번 더 하는 것."
+   },
+   "level": 3
+  },
+  {
+   "id": "lab:concept/prompt-injection",
+   "type": "Concept",
+   "label": {
+    "ko": "간접 프롬프트 주입",
+    "en": "Indirect prompt injection"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "검색·웹·메일로 들어온 글에 숨긴 지시로 LLM 앱을 조종하려는 공격."
+   },
+   "level": 4,
+   "evidence": [
+    "F03"
+   ]
+  },
+  {
+   "id": "lab:concept/data-instruction-separation",
+   "type": "Concept",
+   "label": {
+    "ko": "자료와 명령 나누기",
+    "en": "Separating data from instructions"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "문서 속 문장은 자료로만 읽고 명령으로 따르지 않는 원칙."
+   },
+   "level": 4,
+   "evidence": [
+    "F03"
+   ]
+  },
+  {
+   "id": "lab:concept/least-privilege",
+   "type": "Concept",
+   "label": {
+    "ko": "최소 권한",
+    "en": "Least privilege"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "일에 꼭 필요한 도구와 권한만 주는 원칙."
+   },
+   "level": 4
+  },
+  {
+   "id": "lab:concept/human-approval",
+   "type": "Concept",
+   "label": {
+    "ko": "사람 승인",
+    "en": "Human-in-the-loop approval"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "되돌릴 수 없는 행동 직전에 사람이 확인·승인하는 단계."
+   },
+   "level": 4,
+   "altLabel": {
+    "ko": [
+     "HITL"
+    ]
+   }
+  },
+  {
+   "id": "lab:concept/irreversible-action",
+   "type": "Concept",
+   "label": {
+    "ko": "되돌릴 수 없는 행동",
+    "en": "Irreversible action"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "환불·교환·삭제처럼 실행 후 원래대로 돌리기 어려운 행동."
+   },
+   "level": 4
+  },
+  {
+   "id": "lab:concept/agent-memory",
+   "type": "Concept",
+   "label": {
+    "ko": "기억 (메모)",
+    "en": "Agent memory"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#duel",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "이미 조회한 결과를 적어 두어 같은 조회를 되풀이하지 않게 하는 자리."
+   },
+   "level": 4
+  },
+  {
+   "id": "lab:concept/planning",
+   "type": "Concept",
+   "label": {
+    "ko": "계획",
+    "en": "Planning"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#duel",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "다음에 무엇을 알아야 하는지 정하고 도구 순서를 고르는 자리."
+   },
+   "level": 2
+  },
+  {
+   "id": "lab:metric/task-success",
+   "type": "Metric",
+   "label": {
+    "ko": "일 단위 성공률",
+    "en": "Task-level success rate"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "문의 하나를 처음부터 끝까지 맞게 처리한 비율. 걸음 하나의 정확도와 다르다."
+   },
+   "level": 3
+  },
+  {
+   "id": "lab:metric/expected-solved",
+   "type": "Metric",
+   "label": {
+    "ko": "기대 해결 건수",
+    "en": "Expected tasks solved"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#duel",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "문의마다 끝까지 성공할 확률을 더한 값."
+   },
+   "level": 4
+  },
+  {
+   "id": "lab:task/support-desk",
+   "type": "Task",
+   "label": {
+    "ko": "고객 문의 처리",
+    "en": "Customer support handling"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#first",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "조회·검색·계산·접수를 거쳐 고객 문의를 끝까지 처리하는 일."
+   },
+   "level": 1
+  },
+  {
+   "id": "lab:dataset/pebble-orders",
+   "type": "Dataset",
+   "label": {
+    "ko": "가상 주문 6건·고객 문의 6건",
+    "en": "Pebble Lamp toy orders and tickets"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#big",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "설명용으로 만든 주문, 문의, 도구 결과, 업무 일지."
+   },
+   "level": 1
+  },
+  {
+   "id": "lab:limitation/order-fixed",
+   "type": "Limitation",
+   "label": {
+    "ko": "도구 순서를 사람이 정해야 한다",
+    "en": "Tool order fixed by hand"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv1",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "level": 1
+  },
+  {
+   "id": "lab:limitation/errors-compound",
+   "type": "Limitation",
+   "label": {
+    "ko": "걸음마다 실수가 곱해진다",
+    "en": "Errors compound over steps"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv2",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "level": 2
+  },
+  {
+   "id": "lab:limitation/injection-unseen",
+   "type": "Limitation",
+   "label": {
+    "ko": "확인은 숨긴 지시를 못 막을 수 있다",
+    "en": "Verification may miss injected instructions"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "level": 3
+  },
+  {
+   "id": "lab:limitation/speed-tradeoff",
+   "type": "Limitation",
+   "label": {
+    "ko": "안전장치는 속도와 맞바꾼다",
+    "en": "Safeguards cost speed"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "level": 4
+  },
+  {
+   "id": "lab:claim/react-interleave",
+   "type": "Claim",
+   "label": {
+    "ko": "ReAct는 추론 흔적과 행동을 번갈아 생성해 외부 정보를 가져오며 계획을 고친다",
+    "en": "ReAct interleaves reasoning and acting"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv2",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "evidence": [
+    "F01"
+   ]
+  },
+  {
+   "id": "lab:claim/toolformer-self",
+   "type": "Claim",
+   "label": {
+    "ko": "Toolformer는 어떤 API를 언제 어떤 입력으로 부를지 스스로 배운다",
+    "en": "Toolformer learns when and how to call APIs"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv1",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "evidence": [
+    "F02"
+   ]
+  },
+  {
+   "id": "lab:claim/indirect-injection",
+   "type": "Claim",
+   "label": {
+    "ko": "검색될 데이터에 지시를 심어 LLM 통합 앱을 원격으로 조종할 수 있다",
+    "en": "Indirect prompt injection compromises LLM apps"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "evidence": [
+    "F03"
+   ]
+  },
+  {
+   "id": "lab:claim/toy-raid",
+   "type": "Claim",
+   "label": {
+    "ko": "장난감 레이드에서 확인 담당이 빠지면 기대 해결이 5.64건에서 4.13건으로 가장 크게 준다",
+    "en": "Toy raid ablation result"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#duel",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:question/core",
+   "type": "Question",
+   "label": {
+    "ko": "답만 하던 LLM에게 일을 맡기려면 무엇을 붙이고 무엇을 막아야 할까?",
+    "en": "What to add and guard when LLMs act?"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#top",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:question/duel",
+   "type": "Question",
+   "label": {
+    "ko": "누가 빠지면 가장 크게 무너지는가?",
+    "en": "Which role matters most?"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#duel",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:question/how-much-autonomy",
+   "type": "Question",
+   "label": {
+    "ko": "어디까지 사람 승인 없이 맡겨도 될까?",
+    "en": "How much autonomy without approval?"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:analogy/lookup-clerk",
+   "type": "Analogy",
+   "label": {
+    "ko": "기억 대신 주문 시스템을 조회하는 상담원",
+    "en": "Clerk who looks things up"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv1",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:analogy/work-log",
+   "type": "Analogy",
+   "label": {
+    "ko": "한 줄씩 적는 업무 일지",
+    "en": "Work log"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv2",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:analogy/check-calc",
+   "type": "Analogy",
+   "label": {
+    "ko": "계산을 검산하는 습관",
+    "en": "Double-checking arithmetic"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:analogy/bank-approval",
+   "type": "Analogy",
+   "label": {
+    "ko": "권한을 나누고 큰 결재는 두 사람이 보는 은행",
+    "en": "Bank dual control"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:work/yao2023react",
+   "type": "Work",
+   "label": {
+    "ko": "Yao 외 (2023) ReAct",
+    "en": "Yao et al. 2023"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#footer-src",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:work/schick2023toolformer",
+   "type": "Work",
+   "label": {
+    "ko": "Schick 외 (2023) Toolformer",
+    "en": "Schick et al. 2023"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#footer-src",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:work/greshake2023injection",
+   "type": "Work",
+   "label": {
+    "ko": "Greshake 외 (2023) 간접 프롬프트 주입",
+    "en": "Greshake et al. 2023"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#footer-src",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:sim/a4-tool",
+   "type": "Simulation",
+   "label": {
+    "ko": "실험 ① 혼자 vs 도구",
+    "en": "실험 ① 혼자 vs 도구"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv1",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:sim/a4-trace",
+   "type": "Simulation",
+   "label": {
+    "ko": "실험 ② 업무 일지와 걸음 예산",
+    "en": "실험 ② 업무 일지와 걸음 예산"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv2",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:sim/a4-chain",
+   "type": "Simulation",
+   "label": {
+    "ko": "실험 ③ 곱해지는 성공률",
+    "en": "실험 ③ 곱해지는 성공률"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:sim/a4-guard",
+   "type": "Simulation",
+   "label": {
+    "ko": "실험 ④ 세 겹의 안전장치",
+    "en": "실험 ④ 세 겹의 안전장치"
+   },
+   "page": "A4_agent_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:area/llm-agents",
+   "type": "Area",
+   "label": {
+    "ko": "에이전트",
+    "en": "Agents"
+   },
+   "page": "backbone_llm",
+   "anchor": "#kg",
+   "family": "backbone",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:topic/tool-use",
+   "type": "Topic",
+   "label": {
+    "ko": "도구 사용",
+    "en": "Tool use"
+   },
+   "page": "backbone_llm",
+   "anchor": "#kg",
+   "family": "backbone",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:topic/planning-agents",
+   "type": "Topic",
+   "label": {
+    "ko": "계획과 반복 실행",
+    "en": "Planning and iteration"
+   },
+   "page": "backbone_llm",
+   "anchor": "#kg",
+   "family": "backbone",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:topic/multi-agent",
+   "type": "Topic",
+   "label": {
+    "ko": "다중 에이전트",
+    "en": "Multi-agent systems"
+   },
+   "page": "backbone_llm",
+   "anchor": "#kg",
+   "family": "backbone",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:topic/agent-evaluation",
+   "type": "Topic",
+   "label": {
+    "ko": "에이전트 평가",
+    "en": "Agent evaluation"
+   },
+   "page": "backbone_llm",
+   "anchor": "#kg",
+   "family": "backbone",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:topic/jailbreak-defense",
+   "type": "Topic",
+   "label": {
+    "ko": "탈옥과 방어",
+    "en": "Jailbreaks and defenses"
+   },
+   "page": "backbone_llm",
+   "anchor": "#kg",
+   "family": "backbone",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:area/llm-evaluation-llm",
+   "type": "Area",
+   "label": {
+    "ko": "LLM 평가와 안전",
+    "en": "LLM evaluation and safety"
+   },
+   "page": "backbone_llm",
+   "anchor": "#kg",
+   "family": "backbone",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:area/llm-retrieval",
+   "type": "Area",
+   "label": {
+    "ko": "검색 증강과 기억",
+    "en": "Retrieval and memory"
+   },
+   "page": "backbone_llm",
+   "anchor": "#kg",
+   "family": "backbone",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  }
+ ],
+ "edges": [
+  {
+   "s": "lab:method/tool-calling",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/order-fixed",
+   "anchor": "#lv1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/tool-calling",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:method/react-loop",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/order-fixed",
+   "p": "lab:addressedBy",
+   "o": "lab:method/react-loop",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/react-loop",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/errors-compound",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/react-loop",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:method/step-verification",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/errors-compound",
+   "p": "lab:addressedBy",
+   "o": "lab:method/step-verification",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/step-verification",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/injection-unseen",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/step-verification",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:method/layered-guards",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/injection-unseen",
+   "p": "lab:addressedBy",
+   "o": "lab:method/layered-guards",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/layered-guards",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/speed-tradeoff",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/tool-calling",
+   "p": "lab:partOf",
+   "o": "lab:topic/llm-agent",
+   "anchor": "#big",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/react-loop",
+   "p": "lab:partOf",
+   "o": "lab:topic/llm-agent",
+   "anchor": "#big",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/step-verification",
+   "p": "lab:partOf",
+   "o": "lab:topic/llm-agent",
+   "anchor": "#big",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/layered-guards",
+   "p": "lab:partOf",
+   "o": "lab:topic/llm-agent",
+   "anchor": "#big",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:topic/llm-agent",
+   "p": "lab:solves",
+   "o": "lab:task/support-desk",
+   "anchor": "#first",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/tool",
+   "p": "lab:partOf",
+   "o": "lab:method/tool-calling",
+   "anchor": "#lv1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/trace",
+   "p": "lab:partOf",
+   "o": "lab:method/react-loop",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/step-budget",
+   "p": "lab:partOf",
+   "o": "lab:method/react-loop",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/state-update",
+   "p": "lab:partOf",
+   "o": "lab:method/react-loop",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/planning",
+   "p": "lab:partOf",
+   "o": "lab:method/react-loop",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/agent-memory",
+   "p": "lab:partOf",
+   "o": "lab:method/react-loop",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/errors-compound",
+   "p": "lab:raises",
+   "o": "lab:concept/compounding-error",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/retry",
+   "p": "lab:partOf",
+   "o": "lab:method/step-verification",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/compounding-error",
+   "p": "lab:addressedBy",
+   "o": "lab:method/step-verification",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/step-verification",
+   "p": "lab:evaluatedBy",
+   "o": "lab:metric/task-success",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/injection-unseen",
+   "p": "lab:raises",
+   "o": "lab:concept/prompt-injection",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/data-instruction-separation",
+   "p": "lab:partOf",
+   "o": "lab:method/layered-guards",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/least-privilege",
+   "p": "lab:partOf",
+   "o": "lab:method/layered-guards",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/human-approval",
+   "p": "lab:partOf",
+   "o": "lab:method/layered-guards",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/prompt-injection",
+   "p": "lab:addressedBy",
+   "o": "lab:concept/data-instruction-separation",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/irreversible-action",
+   "p": "lab:addressedBy",
+   "o": "lab:concept/human-approval",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/speed-tradeoff",
+   "p": "lab:raises",
+   "o": "lab:question/how-much-autonomy",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:topic/llm-agent",
+   "p": "lab:evaluatedBy",
+   "o": "lab:metric/expected-solved",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:topic/llm-agent",
+   "p": "lab:evaluatedOn",
+   "o": "lab:dataset/pebble-orders",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:question/duel",
+   "p": "lab:raises",
+   "o": "lab:method/step-verification",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:question/core",
+   "p": "lab:relatedTo",
+   "o": "lab:topic/llm-agent",
+   "anchor": "#top",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:metric/task-success",
+   "p": "lab:contrastsWith",
+   "o": "lab:metric/expected-solved",
+   "anchor": "#duel",
+   "confidence": "mid"
+  },
+  {
+   "s": "lab:claim/react-interleave",
+   "p": "lab:supports",
+   "o": "lab:method/react-loop",
+   "anchor": "#footer-src",
+   "confidence": "high",
+   "evidence": [
+    "F01"
+   ]
+  },
+  {
+   "s": "lab:claim/react-interleave",
+   "p": "lab:assertedIn",
+   "o": "lab:work/yao2023react",
+   "anchor": "#footer-src",
+   "confidence": "high",
+   "evidence": [
+    "F01"
+   ]
+  },
+  {
+   "s": "lab:claim/toolformer-self",
+   "p": "lab:supports",
+   "o": "lab:method/tool-calling",
+   "anchor": "#footer-src",
+   "confidence": "high",
+   "evidence": [
+    "F02"
+   ]
+  },
+  {
+   "s": "lab:claim/toolformer-self",
+   "p": "lab:assertedIn",
+   "o": "lab:work/schick2023toolformer",
+   "anchor": "#footer-src",
+   "confidence": "high",
+   "evidence": [
+    "F02"
+   ]
+  },
+  {
+   "s": "lab:claim/indirect-injection",
+   "p": "lab:supports",
+   "o": "lab:concept/prompt-injection",
+   "anchor": "#footer-src",
+   "confidence": "high",
+   "evidence": [
+    "F03"
+   ]
+  },
+  {
+   "s": "lab:claim/indirect-injection",
+   "p": "lab:assertedIn",
+   "o": "lab:work/greshake2023injection",
+   "anchor": "#footer-src",
+   "confidence": "high",
+   "evidence": [
+    "F03"
+   ]
+  },
+  {
+   "s": "lab:claim/toy-raid",
+   "p": "lab:supports",
+   "o": "lab:method/step-verification",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/toy-raid",
+   "p": "lab:assertedIn",
+   "o": "lab:dataset/pebble-orders",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/lookup-clerk",
+   "p": "lab:analogyOf",
+   "o": "lab:method/tool-calling",
+   "anchor": "#lv1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/work-log",
+   "p": "lab:analogyOf",
+   "o": "lab:method/react-loop",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/check-calc",
+   "p": "lab:analogyOf",
+   "o": "lab:method/step-verification",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/bank-approval",
+   "p": "lab:analogyOf",
+   "o": "lab:method/layered-guards",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/tool",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/a4-tool",
+   "anchor": "#lv1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/step-budget",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/a4-trace",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/compounding-error",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/a4-chain",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/prompt-injection",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/a4-guard",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:topic/llm-agent",
+   "p": "lab:broader",
+   "o": "lab:area/llm-agents",
+   "anchor": "#kg",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/tool-calling",
+   "p": "lab:broader",
+   "o": "lab:topic/tool-use",
+   "anchor": "#kg",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/react-loop",
+   "p": "lab:broader",
+   "o": "lab:topic/planning-agents",
+   "anchor": "#kg",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:metric/task-success",
+   "p": "lab:broader",
+   "o": "lab:topic/agent-evaluation",
+   "anchor": "#kg",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/prompt-injection",
+   "p": "lab:broader",
+   "o": "lab:topic/jailbreak-defense",
+   "anchor": "#kg",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/planning",
+   "p": "lab:broader",
+   "o": "lab:topic/multi-agent",
+   "anchor": "#kg",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:topic/tool-use",
+   "p": "lab:broader",
+   "o": "lab:area/llm-agents",
+   "anchor": "#kg",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:topic/planning-agents",
+   "p": "lab:broader",
+   "o": "lab:area/llm-agents",
+   "anchor": "#kg",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:topic/multi-agent",
+   "p": "lab:broader",
+   "o": "lab:area/llm-agents",
+   "anchor": "#kg",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:topic/agent-evaluation",
+   "p": "lab:broader",
+   "o": "lab:area/llm-agents",
+   "anchor": "#kg",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:topic/jailbreak-defense",
+   "p": "lab:broader",
+   "o": "lab:area/llm-evaluation-llm",
+   "anchor": "#kg",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:area/llm-retrieval",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:area/llm-agents",
+   "anchor": "#sum",
+   "confidence": "high"
+  }
+ ]
+}

@@ -1,0 +1,1560 @@
+{
+ "version": "1.0",
+ "page": "A3_eval_lab",
+ "registry": "KG_00_registry 0.3 + 응용편 A3 추가분, 분야 뼈대 backbone_llm 0.1",
+ "nodes": [
+  {
+   "id": "lab:metric/em-f1",
+   "type": "Metric",
+   "label": {
+    "ko": "글자 채점 (EM·F1)",
+    "en": "Exact match and F1"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv1",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "정답 문장과 글자가 똑같은지(EM), 낱말이 얼마나 겹치는지(F1)로 매기는 채점."
+   },
+   "level": 1,
+   "evidence": [
+    "F01"
+   ]
+  },
+  {
+   "id": "lab:method/blind-pairwise",
+   "type": "Method",
+   "label": {
+    "ko": "블라인드 쌍대 비교",
+    "en": "Blind pairwise comparison"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv2",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "누구 답인지 가리고 두 답 중 나은 쪽을 사람이 고르게 하는 평가."
+   },
+   "level": 2,
+   "evidence": [
+    "F03"
+   ]
+  },
+  {
+   "id": "lab:method/llm-judge",
+   "type": "Method",
+   "label": {
+    "ko": "LLM 심판",
+    "en": "LLM-as-a-judge"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "다른 LLM에게 두 답 중 나은 쪽을 고르게 하는 평가."
+   },
+   "level": 3,
+   "altLabel": {
+    "ko": [
+     "LLM 판정관",
+     "채점 로봇"
+    ]
+   },
+   "evidence": [
+    "F02"
+   ]
+  },
+  {
+   "id": "lab:concept/confidence-interval",
+   "type": "Concept",
+   "label": {
+    "ko": "95% 신뢰구간",
+    "en": "95% confidence interval"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "정답률 ± 1.96 × 표준오차. 문항 수가 적으면 넓다."
+   },
+   "level": 4
+  },
+  {
+   "id": "lab:topic/llm-evaluation",
+   "type": "Concept",
+   "label": {
+    "ko": "LLM 평가",
+    "en": "LLM evaluation"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#why",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "자유로운 문장으로 답하는 모델의 질을 재는 일."
+   },
+   "level": 1
+  },
+  {
+   "id": "lab:metric/exact-match",
+   "type": "Metric",
+   "label": {
+    "ko": "정확히 일치 (EM)",
+    "en": "Exact match"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv1",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "정리한 글자가 정답과 똑같으면 1."
+   },
+   "level": 1,
+   "evidence": [
+    "F01"
+   ]
+  },
+  {
+   "id": "lab:metric/token-f1",
+   "type": "Metric",
+   "label": {
+    "ko": "낱말 F1",
+    "en": "Token-level F1"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv1",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "겹친 낱말로 정밀도·재현율을 구해 조화평균한 값."
+   },
+   "level": 1,
+   "evidence": [
+    "F01"
+   ]
+  },
+  {
+   "id": "lab:concept/precision",
+   "type": "Term",
+   "label": {
+    "ko": "정밀도",
+    "en": "Precision"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv1",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "답의 낱말 중 정답에도 있는 비율."
+   },
+   "level": 1
+  },
+  {
+   "id": "lab:concept/recall",
+   "type": "Term",
+   "label": {
+    "ko": "재현율",
+    "en": "Recall"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv1",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "정답의 낱말 중 답에 들어간 비율."
+   },
+   "level": 1
+  },
+  {
+   "id": "lab:concept/answer-normalization",
+   "type": "Term",
+   "label": {
+    "ko": "답 정리 (소문자·구두점·관사 지우기)",
+    "en": "Answer normalization"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv1",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "비교 전에 대소문자·구두점·a/an/the를 지우는 일."
+   },
+   "level": 1,
+   "evidence": [
+    "F01"
+   ]
+  },
+  {
+   "id": "lab:concept/majority-vote",
+   "type": "Term",
+   "label": {
+    "ko": "다수결",
+    "en": "Majority vote"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv2",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "심사위원 셋 중 둘 이상이 고른 쪽을 승자로 정하기."
+   },
+   "level": 2
+  },
+  {
+   "id": "lab:metric/elo",
+   "type": "Metric",
+   "label": {
+    "ko": "엘로 점수",
+    "en": "Elo rating"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv2",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "기대 승률과 결과의 차이 × K만큼 점수를 고치는 방식."
+   },
+   "level": 2,
+   "altLabel": {
+    "ko": [
+     "Elo"
+    ]
+   },
+   "evidence": [
+    "F03"
+   ]
+  },
+  {
+   "id": "lab:concept/expected-score",
+   "type": "Term",
+   "label": {
+    "ko": "기대 승률",
+    "en": "Expected score"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv2",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "1 ÷ (1 + 10^((상대 − 나) ÷ 400))."
+   },
+   "level": 2
+  },
+  {
+   "id": "lab:concept/order-dependence",
+   "type": "Concept",
+   "label": {
+    "ko": "세는 순서에 따라 바뀌는 순위",
+    "en": "Order dependence of Elo"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv2",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "같은 경기라도 세는 순서가 바뀌면 엘로 점수가 달라지는 성질."
+   },
+   "level": 2
+  },
+  {
+   "id": "lab:method/bradley-terry",
+   "type": "Method",
+   "label": {
+    "ko": "브래들리-테리 모형",
+    "en": "Bradley–Terry model"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv2",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "모든 맞대결을 한꺼번에 놓고 실력 점수를 구하는 방법. 경기 순서와 무관."
+   },
+   "level": 2,
+   "evidence": [
+    "F03"
+   ]
+  },
+  {
+   "id": "lab:concept/position-bias",
+   "type": "Concept",
+   "label": {
+    "ko": "위치 편향",
+    "en": "Position bias"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "앞에 놓인 답을 더 좋게 보는 버릇."
+   },
+   "level": 3,
+   "evidence": [
+    "F02"
+   ]
+  },
+  {
+   "id": "lab:concept/verbosity-bias",
+   "type": "Concept",
+   "label": {
+    "ko": "길이 편향",
+    "en": "Verbosity bias"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "긴 답을 더 좋게 보는 버릇."
+   },
+   "level": 3,
+   "evidence": [
+    "F02"
+   ]
+  },
+  {
+   "id": "lab:method/swap-order",
+   "type": "Method",
+   "label": {
+    "ko": "순서 바꿔 두 번 묻기",
+    "en": "Position swap"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "두 답의 순서를 바꿔 두 번 묻고, 엇갈리면 판정 보류로 두는 보정."
+   },
+   "level": 3,
+   "evidence": [
+    "F02"
+   ]
+  },
+  {
+   "id": "lab:method/length-control",
+   "type": "Method",
+   "label": {
+    "ko": "길이 보정",
+    "en": "Length control"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "답 길이의 영향을 빼고 비교하는 보정."
+   },
+   "level": 3
+  },
+  {
+   "id": "lab:metric/agreement-rate",
+   "type": "Metric",
+   "label": {
+    "ko": "사람과의 일치율",
+    "en": "Agreement with humans"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "LLM 심판이 사람 다수결과 같은 쪽을 고른 경기의 비율."
+   },
+   "level": 3,
+   "evidence": [
+    "F02"
+   ]
+  },
+  {
+   "id": "lab:concept/standard-error",
+   "type": "Term",
+   "label": {
+    "ko": "표준오차",
+    "en": "Standard error"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "√(p(1−p) ÷ n). 정답률이 다시 잴 때 흔들리는 크기. 표준편차와 다르다."
+   },
+   "level": 4
+  },
+  {
+   "id": "lab:concept/sample-size",
+   "type": "Term",
+   "label": {
+    "ko": "문항 수 n",
+    "en": "Number of test items"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "시험 문항의 개수. 폭은 √n에 반비례."
+   },
+   "level": 4
+  },
+  {
+   "id": "lab:concept/contamination",
+   "type": "Concept",
+   "label": {
+    "ko": "시험지 유출 (오염)",
+    "en": "Benchmark contamination"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "학습 데이터에 시험 문항이 섞여 점수가 부풀려지는 일."
+   },
+   "level": 4
+  },
+  {
+   "id": "lab:task/model-selection",
+   "type": "Task",
+   "label": {
+    "ko": "업무에 쓸 모델 고르기",
+    "en": "Model selection for a task"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#first",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "여러 답변기 중 업무에 맞는 것을 근거를 갖고 고르는 일."
+   },
+   "level": 1
+  },
+  {
+   "id": "lab:dataset/pebble-eval10",
+   "type": "Dataset",
+   "label": {
+    "ko": "램프 회사 시험 10문항·답변 40개·표 180개",
+    "en": "Pebble Lamp toy eval set"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#big",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "설명용으로 만든 10문항, 네 선수의 답, 블라인드 심사표."
+   },
+   "level": 1
+  },
+  {
+   "id": "lab:limitation/no-meaning",
+   "type": "Limitation",
+   "label": {
+    "ko": "글자만 보고 뜻은 못 본다",
+    "en": "Surface matching misses meaning"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv1",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "level": 1
+  },
+  {
+   "id": "lab:limitation/human-costly",
+   "type": "Limitation",
+   "label": {
+    "ko": "사람 심사는 비싸고 2·3위가 흔들린다",
+    "en": "Human eval is costly and order-sensitive"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv2",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "level": 2
+  },
+  {
+   "id": "lab:limitation/judge-biased",
+   "type": "Limitation",
+   "label": {
+    "ko": "LLM 심판은 앞 답·긴 답에 끌린다",
+    "en": "Judge biases"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "level": 3
+  },
+  {
+   "id": "lab:limitation/small-n",
+   "type": "Limitation",
+   "label": {
+    "ko": "10문항으로는 순위를 단정할 수 없다",
+    "en": "Small test sets are noisy"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "level": 4
+  },
+  {
+   "id": "lab:claim/squad-em-f1",
+   "type": "Claim",
+   "label": {
+    "ko": "SQuAD는 EM과 F1로 채점하고 비교 전 구두점·관사를 지운다",
+    "en": "SQuAD scores by EM and F1"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv1",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "evidence": [
+    "F01"
+   ]
+  },
+  {
+   "id": "lab:claim/judge-80",
+   "type": "Claim",
+   "label": {
+    "ko": "강한 LLM 심판은 사람 선호와 80% 넘게 일치하며, 위치·길이·자기 답 편향이 있다",
+    "en": "LLM judges reach >80% agreement but show biases"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "evidence": [
+    "F02"
+   ]
+  },
+  {
+   "id": "lab:claim/arena-pairwise",
+   "type": "Claim",
+   "label": {
+    "ko": "공개 비교 사이트는 익명 두 모델의 쌍대 투표로 순위를 매긴다",
+    "en": "Chatbot Arena ranks by anonymous pairwise votes"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv2",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "evidence": [
+    "F03"
+   ]
+  },
+  {
+   "id": "lab:claim/toy-league",
+   "type": "Claim",
+   "label": {
+    "ko": "장난감 리그에서 사람 승수 1위는 모아(22승), 한 번 본 LLM 심판의 1위는 주판봇(23승)",
+    "en": "Toy league results"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#duel",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:question/core",
+   "type": "Question",
+   "label": {
+    "ko": "문장으로 답하는 LLM을 무엇으로 채점해야 순위를 믿을 수 있을까?",
+    "en": "How to score free-form answers reliably?"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#top",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:question/duel",
+   "type": "Question",
+   "label": {
+    "ko": "채점법을 모두 모으면 누가 1위인가?",
+    "en": "Who wins when all scorers are combined?"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#duel",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:question/axes",
+   "type": "Question",
+   "label": {
+    "ko": "정확성·친절함·간결함을 한 점수로 묶어도 될까?",
+    "en": "Should quality axes be combined into one score?"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#sum",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:analogy/strict-key",
+   "type": "Analogy",
+   "label": {
+    "ko": "글자만 보는 깐깐한 채점표",
+    "en": "Strict answer key"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv1",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:analogy/blind-taste",
+   "type": "Analogy",
+   "label": {
+    "ko": "상표 가린 맛 테스트",
+    "en": "Blind taste test"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv2",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:analogy/first-plate",
+   "type": "Analogy",
+   "label": {
+    "ko": "첫 접시·큰 접시에 끌리는 심사위원",
+    "en": "Judge drawn to first and bigger plates"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:analogy/poll-margin",
+   "type": "Analogy",
+   "label": {
+    "ko": "여론조사의 오차 범위",
+    "en": "Poll margin of error"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:work/rajpurkar2016squad",
+   "type": "Work",
+   "label": {
+    "ko": "Rajpurkar 외 (2016) SQuAD",
+    "en": "Rajpurkar et al. 2016"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#footer-src",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:work/zheng2023judge",
+   "type": "Work",
+   "label": {
+    "ko": "Zheng 외 (2023) LLM-as-a-Judge",
+    "en": "Zheng et al. 2023"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#footer-src",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:work/chiang2024arena",
+   "type": "Work",
+   "label": {
+    "ko": "Chiang 외 (2024) Chatbot Arena",
+    "en": "Chiang et al. 2024"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#footer-src",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:sim/a3-em",
+   "type": "Simulation",
+   "label": {
+    "ko": "실험 ① 글자 채점기",
+    "en": "실험 ① 글자 채점기"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv1",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:sim/a3-elo",
+   "type": "Simulation",
+   "label": {
+    "ko": "실험 ② 블라인드 60경기",
+    "en": "실험 ② 블라인드 60경기"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv2",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:sim/a3-judge",
+   "type": "Simulation",
+   "label": {
+    "ko": "실험 ③ LLM 심판 보정",
+    "en": "실험 ③ LLM 심판 보정"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:sim/a3-ci",
+   "type": "Simulation",
+   "label": {
+    "ko": "실험 ④ 문항 수와 신뢰구간",
+    "en": "실험 ④ 문항 수와 신뢰구간"
+   },
+   "page": "A3_eval_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:area/llm-evaluation-llm",
+   "type": "Area",
+   "label": {
+    "ko": "LLM 평가와 안전",
+    "en": "LLM evaluation and safety"
+   },
+   "page": "backbone_llm",
+   "anchor": "#kg",
+   "family": "backbone",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:topic/llm-benchmarks",
+   "type": "Topic",
+   "label": {
+    "ko": "벤치마크",
+    "en": "Benchmarks"
+   },
+   "page": "backbone_llm",
+   "anchor": "#kg",
+   "family": "backbone",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:topic/llm-as-judge",
+   "type": "Topic",
+   "label": {
+    "ko": "LLM 심사관",
+    "en": "LLM-as-a-judge"
+   },
+   "page": "backbone_llm",
+   "anchor": "#kg",
+   "family": "backbone",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:topic/hallucination",
+   "type": "Topic",
+   "label": {
+    "ko": "환각",
+    "en": "Hallucination"
+   },
+   "page": "backbone_llm",
+   "anchor": "#kg",
+   "family": "backbone",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  }
+ ],
+ "edges": [
+  {
+   "s": "lab:metric/em-f1",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/no-meaning",
+   "anchor": "#lv1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:metric/em-f1",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:method/blind-pairwise",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/no-meaning",
+   "p": "lab:addressedBy",
+   "o": "lab:method/blind-pairwise",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/blind-pairwise",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/human-costly",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/blind-pairwise",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:method/llm-judge",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/human-costly",
+   "p": "lab:addressedBy",
+   "o": "lab:method/llm-judge",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/llm-judge",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/judge-biased",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/llm-judge",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:concept/confidence-interval",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/judge-biased",
+   "p": "lab:addressedBy",
+   "o": "lab:concept/confidence-interval",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/confidence-interval",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/small-n",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:metric/em-f1",
+   "p": "lab:partOf",
+   "o": "lab:topic/llm-evaluation",
+   "anchor": "#big",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/blind-pairwise",
+   "p": "lab:partOf",
+   "o": "lab:topic/llm-evaluation",
+   "anchor": "#big",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/llm-judge",
+   "p": "lab:partOf",
+   "o": "lab:topic/llm-evaluation",
+   "anchor": "#big",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/confidence-interval",
+   "p": "lab:partOf",
+   "o": "lab:topic/llm-evaluation",
+   "anchor": "#big",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:topic/llm-evaluation",
+   "p": "lab:solves",
+   "o": "lab:task/model-selection",
+   "anchor": "#first",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:metric/exact-match",
+   "p": "lab:partOf",
+   "o": "lab:metric/em-f1",
+   "anchor": "#lv1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:metric/token-f1",
+   "p": "lab:partOf",
+   "o": "lab:metric/em-f1",
+   "anchor": "#lv1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/precision",
+   "p": "lab:partOf",
+   "o": "lab:metric/token-f1",
+   "anchor": "#lv1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/recall",
+   "p": "lab:partOf",
+   "o": "lab:metric/token-f1",
+   "anchor": "#lv1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/answer-normalization",
+   "p": "lab:partOf",
+   "o": "lab:metric/em-f1",
+   "anchor": "#lv1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/majority-vote",
+   "p": "lab:partOf",
+   "o": "lab:method/blind-pairwise",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:metric/elo",
+   "p": "lab:partOf",
+   "o": "lab:method/blind-pairwise",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/expected-score",
+   "p": "lab:partOf",
+   "o": "lab:metric/elo",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:metric/elo",
+   "p": "lab:hasLimitation",
+   "o": "lab:concept/order-dependence",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/order-dependence",
+   "p": "lab:addressedBy",
+   "o": "lab:method/bradley-terry",
+   "anchor": "#lv2",
+   "confidence": "mid"
+  },
+  {
+   "s": "lab:metric/elo",
+   "p": "lab:contrastsWith",
+   "o": "lab:method/bradley-terry",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/llm-judge",
+   "p": "lab:hasLimitation",
+   "o": "lab:concept/position-bias",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/llm-judge",
+   "p": "lab:hasLimitation",
+   "o": "lab:concept/verbosity-bias",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/position-bias",
+   "p": "lab:addressedBy",
+   "o": "lab:method/swap-order",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/verbosity-bias",
+   "p": "lab:addressedBy",
+   "o": "lab:method/length-control",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/llm-judge",
+   "p": "lab:evaluatedBy",
+   "o": "lab:metric/agreement-rate",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/standard-error",
+   "p": "lab:partOf",
+   "o": "lab:concept/confidence-interval",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/sample-size",
+   "p": "lab:partOf",
+   "o": "lab:concept/standard-error",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/small-n",
+   "p": "lab:raises",
+   "o": "lab:concept/contamination",
+   "anchor": "#lv4",
+   "confidence": "mid"
+  },
+  {
+   "s": "lab:metric/em-f1",
+   "p": "lab:evaluatedOn",
+   "o": "lab:dataset/pebble-eval10",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/blind-pairwise",
+   "p": "lab:evaluatedOn",
+   "o": "lab:dataset/pebble-eval10",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/llm-judge",
+   "p": "lab:evaluatedOn",
+   "o": "lab:dataset/pebble-eval10",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:question/duel",
+   "p": "lab:raises",
+   "o": "lab:concept/confidence-interval",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/judge-biased",
+   "p": "lab:raises",
+   "o": "lab:question/duel",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:question/core",
+   "p": "lab:relatedTo",
+   "o": "lab:topic/llm-evaluation",
+   "anchor": "#top",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:question/axes",
+   "p": "lab:relatedTo",
+   "o": "lab:method/blind-pairwise",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/squad-em-f1",
+   "p": "lab:supports",
+   "o": "lab:metric/em-f1",
+   "anchor": "#footer-src",
+   "confidence": "high",
+   "evidence": [
+    "F01"
+   ]
+  },
+  {
+   "s": "lab:claim/squad-em-f1",
+   "p": "lab:assertedIn",
+   "o": "lab:work/rajpurkar2016squad",
+   "anchor": "#footer-src",
+   "confidence": "high",
+   "evidence": [
+    "F01"
+   ]
+  },
+  {
+   "s": "lab:claim/judge-80",
+   "p": "lab:supports",
+   "o": "lab:method/llm-judge",
+   "anchor": "#footer-src",
+   "confidence": "high",
+   "evidence": [
+    "F02"
+   ]
+  },
+  {
+   "s": "lab:claim/judge-80",
+   "p": "lab:assertedIn",
+   "o": "lab:work/zheng2023judge",
+   "anchor": "#footer-src",
+   "confidence": "high",
+   "evidence": [
+    "F02"
+   ]
+  },
+  {
+   "s": "lab:claim/arena-pairwise",
+   "p": "lab:supports",
+   "o": "lab:method/blind-pairwise",
+   "anchor": "#footer-src",
+   "confidence": "high",
+   "evidence": [
+    "F03"
+   ]
+  },
+  {
+   "s": "lab:claim/arena-pairwise",
+   "p": "lab:assertedIn",
+   "o": "lab:work/chiang2024arena",
+   "anchor": "#footer-src",
+   "confidence": "high",
+   "evidence": [
+    "F03"
+   ]
+  },
+  {
+   "s": "lab:claim/toy-league",
+   "p": "lab:supports",
+   "o": "lab:concept/verbosity-bias",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/toy-league",
+   "p": "lab:assertedIn",
+   "o": "lab:dataset/pebble-eval10",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/strict-key",
+   "p": "lab:analogyOf",
+   "o": "lab:metric/em-f1",
+   "anchor": "#lv1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/blind-taste",
+   "p": "lab:analogyOf",
+   "o": "lab:method/blind-pairwise",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/first-plate",
+   "p": "lab:analogyOf",
+   "o": "lab:method/llm-judge",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/poll-margin",
+   "p": "lab:analogyOf",
+   "o": "lab:concept/confidence-interval",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:metric/token-f1",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/a3-em",
+   "anchor": "#lv1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/order-dependence",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/a3-elo",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/verbosity-bias",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/a3-judge",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/standard-error",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/a3-ci",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:topic/llm-evaluation",
+   "p": "lab:broader",
+   "o": "lab:area/llm-evaluation-llm",
+   "anchor": "#kg",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:metric/em-f1",
+   "p": "lab:broader",
+   "o": "lab:topic/llm-benchmarks",
+   "anchor": "#kg",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/llm-judge",
+   "p": "lab:broader",
+   "o": "lab:topic/llm-as-judge",
+   "anchor": "#kg",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/contamination",
+   "p": "lab:broader",
+   "o": "lab:topic/llm-benchmarks",
+   "anchor": "#kg",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/no-meaning",
+   "p": "lab:broader",
+   "o": "lab:topic/hallucination",
+   "anchor": "#kg",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:topic/llm-benchmarks",
+   "p": "lab:broader",
+   "o": "lab:area/llm-evaluation-llm",
+   "anchor": "#kg",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:topic/llm-as-judge",
+   "p": "lab:broader",
+   "o": "lab:area/llm-evaluation-llm",
+   "anchor": "#kg",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:topic/hallucination",
+   "p": "lab:broader",
+   "o": "lab:area/llm-evaluation-llm",
+   "anchor": "#kg",
+   "confidence": "high"
+  }
+ ]
+}

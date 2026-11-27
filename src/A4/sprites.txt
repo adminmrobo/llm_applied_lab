@@ -1,0 +1,1 @@
+doc_front doc_board doc_judge doc_magic doc_think asst_smile asst_firm asst_report asst_spark asst_shock fly_clip fly_point fly_arms fly_magnify robo_smile robo_coin robo_calc robo_blush sia_smile sia_explain sia_firm sia_proud moa_smile moa_report moa_think moa_tea moa_sparkle x1_hint x2_hint x3_hint

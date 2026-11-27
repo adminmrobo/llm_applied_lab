@@ -1,12 +1,27 @@
 {
  "series_ko": "LLM 공식에서 GPT-6까지 · 응용편",
- "title_ko": "RAG 연구실",
- "site_title": "RAG 연구실 — 사서가 찾아온 문장으로 LLM이 답한다",
+ "title_ko": "응용편 (RAG · 미세조정 · 평가 · 에이전트)",
+ "site_title": "LLM 공식에서 GPT-6까지 · 응용편",
  "site_url": "https://adminmrobo.github.io/llm_applied_lab/",
  "ontology": {
   "pages": [
    {
     "path": "A1_rag_lab.html",
+    "kg": true,
+    "export": true
+   },
+   {
+    "path": "A2_finetune_lab.html",
+    "kg": true,
+    "export": true
+   },
+   {
+    "path": "A3_eval_lab.html",
+    "kg": true,
+    "export": true
+   },
+   {
+    "path": "A4_agent_lab.html",
     "kg": true,
     "export": true
    }
@@ -20,7 +35,7 @@
    "ko"
   ],
   "pages": {
-   "ko": 1
+   "ko": 4
   },
   "readme_langs": [
    "ko"
@@ -143,7 +158,205 @@
    "prompt_en": "(genspark_A1/요청2_컷_2장.txt 2번)",
    "source_of": null,
    "status": "ok"
+  },
+  {
+   "id": "cover_A2",
+   "role": "cover",
+   "path": "assets/img/cover_A2.webp",
+   "size": [
+    1600,
+    900
+   ],
+   "characters": [
+    "doc",
+    "asst",
+    "fly",
+    "jupanbot",
+    "sia",
+    "moa"
+   ],
+   "robot": "jupanbot-v2",
+   "prompt_en": "(genspark_A2/요청1_표지.txt)",
+   "source_of": null,
+   "status": "redraw",
+   "note": "Genspark 요청 대기, 지금은 CSS 대체 표지"
+  },
+  {
+   "id": "thumb_A2",
+   "role": "thumb",
+   "path": "assets/img/thumb_A2.webp",
+   "size": [
+    600,
+    400
+   ],
+   "characters": [
+    "doc",
+    "asst",
+    "fly",
+    "jupanbot",
+    "sia",
+    "moa"
+   ],
+   "robot": "jupanbot-v2",
+   "prompt_en": null,
+   "source_of": "cover_A2",
+   "status": "redraw",
+   "note": "CSS 대체 표지를 찍은 임시 그림"
+  },
+  {
+   "id": "og_A2",
+   "role": "og",
+   "path": "assets/img/og_A2.jpg",
+   "size": [
+    1200,
+    630
+   ],
+   "characters": [
+    "doc",
+    "asst",
+    "fly",
+    "jupanbot",
+    "sia",
+    "moa"
+   ],
+   "robot": "jupanbot-v2",
+   "prompt_en": null,
+   "source_of": "cover_A2",
+   "status": "redraw",
+   "note": "CSS 대체 표지를 찍은 임시 그림"
+  },
+  {
+   "id": "cover_A3",
+   "role": "cover",
+   "path": "assets/img/cover_A3.webp",
+   "size": [
+    1600,
+    900
+   ],
+   "characters": [
+    "doc",
+    "asst",
+    "fly",
+    "jupanbot",
+    "sia",
+    "moa"
+   ],
+   "robot": "jupanbot-v2",
+   "prompt_en": "(genspark_A3/요청1_표지.txt)",
+   "source_of": null,
+   "status": "redraw",
+   "note": "Genspark 요청 대기, 지금은 CSS 대체 표지"
+  },
+  {
+   "id": "thumb_A3",
+   "role": "thumb",
+   "path": "assets/img/thumb_A3.webp",
+   "size": [
+    600,
+    400
+   ],
+   "characters": [
+    "doc",
+    "asst",
+    "fly",
+    "jupanbot",
+    "sia",
+    "moa"
+   ],
+   "robot": "jupanbot-v2",
+   "prompt_en": null,
+   "source_of": "cover_A3",
+   "status": "redraw",
+   "note": "CSS 대체 표지를 찍은 임시 그림"
+  },
+  {
+   "id": "og_A3",
+   "role": "og",
+   "path": "assets/img/og_A3.jpg",
+   "size": [
+    1200,
+    630
+   ],
+   "characters": [
+    "doc",
+    "asst",
+    "fly",
+    "jupanbot",
+    "sia",
+    "moa"
+   ],
+   "robot": "jupanbot-v2",
+   "prompt_en": null,
+   "source_of": "cover_A3",
+   "status": "redraw",
+   "note": "CSS 대체 표지를 찍은 임시 그림"
+  },
+  {
+   "id": "cover_A4",
+   "role": "cover",
+   "path": "assets/img/cover_A4.webp",
+   "size": [
+    1600,
+    900
+   ],
+   "characters": [
+    "doc",
+    "asst",
+    "fly",
+    "jupanbot",
+    "sia",
+    "moa"
+   ],
+   "robot": "jupanbot-v2",
+   "prompt_en": "(genspark_A4/요청1_표지.txt)",
+   "source_of": null,
+   "status": "redraw",
+   "note": "Genspark 요청 대기, 지금은 CSS 대체 표지"
+  },
+  {
+   "id": "thumb_A4",
+   "role": "thumb",
+   "path": "assets/img/thumb_A4.webp",
+   "size": [
+    600,
+    400
+   ],
+   "characters": [
+    "doc",
+    "asst",
+    "fly",
+    "jupanbot",
+    "sia",
+    "moa"
+   ],
+   "robot": "jupanbot-v2",
+   "prompt_en": null,
+   "source_of": "cover_A4",
+   "status": "redraw",
+   "note": "CSS 대체 표지를 찍은 임시 그림"
+  },
+  {
+   "id": "og_A4",
+   "role": "og",
+   "path": "assets/img/og_A4.jpg",
+   "size": [
+    1200,
+    630
+   ],
+   "characters": [
+    "doc",
+    "asst",
+    "fly",
+    "jupanbot",
+    "sia",
+    "moa"
+   ],
+   "robot": "jupanbot-v2",
+   "prompt_en": null,
+   "source_of": "cover_A4",
+   "status": "redraw",
+   "note": "CSS 대체 표지를 찍은 임시 그림"
   }
  ],
- "updated": "2026-11-21"
+ "updated": "2026-11-27"
 }

@@ -1,0 +1,1633 @@
+{
+ "version": "1.0",
+ "page": "A2_finetune_lab",
+ "registry": "KG_00_registry 0.3 + 응용편 A2 추가분, 분야 뼈대 backbone_llm 0.1",
+ "nodes": [
+  {
+   "id": "lab:method/few-shot-prompting",
+   "type": "Method",
+   "label": {
+    "ko": "예시 붙이기 (퓨샷 프롬프트)",
+    "en": "Few-shot prompting"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv1",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "프롬프트에 모범 문의·답 짝을 몇 개 붙여 따라 하게 하는 방법. 모델의 무게는 바뀌지 않는다."
+   },
+   "level": 1,
+   "evidence": [
+    "F03"
+   ]
+  },
+  {
+   "id": "lab:method/sft",
+   "type": "Method",
+   "label": {
+    "ko": "지도 미세조정 (SFT)",
+    "en": "Supervised fine-tuning"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv2",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "문의와 정답 양식 짝으로 손실을 줄이도록 모델의 무게를 고치는 방법."
+   },
+   "level": 2,
+   "altLabel": {
+    "ko": [
+     "SFT",
+     "미세조정"
+    ]
+   },
+   "evidence": [
+    "F02"
+   ]
+  },
+  {
+   "id": "lab:concept/learning-rate-epoch",
+   "type": "Concept",
+   "label": {
+    "ko": "학습률과 에포크",
+    "en": "Learning rate and epochs"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "한 번에 고치는 세기(학습률)와 학습 기록 전체를 도는 바퀴 수(에포크)."
+   },
+   "level": 3
+  },
+  {
+   "id": "lab:method/lora",
+   "type": "Method",
+   "label": {
+    "ko": "LoRA (저계수 적응)",
+    "en": "Low-Rank Adaptation"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "원래 무게는 얼리고 고칠 양을 작은 행렬 두 개의 곱 B·A로만 배우는 미세조정."
+   },
+   "level": 4,
+   "altLabel": {
+    "ko": [
+     "LoRA"
+    ]
+   },
+   "evidence": [
+    "F01"
+   ]
+  },
+  {
+   "id": "lab:topic/fine-tuning",
+   "type": "Concept",
+   "label": {
+    "ko": "미세조정",
+    "en": "Fine-tuning"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#why",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "이미 학습된 바탕 모델에 새 기록을 더 가르쳐 무게를 고치는 일."
+   },
+   "level": 1
+  },
+  {
+   "id": "lab:concept/base-model",
+   "type": "Concept",
+   "label": {
+    "ko": "바탕 모델",
+    "en": "Base model"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#big",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "미세조정하기 전의 원래 모델."
+   },
+   "level": 1
+  },
+  {
+   "id": "lab:concept/in-context-learning",
+   "type": "Concept",
+   "label": {
+    "ko": "맥락 속 학습",
+    "en": "In-context learning"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv1",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "무게를 바꾸지 않고 프롬프트 안 예시만 보고 형식을 따라 하는 성질."
+   },
+   "level": 1,
+   "evidence": [
+    "F03"
+   ]
+  },
+  {
+   "id": "lab:concept/model-habit",
+   "type": "Concept",
+   "label": {
+    "ko": "바탕 모델의 버릇",
+    "en": "Prior bias of the base model"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv1",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "예시를 붙여도 남는 바탕 모델의 원래 경향. 이 페이지에서는 버릇 점수로 흉내 냈다."
+   },
+   "level": 1
+  },
+  {
+   "id": "lab:concept/cross-entropy-loss",
+   "type": "Metric",
+   "label": {
+    "ko": "손실 (−ln p)",
+    "en": "Cross-entropy loss"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv2",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "정답에 준 확률 p의 음의 로그. p가 1이면 0."
+   },
+   "level": 2
+  },
+  {
+   "id": "lab:concept/softmax",
+   "type": "Term",
+   "label": {
+    "ko": "소프트맥스",
+    "en": "Softmax"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv2",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "점수를 지수함수로 키운 뒤 합이 1이 되게 나눈 확률."
+   },
+   "level": 2
+  },
+  {
+   "id": "lab:concept/gradient-step",
+   "type": "Term",
+   "label": {
+    "ko": "무게 고치기 한 걸음",
+    "en": "Gradient step"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv2",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "w ← w − η × (p − y) × x. 틀린 만큼, 그 주제 숫자만큼 고친다."
+   },
+   "level": 2
+  },
+  {
+   "id": "lab:concept/learning-rate",
+   "type": "Term",
+   "label": {
+    "ko": "학습률 η",
+    "en": "Learning rate"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "한 걸음의 크기. 너무 작으면 느리고 너무 크면 튄다."
+   },
+   "level": 3
+  },
+  {
+   "id": "lab:concept/epoch",
+   "type": "Term",
+   "label": {
+    "ko": "에포크",
+    "en": "Epoch"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "학습용 기록 전체를 한 바퀴 도는 것."
+   },
+   "level": 3
+  },
+  {
+   "id": "lab:concept/overfitting",
+   "type": "Concept",
+   "label": {
+    "ko": "과적합",
+    "en": "Overfitting"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "학습 기록에만 맞춰져 처음 보는 문의의 성적이 떨어지는 일."
+   },
+   "level": 3
+  },
+  {
+   "id": "lab:concept/label-noise",
+   "type": "Concept",
+   "label": {
+    "ko": "기록 실수 (잘못 적힌 정답)",
+    "en": "Label noise"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "학습 기록의 정답 양식이 잘못 적힌 경우. 오래 가르치면 실수까지 외운다."
+   },
+   "level": 3
+  },
+  {
+   "id": "lab:concept/train-test-split",
+   "type": "Concept",
+   "label": {
+    "ko": "학습용과 시험용 나누기",
+    "en": "Train/test split"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "가르칠 기록과 성적을 잴 기록을 따로 두는 일."
+   },
+   "level": 3
+  },
+  {
+   "id": "lab:concept/low-rank",
+   "type": "Term",
+   "label": {
+    "ko": "계수 r (rank)",
+    "en": "Rank"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "LoRA의 작은 표가 가진 방향의 가짓수."
+   },
+   "level": 4
+  },
+  {
+   "id": "lab:concept/frozen-weights",
+   "type": "Term",
+   "label": {
+    "ko": "무게 얼리기",
+    "en": "Frozen weights"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "원래 무게는 고치지 않고 그대로 두는 것."
+   },
+   "level": 4
+  },
+  {
+   "id": "lab:concept/adapter-swap",
+   "type": "Concept",
+   "label": {
+    "ko": "부서마다 바꿔 끼우는 고친 양",
+    "en": "Swappable adapters"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "바탕 모델 하나에 작업마다 다른 작은 표 묶음만 갈아 끼우는 쓰임."
+   },
+   "level": 4,
+   "evidence": [
+    "F01"
+   ]
+  },
+  {
+   "id": "lab:concept/rule-change",
+   "type": "Concept",
+   "label": {
+    "ko": "규칙이 바뀐 날",
+    "en": "Policy change after training"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#duel",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "학습 뒤 회사 규칙이 바뀌면 미세조정 모델은 다시 가르치기 전까지 옛 규칙대로 답한다."
+   },
+   "level": 4
+  },
+  {
+   "id": "lab:concept/prompt-length-cost",
+   "type": "Metric",
+   "label": {
+    "ko": "호출당 글자 수",
+    "en": "Prompt length per call"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv1",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "질문 하나에 모델로 보내는 글자 수. 비용·속도와 비례한다."
+   },
+   "level": 1
+  },
+  {
+   "id": "lab:metric/test-accuracy",
+   "type": "Metric",
+   "label": {
+    "ko": "시험 맞힌 수",
+    "en": "Test accuracy"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv1",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "시험 문의 12건 중 회사 양식을 맞힌 수."
+   },
+   "level": 1
+  },
+  {
+   "id": "lab:metric/trainable-params",
+   "type": "Metric",
+   "label": {
+    "ko": "배우는 숫자 개수",
+    "en": "Trainable parameter count"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "미세조정에서 실제로 고치는 숫자의 개수."
+   },
+   "level": 4
+  },
+  {
+   "id": "lab:concept/rlhf-mention",
+   "type": "Concept",
+   "label": {
+    "ko": "사람 피드백으로 다듬기 (RLHF)",
+    "en": "RLHF"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#sum",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "사람이 고른 더 나은 답 쪽으로 모델을 다듬는 방법. 이 페이지에서는 소개만 한다."
+   },
+   "level": 4,
+   "altLabel": {
+    "ko": [
+     "RLHF"
+    ]
+   },
+   "evidence": [
+    "F02"
+   ]
+  },
+  {
+   "id": "lab:dataset/pebble-tickets",
+   "type": "Dataset",
+   "label": {
+    "ko": "가상 회사 문의 기록 24건·시험 12건",
+    "en": "Pebble Lamp toy support tickets"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#big",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "설명용으로 만든 고객 문의 기록과 네 가지 답변 양식."
+   },
+   "level": 1
+  },
+  {
+   "id": "lab:task/ticket-routing",
+   "type": "Task",
+   "label": {
+    "ko": "고객 문의 양식 고르기",
+    "en": "Support ticket routing"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#first",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "definition": {
+    "ko": "문의를 읽고 회사의 네 가지 답변 양식 중 하나를 고르는 일."
+   },
+   "level": 1
+  },
+  {
+   "id": "lab:limitation/habit-remains",
+   "type": "Limitation",
+   "label": {
+    "ko": "센 버릇은 예시로 못 뒤집는다",
+    "en": "Prompting cannot override strong priors"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv1",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "level": 1
+  },
+  {
+   "id": "lab:limitation/how-much-to-train",
+   "type": "Limitation",
+   "label": {
+    "ko": "몇 번·얼마나 세게 가르칠지 정해야 한다",
+    "en": "Choosing learning rate and epochs"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv2",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "level": 2
+  },
+  {
+   "id": "lab:limitation/full-ft-heavy",
+   "type": "Limitation",
+   "label": {
+    "ko": "숫자를 전부 고치면 무겁다",
+    "en": "Full fine-tuning is heavy"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "level": 3
+  },
+  {
+   "id": "lab:limitation/retrain-on-change",
+   "type": "Limitation",
+   "label": {
+    "ko": "규칙이 바뀌면 다시 가르쳐야 한다",
+    "en": "Must retrain when rules change"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "level": 4
+  },
+  {
+   "id": "lab:claim/lora-10000x",
+   "type": "Claim",
+   "label": {
+    "ko": "GPT-3 175B 기준 LoRA는 배우는 숫자를 약 1만 분의 1로, GPU 메모리를 약 3분의 1로 줄인다",
+    "en": "LoRA reduces trainable params by 10,000x on GPT-3"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "evidence": [
+    "F01"
+   ]
+  },
+  {
+   "id": "lab:claim/instructgpt-preferred",
+   "type": "Claim",
+   "label": {
+    "ko": "사람 피드백으로 다듬은 1.3B InstructGPT의 답이 175B GPT-3보다 더 자주 선택되었다",
+    "en": "1.3B InstructGPT preferred over 175B GPT-3"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#sum",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "evidence": [
+    "F02"
+   ]
+  },
+  {
+   "id": "lab:claim/gpt3-few-shot",
+   "type": "Claim",
+   "label": {
+    "ko": "GPT-3는 무게를 고치지 않고 예시만으로 여러 과제를 푼다",
+    "en": "GPT-3 few-shot without gradient updates"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv1",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high",
+   "evidence": [
+    "F03"
+   ]
+  },
+  {
+   "id": "lab:claim/toy-duel",
+   "type": "Claim",
+   "label": {
+    "ko": "장난감 데이터에서 정확도 11/12 대 12/12, 글자 432 대 26, 새 규칙 3/3 대 0/3",
+    "en": "Toy duel results"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#duel",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:question/core",
+   "type": "Question",
+   "label": {
+    "ko": "검색으로 안 바뀌는 회사 방식을 어떻게 모델의 버릇으로 만들까?",
+    "en": "How to make company conventions a model habit?"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#top",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:question/duel",
+   "type": "Question",
+   "label": {
+    "ko": "예시로 버틸까, 한 번 가르쳐 둘까?",
+    "en": "Prompt or fine-tune?"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#duel",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:question/when-stop",
+   "type": "Question",
+   "label": {
+    "ko": "시험 손실이 바닥인 곳을 실제 업무에서는 어떻게 미리 알까?",
+    "en": "How to pick the stopping point in practice?"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:analogy/manual-pages",
+   "type": "Analogy",
+   "label": {
+    "ko": "신입에게 매뉴얼 몇 장 건네기",
+    "en": "Handing a manual to a new hire"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv1",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:analogy/red-pen",
+   "type": "Analogy",
+   "label": {
+    "ko": "빨간 펜으로 고치며 연습시키기",
+    "en": "Red-pen practice"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv2",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:analogy/wrong-answer-key",
+   "type": "Analogy",
+   "label": {
+    "ko": "정답이 잘못 적힌 연습 문제",
+    "en": "Practice sheet with wrong answers"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:analogy/sticky-notes",
+   "type": "Analogy",
+   "label": {
+    "ko": "교과서에 포스트잇만 붙이기",
+    "en": "Sticky notes on a textbook"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:work/hu2021lora",
+   "type": "Work",
+   "label": {
+    "ko": "Hu 외 (2021) LoRA",
+    "en": "Hu et al. 2021"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#footer-src",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:work/ouyang2022instructgpt",
+   "type": "Work",
+   "label": {
+    "ko": "Ouyang 외 (2022) InstructGPT",
+    "en": "Ouyang et al. 2022"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#footer-src",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:work/brown2020fewshot",
+   "type": "Work",
+   "label": {
+    "ko": "Brown 외 (2020) GPT-3",
+    "en": "Brown et al. 2020"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#footer-src",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:sim/a2-fewshot",
+   "type": "Simulation",
+   "label": {
+    "ko": "실험 ① 예시 고르기",
+    "en": "실험 ① 예시 고르기"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv1",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:sim/a2-sft",
+   "type": "Simulation",
+   "label": {
+    "ko": "실험 ② 한 바퀴씩 가르치기",
+    "en": "실험 ② 한 바퀴씩 가르치기"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv2",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:sim/a2-curve",
+   "type": "Simulation",
+   "label": {
+    "ko": "실험 ③ 학습 곡선",
+    "en": "실험 ③ 학습 곡선"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv3",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:sim/a2-lora",
+   "type": "Simulation",
+   "label": {
+    "ko": "실험 ④ LoRA와 숫자 개수",
+    "en": "실험 ④ LoRA와 숫자 개수"
+   },
+   "page": "A2_finetune_lab",
+   "anchor": "#lv4",
+   "family": "sequence",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:area/llm-training",
+   "type": "Area",
+   "label": {
+    "ko": "사전학습과 정렬",
+    "en": "Pretraining and alignment"
+   },
+   "page": "backbone_llm",
+   "anchor": "#kg",
+   "family": "backbone",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:topic/instruction-tuning",
+   "type": "Topic",
+   "label": {
+    "ko": "지시 튜닝",
+    "en": "Instruction tuning"
+   },
+   "page": "backbone_llm",
+   "anchor": "#kg",
+   "family": "backbone",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:topic/rlhf",
+   "type": "Topic",
+   "label": {
+    "ko": "사람 피드백 강화학습(RLHF)",
+    "en": "RLHF"
+   },
+   "page": "backbone_llm",
+   "anchor": "#kg",
+   "family": "backbone",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:area/llm-prompting",
+   "type": "Area",
+   "label": {
+    "ko": "프롬프트 공학",
+    "en": "Prompt engineering"
+   },
+   "page": "backbone_llm",
+   "anchor": "#kg",
+   "family": "backbone",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:topic/few-shot",
+   "type": "Topic",
+   "label": {
+    "ko": "퓨샷 예시",
+    "en": "Few-shot examples"
+   },
+   "page": "backbone_llm",
+   "anchor": "#kg",
+   "family": "backbone",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  },
+  {
+   "id": "lab:topic/structured-output",
+   "type": "Topic",
+   "label": {
+    "ko": "구조화 출력",
+    "en": "Structured output"
+   },
+   "page": "backbone_llm",
+   "anchor": "#kg",
+   "family": "backbone",
+   "domain": [
+    "llm"
+   ],
+   "anchorType": "D",
+   "flyStrength": "none",
+   "status": "known",
+   "confidence": "high"
+  }
+ ],
+ "edges": [
+  {
+   "s": "lab:method/few-shot-prompting",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/habit-remains",
+   "anchor": "#lv1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/few-shot-prompting",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:method/sft",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/habit-remains",
+   "p": "lab:addressedBy",
+   "o": "lab:method/sft",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/sft",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/how-much-to-train",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/sft",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:concept/learning-rate-epoch",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/how-much-to-train",
+   "p": "lab:addressedBy",
+   "o": "lab:concept/learning-rate-epoch",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/learning-rate-epoch",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/full-ft-heavy",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/learning-rate-epoch",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:method/lora",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/full-ft-heavy",
+   "p": "lab:addressedBy",
+   "o": "lab:method/lora",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/lora",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/retrain-on-change",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/retrain-on-change",
+   "p": "lab:raises",
+   "o": "lab:question/duel",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/few-shot-prompting",
+   "p": "lab:contrastsWith",
+   "o": "lab:method/sft",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:question/duel",
+   "p": "lab:raises",
+   "o": "lab:concept/rule-change",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/sft",
+   "p": "lab:partOf",
+   "o": "lab:topic/fine-tuning",
+   "anchor": "#why",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/lora",
+   "p": "lab:partOf",
+   "o": "lab:topic/fine-tuning",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:topic/fine-tuning",
+   "p": "lab:solves",
+   "o": "lab:task/ticket-routing",
+   "anchor": "#first",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/few-shot-prompting",
+   "p": "lab:solves",
+   "o": "lab:task/ticket-routing",
+   "anchor": "#lv1",
+   "confidence": "mid"
+  },
+  {
+   "s": "lab:concept/base-model",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:topic/fine-tuning",
+   "anchor": "#big",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/in-context-learning",
+   "p": "lab:partOf",
+   "o": "lab:method/few-shot-prompting",
+   "anchor": "#lv1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/model-habit",
+   "p": "lab:partOf",
+   "o": "lab:concept/base-model",
+   "anchor": "#lv1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/habit-remains",
+   "p": "lab:raises",
+   "o": "lab:concept/model-habit",
+   "anchor": "#lv1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/cross-entropy-loss",
+   "p": "lab:partOf",
+   "o": "lab:method/sft",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/softmax",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:concept/cross-entropy-loss",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/gradient-step",
+   "p": "lab:partOf",
+   "o": "lab:method/sft",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/learning-rate",
+   "p": "lab:partOf",
+   "o": "lab:concept/gradient-step",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/learning-rate",
+   "p": "lab:partOf",
+   "o": "lab:concept/learning-rate-epoch",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/epoch",
+   "p": "lab:partOf",
+   "o": "lab:concept/learning-rate-epoch",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/learning-rate-epoch",
+   "p": "lab:partOf",
+   "o": "lab:method/sft",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/label-noise",
+   "p": "lab:raises",
+   "o": "lab:concept/overfitting",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/train-test-split",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:concept/overfitting",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/overfitting",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/epoch",
+   "anchor": "#lv3",
+   "confidence": "mid"
+  },
+  {
+   "s": "lab:concept/low-rank",
+   "p": "lab:partOf",
+   "o": "lab:method/lora",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/frozen-weights",
+   "p": "lab:partOf",
+   "o": "lab:method/lora",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/adapter-swap",
+   "p": "lab:partOf",
+   "o": "lab:method/lora",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/lora",
+   "p": "lab:evaluatedBy",
+   "o": "lab:metric/trainable-params",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/few-shot-prompting",
+   "p": "lab:evaluatedBy",
+   "o": "lab:concept/prompt-length-cost",
+   "anchor": "#lv1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/few-shot-prompting",
+   "p": "lab:evaluatedBy",
+   "o": "lab:metric/test-accuracy",
+   "anchor": "#lv1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/sft",
+   "p": "lab:evaluatedBy",
+   "o": "lab:metric/test-accuracy",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/sft",
+   "p": "lab:evaluatedOn",
+   "o": "lab:dataset/pebble-tickets",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/few-shot-prompting",
+   "p": "lab:evaluatedOn",
+   "o": "lab:dataset/pebble-tickets",
+   "anchor": "#lv1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/rlhf-mention",
+   "p": "lab:relatedTo",
+   "o": "lab:method/sft",
+   "anchor": "#sum",
+   "confidence": "mid"
+  },
+  {
+   "s": "lab:question/when-stop",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/overfitting",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/how-much-to-train",
+   "p": "lab:raises",
+   "o": "lab:question/when-stop",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:question/core",
+   "p": "lab:relatedTo",
+   "o": "lab:topic/fine-tuning",
+   "anchor": "#top",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/lora-10000x",
+   "p": "lab:supports",
+   "o": "lab:method/lora",
+   "anchor": "#footer-src",
+   "confidence": "high",
+   "evidence": [
+    "F01"
+   ]
+  },
+  {
+   "s": "lab:claim/lora-10000x",
+   "p": "lab:assertedIn",
+   "o": "lab:work/hu2021lora",
+   "anchor": "#footer-src",
+   "confidence": "high",
+   "evidence": [
+    "F01"
+   ]
+  },
+  {
+   "s": "lab:claim/instructgpt-preferred",
+   "p": "lab:supports",
+   "o": "lab:concept/rlhf-mention",
+   "anchor": "#footer-src",
+   "confidence": "high",
+   "evidence": [
+    "F02"
+   ]
+  },
+  {
+   "s": "lab:claim/instructgpt-preferred",
+   "p": "lab:assertedIn",
+   "o": "lab:work/ouyang2022instructgpt",
+   "anchor": "#footer-src",
+   "confidence": "high",
+   "evidence": [
+    "F02"
+   ]
+  },
+  {
+   "s": "lab:claim/gpt3-few-shot",
+   "p": "lab:supports",
+   "o": "lab:concept/in-context-learning",
+   "anchor": "#footer-src",
+   "confidence": "high",
+   "evidence": [
+    "F03"
+   ]
+  },
+  {
+   "s": "lab:claim/gpt3-few-shot",
+   "p": "lab:assertedIn",
+   "o": "lab:work/brown2020fewshot",
+   "anchor": "#footer-src",
+   "confidence": "high",
+   "evidence": [
+    "F03"
+   ]
+  },
+  {
+   "s": "lab:claim/toy-duel",
+   "p": "lab:supports",
+   "o": "lab:method/lora",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/toy-duel",
+   "p": "lab:assertedIn",
+   "o": "lab:dataset/pebble-tickets",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/manual-pages",
+   "p": "lab:analogyOf",
+   "o": "lab:method/few-shot-prompting",
+   "anchor": "#lv1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/red-pen",
+   "p": "lab:analogyOf",
+   "o": "lab:method/sft",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/wrong-answer-key",
+   "p": "lab:analogyOf",
+   "o": "lab:concept/label-noise",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/sticky-notes",
+   "p": "lab:analogyOf",
+   "o": "lab:method/lora",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/model-habit",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/a2-fewshot",
+   "anchor": "#lv1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/cross-entropy-loss",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/a2-sft",
+   "anchor": "#lv2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/overfitting",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/a2-curve",
+   "anchor": "#lv3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:metric/trainable-params",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/a2-lora",
+   "anchor": "#lv4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/sft",
+   "p": "lab:broader",
+   "o": "lab:topic/instruction-tuning",
+   "anchor": "#kg",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/lora",
+   "p": "lab:broader",
+   "o": "lab:area/llm-training",
+   "anchor": "#kg",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/rlhf-mention",
+   "p": "lab:broader",
+   "o": "lab:topic/rlhf",
+   "anchor": "#kg",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/few-shot-prompting",
+   "p": "lab:broader",
+   "o": "lab:topic/few-shot",
+   "anchor": "#kg",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:task/ticket-routing",
+   "p": "lab:broader",
+   "o": "lab:topic/structured-output",
+   "anchor": "#kg",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:topic/instruction-tuning",
+   "p": "lab:broader",
+   "o": "lab:area/llm-training",
+   "anchor": "#kg",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:topic/rlhf",
+   "p": "lab:broader",
+   "o": "lab:area/llm-training",
+   "anchor": "#kg",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:topic/few-shot",
+   "p": "lab:broader",
+   "o": "lab:area/llm-prompting",
+   "anchor": "#kg",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:topic/structured-output",
+   "p": "lab:broader",
+   "o": "lab:area/llm-prompting",
+   "anchor": "#kg",
+   "confidence": "high"
+  }
+ ]
+}

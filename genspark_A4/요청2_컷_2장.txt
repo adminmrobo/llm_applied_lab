@@ -1,0 +1,24 @@
+[사용법] 받은 cover_A4.png와 참고 그림을 함께 올리고, 1번과 2번을 하나씩 따로 요청하세요(같은 비율 16:9).
+참고 그림 (genspark_refs 폴더): ref_lab6_lineup.jpg, ref_k02_doctor.jpg, ref_k03_haru.jpg, ref_k04_fly.jpg, ref_jupanbot_E13.jpg, ref_sia_E13.jpg, ref_moa_E13.jpg, ref_spares_x1_x3.jpg
+
+--- 1번 · 저장 이름: cut_A4_lv4.png ---
+16:9, at least 1920x1080, a focused cut for the safeguards section. SCENE: a big red button inside a clear protective case sits on a pedestal. In front of it stand three translucent glowing gates in a row (mint, blue, purple), each slightly offset like layered shields. A floating blank paper note with a sneaky curly arrow drawing tries to reach the button but bounces off the first gate. The fruit fly researcher (left, facing right) crosses his arms calmly beside the first gate; the Professor (right) holds the approval stamp behind the last gate. No text on the note or button.
+
+--- 2번 · 저장 이름: cut_A4_raid.png ---
+16:9, at least 1920x1080, a horizontal team strip before the raid. SCENE: the six lab members stand shoulder to shoulder facing the viewer, each holding their role prop: fruit fly with a pointer stick, AbaBot with the calculator, Sia with a magnifying glass, Moa with a notebook, the Professor with the round stamp, Haru with a clipboard. Behind them, through a service window, three small Secret silhouettes X1, X2, X3 wait as customers holding blank ticket cards. Determined, friendly mood, the moment before the work starts.
+
+
+STYLE: high-resolution detailed 16-bit SNES-era RPG pixel art, drawn natively at the full output size (at least 1920 px wide) with small, dense pixels so that faces, hands, hair strands and props stay finely detailed even when zoomed 2x. Bold dark outlines (#1d1a22), 2-3 tone shading with small highlights. Do not draw on a tiny grid and upscale; no big chunky blocks. Match the attached references in proportions, colors and outfit details. Not a vector illustration, not anime cel painting, not watercolor, not 3D render.
+MOOD: bright daytime laboratory - white walls, large sunlit windows, soft natural light, small props in lavender, mint and pink, a few magenta (#9b3fb5) and green (#13733a) accents on test tubes and monitors.
+
+CHARACTERS (exactly as in the references):
+- Professor: chibi scientist, thin teal rectangular glasses, spiky black hair with one white streak, short tied-back ponytail, white lab coat over black vest and black tie, dark trousers. Purple sparks at the fingertips only when excited.
+- Haru (assistant): long pink hair with two round buns and navy streaks, blue eyes, lavender hoodie under a white lab coat, blue jeans, white sneakers.
+- Fruit fly researcher: small anthropomorphic fruit fly, black body, big red compound eyes, blue helmet with a gold stripe and pink and blue cables, white lab coat over a black vest, black gloves, transparent wings.
+- AbaBot: boxy beige retro CRT-monitor robot with rounded corners, dark green screen face drawn only with mint pixel blocks, short antenna on a small square base topped with one red-brown abacus bead, gray segmented arms, two small dark gray tank treads, wooden abacus with red-brown beads.
+- Intern Sia: calm girl maid intern, long straight jet-black hair with side-swept bangs, no headdress, gray eyes, small silver drop earrings, charcoal-black long-sleeved maid dress, large gray bow, long white frilled apron.
+- Intern Moa: gentle girl maid intern, long ash-beige wavy hair, white frilled maid headband with a small white ribbon over the left ear, amber-brown eyes, red and navy plaid bow tie, white shirt, camel knit cardigan, white frilled apron, black skirt.
+- Secret X1, X2, X3 (only when the request says so): cute solid dark navy-black silhouettes with a thin purple rim light, two round white dot eyes, pink blush pixels, one colored accessory each (X1 a small pink ribbon, X2 a teal glint on round glasses, X3 a small yellow bell). Not scary, no other features.
+
+RULES: Height ratio Professor 1.00, Haru 0.90, Sia 0.88, Moa 0.84, AbaBot 0.72, fruit fly 0.41 (X1 0.85, X2 0.95, X3 0.60). Do not mirror the Professor, Haru, Sia or Moa; keep their hair parting, streaks, ribbons and bangs on the same side as the references. Ignore any Korean labels printed on the reference sheets; do not draw them.
+Absolutely NO text, letters, numbers, speech bubbles, captions or logos anywhere (cards, screens, papers and books stay blank or show simple stripes and icons). No night scene, no neon, no dark background. AbaBot is NOT a white round-headed robot, has no black pill-shaped visor, no yellow or gold eyes, no ball antenna, no cyan chest light, no gold coins, and never floats. No microscope, no insects other than the fruit fly researcher, no real brands, no weapons, no cigarettes, no alcohol, no blood.

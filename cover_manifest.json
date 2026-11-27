@@ -178,8 +178,7 @@
    "robot": "jupanbot-v2",
    "prompt_en": "(genspark_A2/요청1_표지.txt)",
    "source_of": null,
-   "status": "redraw",
-   "note": "Genspark 요청 대기, 지금은 CSS 대체 표지"
+   "status": "ok"
   },
   {
    "id": "thumb_A2",
@@ -200,8 +199,7 @@
    "robot": "jupanbot-v2",
    "prompt_en": null,
    "source_of": "cover_A2",
-   "status": "redraw",
-   "note": "CSS 대체 표지를 찍은 임시 그림"
+   "status": "ok"
   },
   {
    "id": "og_A2",
@@ -222,8 +220,7 @@
    "robot": "jupanbot-v2",
    "prompt_en": null,
    "source_of": "cover_A2",
-   "status": "redraw",
-   "note": "CSS 대체 표지를 찍은 임시 그림"
+   "status": "ok"
   },
   {
    "id": "cover_A3",
@@ -244,8 +241,7 @@
    "robot": "jupanbot-v2",
    "prompt_en": "(genspark_A3/요청1_표지.txt)",
    "source_of": null,
-   "status": "redraw",
-   "note": "Genspark 요청 대기, 지금은 CSS 대체 표지"
+   "status": "ok"
   },
   {
    "id": "thumb_A3",
@@ -266,8 +262,7 @@
    "robot": "jupanbot-v2",
    "prompt_en": null,
    "source_of": "cover_A3",
-   "status": "redraw",
-   "note": "CSS 대체 표지를 찍은 임시 그림"
+   "status": "ok"
   },
   {
    "id": "og_A3",
@@ -288,8 +283,7 @@
    "robot": "jupanbot-v2",
    "prompt_en": null,
    "source_of": "cover_A3",
-   "status": "redraw",
-   "note": "CSS 대체 표지를 찍은 임시 그림"
+   "status": "ok"
   },
   {
    "id": "cover_A4",
@@ -311,7 +305,7 @@
    "prompt_en": "(genspark_A4/요청1_표지.txt)",
    "source_of": null,
    "status": "redraw",
-   "note": "Genspark 요청 대기, 지금은 CSS 대체 표지"
+   "note": "받은 표지에 박사가 두 번 그려져 다시 요청 (genspark_A4/요청4_다시그리기.txt), 지금은 CSS 대체 표지"
   },
   {
    "id": "thumb_A4",
@@ -333,7 +327,7 @@
    "prompt_en": null,
    "source_of": "cover_A4",
    "status": "redraw",
-   "note": "CSS 대체 표지를 찍은 임시 그림"
+   "note": "받은 표지에 박사가 두 번 그려져 다시 요청 (genspark_A4/요청4_다시그리기.txt), 지금은 CSS 대체 표지"
   },
   {
    "id": "og_A4",
@@ -355,7 +349,203 @@
    "prompt_en": null,
    "source_of": "cover_A4",
    "status": "redraw",
-   "note": "CSS 대체 표지를 찍은 임시 그림"
+   "note": "받은 표지에 박사가 두 번 그려져 다시 요청 (genspark_A4/요청4_다시그리기.txt), 지금은 CSS 대체 표지"
+  },
+  {
+   "id": "cut_A2_lv4",
+   "role": "scene",
+   "path": "assets/img/cut_A2_lv4.webp",
+   "size": [
+    960,
+    540
+   ],
+   "characters": [
+    "doc",
+    "asst",
+    "jupanbot"
+   ],
+   "robot": "jupanbot-v2",
+   "prompt_en": "(docs/GENSPARK_PROMPTS_A2_A4.md)",
+   "source_of": null,
+   "status": "ok"
+  },
+  {
+   "id": "cut_A2_versus",
+   "role": "scene",
+   "path": "assets/img/cut_A2_versus.webp",
+   "size": [
+    960,
+    540
+   ],
+   "characters": [
+    "doc",
+    "asst",
+    "fly",
+    "jupanbot",
+    "sia",
+    "moa"
+   ],
+   "robot": "jupanbot-v2",
+   "prompt_en": "(docs/GENSPARK_PROMPTS_A2_A4.md)",
+   "source_of": null,
+   "status": "ok"
+  },
+  {
+   "id": "sc_A2_outro",
+   "role": "outro",
+   "path": "assets/img/sc_A2_outro.webp",
+   "size": [
+    1200,
+    800
+   ],
+   "characters": [
+    "doc",
+    "asst",
+    "fly",
+    "jupanbot",
+    "sia",
+    "moa"
+   ],
+   "robot": "jupanbot-v2",
+   "prompt_en": "(docs/GENSPARK_PROMPTS_A2_A4.md)",
+   "source_of": null,
+   "status": "ok"
+  },
+  {
+   "id": "cut_A3_lv2",
+   "role": "scene",
+   "path": "assets/img/cut_A3_lv2.webp",
+   "size": [
+    960,
+    540
+   ],
+   "characters": [
+    "doc",
+    "asst",
+    "fly",
+    "jupanbot",
+    "sia",
+    "moa",
+    "x1",
+    "x2",
+    "x3"
+   ],
+   "robot": "jupanbot-v2",
+   "prompt_en": "(docs/GENSPARK_PROMPTS_A2_A4.md)",
+   "source_of": null,
+   "status": "ok"
+  },
+  {
+   "id": "cut_A3_versus",
+   "role": "scene",
+   "path": "assets/img/cut_A3_versus.webp",
+   "size": [
+    960,
+    540
+   ],
+   "characters": [
+    "doc",
+    "asst",
+    "fly",
+    "jupanbot",
+    "sia",
+    "moa"
+   ],
+   "robot": "jupanbot-v2",
+   "prompt_en": "(docs/GENSPARK_PROMPTS_A2_A4.md)",
+   "source_of": null,
+   "status": "ok"
+  },
+  {
+   "id": "sc_A3_outro",
+   "role": "outro",
+   "path": "assets/img/sc_A3_outro.webp",
+   "size": [
+    1200,
+    800
+   ],
+   "characters": [
+    "doc",
+    "asst",
+    "fly",
+    "jupanbot",
+    "sia",
+    "moa",
+    "x1",
+    "x2",
+    "x3"
+   ],
+   "robot": "jupanbot-v2",
+   "prompt_en": "(docs/GENSPARK_PROMPTS_A2_A4.md)",
+   "source_of": null,
+   "status": "ok"
+  },
+  {
+   "id": "cut_A4_lv4",
+   "role": "scene",
+   "path": "assets/img/cut_A4_lv4.webp",
+   "size": [
+    720,
+    540
+   ],
+   "characters": [
+    "doc",
+    "fly",
+    "jupanbot"
+   ],
+   "robot": "jupanbot-v2",
+   "prompt_en": "(docs/GENSPARK_PROMPTS_A2_A4.md)",
+   "source_of": null,
+   "status": "ok",
+   "note": "박사가 두 번 그려진 원본에서 왼쪽 30%를 잘라 냄 (가로 720). 다시 받으면 960×540으로 교체"
+  },
+  {
+   "id": "cut_A4_raid",
+   "role": "scene",
+   "path": "assets/img/cut_A4_raid.webp",
+   "size": [
+    960,
+    540
+   ],
+   "characters": [
+    "doc",
+    "asst",
+    "fly",
+    "jupanbot",
+    "sia",
+    "moa",
+    "x1",
+    "x2",
+    "x3"
+   ],
+   "robot": "jupanbot-v2",
+   "prompt_en": "(docs/GENSPARK_PROMPTS_A2_A4.md)",
+   "source_of": null,
+   "status": "ok"
+  },
+  {
+   "id": "sc_A4_outro",
+   "role": "outro",
+   "path": "assets/img/sc_A4_outro.webp",
+   "size": [
+    1200,
+    800
+   ],
+   "characters": [
+    "doc",
+    "asst",
+    "fly",
+    "jupanbot",
+    "sia",
+    "moa",
+    "x1",
+    "x2",
+    "x3"
+   ],
+   "robot": "jupanbot-v2",
+   "prompt_en": "(docs/GENSPARK_PROMPTS_A2_A4.md)",
+   "source_of": null,
+   "status": "ok"
   }
  ],
  "updated": "2026-11-27"

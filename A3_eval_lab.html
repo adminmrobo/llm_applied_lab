@@ -359,6 +359,7 @@ table.mini tr.hit td{background:var(--gfp-soft)} table.mini tr.miss td{backgroun
 @media (max-width:760px){.cover .deco{right:3%;top:8%;gap:6px}.cover .deco i{width:40px;height:54px}.cover .deco i::before{top:18px}.cover .deco i::after{top:28px}}
 
 .league{min-width:760px}
+.cover img.cv{object-position:50% 32%}
 
 </style>
 <!-- px-fix v1 --><style id="px-fix">img{image-rendering:auto!important}</style><script id="px-fix-js">(function(){var R=window.ResizeObserver;function f(i){var n=i.naturalWidth,w=i.getBoundingClientRect().width;if(!n||!w)return;var s=w*(window.devicePixelRatio||1)/n;i.style.setProperty("image-rendering",s>=1.95?"pixelated":"auto","important")}var ro=R?new R(function(es){es.forEach(function(e){f(e.target)})}):null;function a(i){if(i.__px)return;i.__px=1;i.addEventListener("load",function(){f(i)});if(ro)ro.observe(i);f(i)}function all(r){(r||document).querySelectorAll&&(r||document).querySelectorAll("img").forEach(a)}function go(){all();if(window.MutationObserver)new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){if(n.nodeType!==1)return;if(n.tagName==="IMG")a(n);else all(n)})})}).observe(document.documentElement,{childList:true,subtree:true});window.addEventListener("resize",function(){document.querySelectorAll("img").forEach(f)})}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",go);else go()})();</script><!-- /px-fix -->
@@ -375,17 +376,8 @@ table.mini tr.hit td{background:var(--gfp-soft)} table.mini tr.miss td{backgroun
 </nav>
 
 <!-- lab-cover -->
-<header class="cover" id="cover" data-img="cover_A3" role="img" aria-label="낮의 연구실 무대에 네 선수(초파리 연구원, 인턴 시아, 인턴 모아, 주판봇)가 나란히 서고, 박사와 조수가 점수판 앞에 선 대체 표지">
-  <div class="hex"></div>
-  <div class="deco" aria-hidden="true"><i><b style="background:#c93030"></b></i><i><b style="background:#4b5563"></b></i><i><b style="background:#a2561c"></b></i><i><b style="background:#0b7a86"></b></i></div>
-  <div class="line" aria-hidden="true">
-    <img class="fly" data-who="fly" data-mood="clip" data-face="right" alt="">
-    <img data-who="sia" data-mood="smile" alt="">
-    <img data-who="doc" data-mood="judge" alt="">
-    <img data-who="asst" data-mood="report" alt="">
-    <img data-who="moa" data-mood="cheer" alt="">
-    <img class="robo" data-who="robo" data-mood="coin" alt="">
-  </div>
+<header class="cover" id="cover" data-img="cover_A3">
+  <img class="cv" src="assets/img/cover_A3.webp" width="1600" height="900" alt="낮의 연구실 리그 무대 위에 시아·초파리 연구원·모아·주판봇이 서고, 빈 점수판 아래 심판석의 박사가 손을 들고 조수가 기록하는 픽셀아트 표지" fetchpriority="high">
   <span class="cover-chip">LLM 공식에서 GPT-6까지 · 응용편 3</span>
 </header>
 <!-- /lab-cover -->
@@ -584,6 +576,7 @@ table.mini tr.hit td{background:var(--gfp-soft)} table.mini tr.miss td{backgroun
     <div><div class="tag fly">일상으로 치면</div><p>시식 코너에서 상표를 가린 두 잔을 내밉니다. 「어느 쪽이 더 낫나요?」만 묻습니다. 점수를 매기라고 하면 사람마다 기준이 다르지만, 둘 중 고르기는 훨씬 덜 흔들립니다.</p></div>
     <div><div class="tag nn">모델에서는</div><p>공개 비교 사이트들은 익명의 두 모델 답을 나란히 보여 주고 사용자의 선택을 모아 순위를 냅니다. 승패로 점수를 매기는 엘로·브래들리-테리 방식을 씁니다 <sup>[3]</sup>.</p></div>
   </div>
+    <figure class="scene" data-img="cut_A3_lv2"><img src="assets/img/cut_A3_lv2.webp" width="960" height="540" loading="lazy" alt="실루엣 심사위원 셋(미공개 X1~X3)이 분홍·민트 카드 두 장을 앞에 두고 앉아 있고, 뒤에서 연구실 식구들이 지켜보는 픽셀아트 컷"><figcaption>누가 쓴 답인지 가린 채 두 장 중 나은 쪽만 고릅니다.</figcaption></figure>
   <div class="talk">
     <div class="line" data-who="moa"><img data-who="moa" data-mood="report" alt="" aria-hidden="true"><b>인턴 모아</b><span>심사위원 세 분은 누구 답인지 몰라요. 「답 A」「답 B」로만 보세요.</span></div>
     <div class="line" data-who="robo"><img data-who="robo" data-mood="coin" alt="" aria-hidden="true"><b>주판봇</b><span>순서가 무슨 상관이야. 몇 번째 경기부터 세든 1등은 1등이지.</span></div>
@@ -731,6 +724,7 @@ table.mini tr.hit td{background:var(--gfp-soft)} table.mini tr.miss td{backgroun
 <div class="wrap">
   <h2>개인전 리그 — 네 가지 채점을 모두 모으면 누가 1위일까</h2>
   <p>네 선수가 같은 10문항으로 겨뤘습니다. 순위는 <b>사람 블라인드 심사의 승수</b>로 정하고, 다른 채점의 순위와 오차는 함께 공개합니다. 판정은 박사, 숫자 발표는 조수가 맡습니다.</p>
+  <figure class="scene" data-img="cut_A3_versus"><img src="assets/img/cut_A3_versus.webp" width="960" height="540" loading="lazy" alt="리그 결과 발표 전, 색이 다른 조명 아래 네 선수와 박사·조수가 무대에 나란히 선 픽셀아트 띠"></figure>
   <div class="duel" id="duelBox">
     <div class="xrow" style="justify-content:space-around">
       <figure style="text-align:center"><img data-who="sia" data-mood="smile" alt="" aria-hidden="true" style="width:84px;height:84px;object-fit:contain"><figcaption style="color:var(--c-sia)">시아 · 예시 붙이기</figcaption></figure>
@@ -787,6 +781,7 @@ table.mini tr.hit td{background:var(--gfp-soft)} table.mini tr.miss td{backgroun
 <section class="level" id="outro">
 <div class="wrap">
   <h2>아웃트로</h2>
+  <figure class="scene" data-img="sc_A3_outro"><img src="assets/img/sc_A3_outro.webp" width="1200" height="800" loading="lazy" alt="리그 뒤 모아가 금색 별을 들고 앞에서 기뻐하고, 박사가 모아를 가리키며, 초파리 연구원은 커피를, 주판봇은 담담한 얼굴, 시아는 미소, 뒤에서 실루엣 셋이 손뼉 치는 픽셀아트 장면"></figure>
   <div class="say" data-who="doc"><img class="who" data-who="doc" data-mood="magic" alt="" aria-hidden="true"><div><b class="name">박사</b><p>오늘의 세 줄이에요.<br>① 채점법이 바뀌면 1등도 바뀐다.<br>② LLM 심판에는 순서 바꾸기와 길이 보정을 켠다.<br>③ 순위에는 문항 수와 오차 막대를 함께 적는다.</p></div></div>
   <div class="say" data-who="moa"><img class="who" data-who="moa" data-mood="sparkle" alt="" aria-hidden="true"><div><b class="name">인턴 모아</b><p>사람 심사 1위라니! 그래도 10문항이라 「확실한 1등」은 아니래요. 문항을 더 모아 올게요.</p></div></div>
   <div class="say" data-who="fly"><img class="who" data-who="fly" data-mood="coffee" alt="" aria-hidden="true"><div><b class="name">초파리 연구원</b><p>글자 채점에선 내가 1등이었는데. …공동 2위, 인정.</p></div></div>

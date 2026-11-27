@@ -340,3 +340,4 @@ table.mini tr.hit td{background:var(--gfp-soft)} table.mini tr.miss td{backgroun
 @media (max-width:760px){.cover .deco{right:3%;top:8%;gap:6px}.cover .deco i{width:40px;height:54px}.cover .deco i::before{top:18px}.cover .deco i::after{top:28px}}
 
 .league{min-width:760px}
+.cover img.cv{object-position:50% 32%}

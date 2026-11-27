@@ -304,8 +304,7 @@
    "robot": "jupanbot-v2",
    "prompt_en": "(genspark_A4/요청1_표지.txt)",
    "source_of": null,
-   "status": "redraw",
-   "note": "받은 표지에 박사가 두 번 그려져 다시 요청 (genspark_A4/요청4_다시그리기.txt), 지금은 CSS 대체 표지"
+   "status": "ok"
   },
   {
    "id": "thumb_A4",
@@ -326,8 +325,7 @@
    "robot": "jupanbot-v2",
    "prompt_en": null,
    "source_of": "cover_A4",
-   "status": "redraw",
-   "note": "받은 표지에 박사가 두 번 그려져 다시 요청 (genspark_A4/요청4_다시그리기.txt), 지금은 CSS 대체 표지"
+   "status": "ok"
   },
   {
    "id": "og_A4",
@@ -348,8 +346,7 @@
    "robot": "jupanbot-v2",
    "prompt_en": null,
    "source_of": "cover_A4",
-   "status": "redraw",
-   "note": "받은 표지에 박사가 두 번 그려져 다시 요청 (genspark_A4/요청4_다시그리기.txt), 지금은 CSS 대체 표지"
+   "status": "ok"
   },
   {
    "id": "cut_A2_lv4",
@@ -497,7 +494,7 @@
    "prompt_en": "(docs/GENSPARK_PROMPTS_A2_A4.md)",
    "source_of": null,
    "status": "ok",
-   "note": "박사가 두 번 그려진 원본에서 왼쪽 30%를 잘라 냄 (가로 720). 다시 받으면 960×540으로 교체"
+   "note": "첫 판에서 박사 중복 부분(왼쪽 25%)을 잘라 씀 (720×540). 두 번째 판은 문·버튼이 없는 단체 장면이라 쓰지 않음"
   },
   {
    "id": "cut_A4_raid",
